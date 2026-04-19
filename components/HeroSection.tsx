@@ -30,14 +30,26 @@ export default function HeroSection() {
         overflow: "hidden",
       }}
     >
-      {/* ── Deep space background ── */}
+      {/* ── Deep space background — dark blue-indigo like p1 ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, #02000A 0%, #05001A 30%, #07002A 58%, #080030 78%, #060020 100%)",
+            "linear-gradient(180deg, #030010 0%, #040018 25%, #050020 52%, #07002A 72%, #090030 100%)",
           zIndex: 0,
+        }}
+      />
+
+      {/* ── Very subtle radial darkening at edges (vignette) ── */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(0,0,8,0.55) 100%)",
+          pointerEvents: "none",
+          zIndex: 1,
         }}
       />
 
@@ -48,10 +60,10 @@ export default function HeroSection() {
           top: 0,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "70%",
-          height: "55%",
+          width: "65%",
+          height: "50%",
           background:
-            "radial-gradient(ellipse 60% 55% at 50% 0%, rgba(110, 28, 255, 0.22) 0%, rgba(70, 10, 180, 0.1) 40%, transparent 75%)",
+            "radial-gradient(ellipse 55% 50% at 50% 0%, rgba(90, 20, 220, 0.18) 0%, rgba(50, 8, 140, 0.08) 45%, transparent 72%)",
           pointerEvents: "none",
           zIndex: 1,
         }}

@@ -20,12 +20,12 @@ export default function Navbar() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 40px",
-        height: "64px",
-        background: "rgba(2, 0, 10, 0.55)",
-        backdropFilter: "blur(18px)",
-        WebkitBackdropFilter: "blur(18px)",
-        borderBottom: "1px solid rgba(255, 255, 255, 0.07)",
+        padding: "0 36px",
+        height: "54px",
+        background: "rgba(3, 0, 16, 0.35)",
+        backdropFilter: "blur(14px)",
+        WebkitBackdropFilter: "blur(14px)",
+        borderBottom: "1px solid rgba(255, 255, 255, 0.05)",
       }}
     >
       {/* Logo */}
@@ -67,29 +67,33 @@ export default function Navbar() {
         ))}
       </div>
 
-      {/* Register button */}
+      {/* Register button — outlined like p1's Connect Wallet */}
       <button
         style={{
-          padding: "9px 26px",
-          background: "rgba(255,255,255,0.96)",
-          color: "#05000e",
-          fontSize: "14px",
-          fontWeight: 600,
+          padding: "8px 22px",
+          background: "rgba(255,255,255,0.06)",
+          color: "#ffffff",
+          fontSize: "13px",
+          fontWeight: 500,
           borderRadius: "8px",
-          border: "none",
+          border: "1px solid rgba(255,255,255,0.65)",
           cursor: "pointer",
-          letterSpacing: "0.025em",
-          transition: "background 0.2s, transform 0.15s",
+          letterSpacing: "0.03em",
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          transition: "background 0.2s, border-color 0.2s, transform 0.15s",
           flexShrink: 0,
         }}
         onMouseEnter={(e) => {
           const b = e.currentTarget;
-          b.style.background = "#ffffff";
+          b.style.background = "rgba(255,255,255,0.14)";
+          b.style.borderColor = "rgba(255,255,255,0.9)";
           b.style.transform = "scale(1.03)";
         }}
         onMouseLeave={(e) => {
           const b = e.currentTarget;
-          b.style.background = "rgba(255,255,255,0.96)";
+          b.style.background = "rgba(255,255,255,0.06)";
+          b.style.borderColor = "rgba(255,255,255,0.65)";
           b.style.transform = "scale(1)";
         }}
       >
