@@ -8,65 +8,64 @@ export default function DemiSphere() {
       style={{
         position: "relative",
         width: "100%",
-        height: "460px",
+        height: "420px",
         overflow: "hidden",
         flexShrink: 0,
+        /* Fades the rectangle corners away — exact demo.tsx technique */
         maskImage: "radial-gradient(50% 50%, white, transparent)",
         WebkitMaskImage: "radial-gradient(50% 50%, white, transparent)",
-        zIndex: 2,
       }}
     >
-      {/* Soft purple bloom rising from sphere */}
+      {/* Purple glow rising from the sphere — matches demo.tsx */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(circle at bottom center, rgba(65, 5, 150, 0.52) 0%, rgba(20, 0, 60, 0.25) 45%, transparent 70%)",
         }}
-      />
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(circle at bottom center, #6432c8, transparent 70%)",
+            opacity: 0.42,
+          }}
+        />
+      </div>
 
-      {/* Hemisphere — black-dominant with faint purple tint on rim */}
+      {/* Hemisphere — bg = page color so edges blend perfectly */}
       <div
         style={{
           position: "absolute",
           left: "-50%",
-          top: "40%",
+          top: "50%",
           width: "200%",
-          aspectRatio: "1 / 0.72",
+          aspectRatio: "1 / 0.7",
           zIndex: 10,
           borderRadius: "100%",
-          /* Rim outline fades with the mask so no hard rectangle */
-          borderTop: "1px solid rgba(155, 48, 255, 0.32)",
-          /* Mostly black, ultra-dark purple only at the very top */
-          background:
-            "linear-gradient(180deg, #07000E 0%, #040009 18%, #020006 40%, #010004 65%, #000000 100%)",
+          borderTop: "1px solid rgba(255,255,255,0.18)",
+          background: "#07071a",
         }}
       />
 
-      {/* Sparkles — purple, concentrated in centre by inner mask */}
+      {/* Sparkles — white, concentrated in centre by inner mask */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 15,
-          maskImage:
-            "radial-gradient(50% 50%, white, transparent 85%)",
-          WebkitMaskImage:
-            "radial-gradient(50% 50%, white, transparent 85%)",
+          maskImage: "radial-gradient(50% 50%, white, transparent 85%)",
+          WebkitMaskImage: "radial-gradient(50% 50%, white, transparent 85%)",
         }}
       >
         <Sparkles
-          density={1100}
-          className="absolute inset-0 w-full h-full"
-          color={["#9B30FF", "#B050FF", "#7010DF", "#CC00FF", "#D4A0FF"]}
-          size={1.3}
-          minSize={0.3}
-          speed={0.9}
-          minSpeed={0.1}
-          opacity={0.95}
-          minOpacity={0.15}
-          background="transparent"
+          density={1200}
+          className="absolute inset-x-0 bottom-0 h-full w-full"
+          color="#ffffff"
+          size={1}
+          speed={1}
+          opacity={0.9}
         />
       </div>
     </div>

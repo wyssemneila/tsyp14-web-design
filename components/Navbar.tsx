@@ -22,10 +22,8 @@ export default function Navbar() {
         alignItems: "center",
         justifyContent: "space-between",
         padding: "0 32px",
-        background: "rgba(7, 7, 26, 0.6)",
-        backdropFilter: "blur(16px)",
-        WebkitBackdropFilter: "blur(16px)",
-        borderBottom: "1px solid rgba(255,255,255,0.05)",
+        background: "transparent",
+        border: "none",
       }}
     >
       {/* ── Logo ── */}

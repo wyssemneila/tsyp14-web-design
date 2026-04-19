@@ -68,7 +68,7 @@ export default function HeroSection() {
       <div
         style={{
           flex: "0 0 auto",
-          height: "calc(100vh - 460px)",
+          height: "calc(100vh - 420px)",
           minHeight: "320px",
           display: "flex",
           flexDirection: "column",
