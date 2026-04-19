@@ -8,25 +8,25 @@ export default function DemiSphere() {
       style={{
         position: "relative",
         width: "100%",
-        height: "500px",
+        height: "560px",
         overflow: "hidden",
         flexShrink: 0,
         maskImage: "radial-gradient(50% 50%, white, transparent)",
         WebkitMaskImage: "radial-gradient(50% 50%, white, transparent)",
       }}
     >
-      {/* ── Purple bloom — concentrated at the rim area ── */}
+      {/* Wide purple bloom — dramatic like p1 */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           zIndex: 1,
           background:
-            "radial-gradient(ellipse 80% 40% at 50% 100%, rgba(109,40,217,0.75) 0%, rgba(80,20,160,0.35) 40%, transparent 70%)",
+            "radial-gradient(ellipse 90% 50% at 50% 100%, rgba(120,50,240,0.8) 0%, rgba(90,30,190,0.45) 35%, rgba(60,15,130,0.15) 60%, transparent 75%)",
         }}
       />
 
-      {/* ── White sparkles BEHIND the sphere ── */}
+      {/* Sparkles BEHIND sphere */}
       <div
         style={{
           position: "absolute",
@@ -46,26 +46,24 @@ export default function DemiSphere() {
         />
       </div>
 
-      {/* ── Hemisphere — DARK surface like p1, bright purple rim glow ── */}
+      {/* Hemisphere — larger (w-[220%]), darker surface, strong rim glow */}
       <div
         style={{
           position: "absolute",
-          left: "-50%",
-          top: "48%",
-          width: "200%",
+          left: "-60%",
+          top: "46%",
+          width: "220%",
           aspectRatio: "1 / 0.7",
           zIndex: 10,
           borderRadius: "100%",
-          /* Very dark surface — near background, subtle inner purple */
           background:
-            "radial-gradient(circle at 40% 28%, #1c0050 0%, #0e0028 25%, #09001e 50%, #07071a 80%)",
-          /* THE KEY: bright purple rim glow like p1 */
-          borderTop: "1px solid rgba(167, 139, 250, 0.55)",
+            "radial-gradient(circle at 40% 26%, #1a0048 0%, #0d001e 22%, #080018 48%, #07071a 75%)",
+          borderTop: "1px solid rgba(180, 130, 255, 0.6)",
           boxShadow: `
-            0 -4px 60px 10px rgba(120, 50, 230, 0.65),
-            0 -2px 120px 20px rgba(100, 30, 200, 0.4),
-            0 -1px 200px 40px rgba(80, 20, 160, 0.2),
-            inset 0 4px 40px rgba(140, 70, 255, 0.12)
+            0 -6px 80px 15px rgba(130, 55, 240, 0.7),
+            0 -3px 160px 30px rgba(100, 30, 200, 0.45),
+            0 -1px 240px 60px rgba(75, 15, 160, 0.2),
+            inset 0 6px 60px rgba(150, 80, 255, 0.1)
           `,
         }}
       />
