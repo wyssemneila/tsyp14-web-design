@@ -30,40 +30,49 @@ export default function HeroSection() {
         overflow: "hidden",
       }}
     >
-      {/* ── Deep space background — dark blue-indigo like p1 ── */}
+      {/* ── Dark purple background — matches p1 exactly ── */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background: "#080014",
+          zIndex: 0,
+        }}
+      />
+      {/* Subtle gradient depth — darker at top, slightly more purple toward sphere */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "linear-gradient(180deg, #030010 0%, #040018 25%, #050020 52%, #07002A 72%, #090030 100%)",
+            "linear-gradient(180deg, #050010 0%, #080018 40%, #0C0022 70%, #0E0030 100%)",
           zIndex: 0,
         }}
       />
 
-      {/* ── Very subtle radial darkening at edges (vignette) ── */}
+      {/* ── Edge vignette (darkens corners like p1) ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 120% 100% at 50% 50%, transparent 40%, rgba(0,0,8,0.55) 100%)",
+            "radial-gradient(ellipse 110% 90% at 50% 50%, transparent 45%, rgba(0,0,6,0.6) 100%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
       />
 
-      {/* ── Sky-light beam from top — like p1 ── */}
+      {/* ── Sky-light from top center — visible in p1 ── */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: "50%",
           transform: "translateX(-50%)",
-          width: "65%",
-          height: "50%",
+          width: "60%",
+          height: "55%",
           background:
-            "radial-gradient(ellipse 55% 50% at 50% 0%, rgba(90, 20, 220, 0.18) 0%, rgba(50, 8, 140, 0.08) 45%, transparent 72%)",
+            "radial-gradient(ellipse 50% 45% at 50% 0%, rgba(120, 30, 255, 0.2) 0%, rgba(80, 10, 200, 0.08) 50%, transparent 75%)",
           pointerEvents: "none",
           zIndex: 1,
         }}

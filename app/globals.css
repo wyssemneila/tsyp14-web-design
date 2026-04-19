@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-background: #02000a;
+  --color-background: #080014;
   --color-foreground: #ffffff;
   --color-purple-primary: #9b30ff;
   --font-sans: var(--font-poppins);
@@ -17,7 +17,7 @@
 
 html,
 body {
-  background: #02000a;
+  background: #080014;
   color: #ffffff;
   font-family: var(--font-poppins), sans-serif;
   overflow-x: hidden;
