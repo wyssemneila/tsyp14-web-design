@@ -3,12 +3,12 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
-const links = ["Home", "Features", "Roadmap", "Docs"];
+const links = ["Home", "Features", "Staking", "Roadmap", "Docs"];
 
 export default function Navbar() {
   return (
     <motion.nav
-      initial={{ opacity: 0, y: -10 }}
+      initial={{ opacity: 0, y: -12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       style={{
@@ -17,19 +17,18 @@ export default function Navbar() {
         left: 0,
         right: 0,
         zIndex: 100,
-        height: "52px",
+        height: "60px",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        padding: "0 28px",
-        /* Nearly invisible — matches p1 exactly */
-        background: "rgba(8, 0, 20, 0.3)",
-        backdropFilter: "blur(12px)",
-        WebkitBackdropFilter: "blur(12px)",
-        borderBottom: "1px solid rgba(255,255,255,0.04)",
+        padding: "0 32px",
+        background: "rgba(7, 7, 26, 0.6)",
+        backdropFilter: "blur(16px)",
+        WebkitBackdropFilter: "blur(16px)",
+        borderBottom: "1px solid rgba(255,255,255,0.05)",
       }}
     >
-      {/* Logo left */}
+      {/* ── Logo ── */}
       <div style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
         <Image
           src="/lg.webp"
@@ -41,15 +40,19 @@ export default function Navbar() {
         />
       </div>
 
-      {/* Nav links center — exact p1 style */}
+      {/* ── Pill nav group — matches p1 exactly ── */}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "28px",
           position: "absolute",
           left: "50%",
           transform: "translateX(-50%)",
+          display: "flex",
+          alignItems: "center",
+          gap: "2px",
+          padding: "5px 6px",
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.1)",
+          borderRadius: "999px",
         }}
       >
         {links.map((link) => (
@@ -57,52 +60,53 @@ export default function Navbar() {
             key={link}
             href="#"
             style={{
+              padding: "5px 14px",
               fontSize: "13px",
               fontWeight: 400,
               color: "rgba(255,255,255,0.75)",
               textDecoration: "none",
-              letterSpacing: "0.01em",
+              borderRadius: "999px",
               whiteSpace: "nowrap",
-              transition: "color 0.18s",
+              transition: "background 0.18s, color 0.18s",
             }}
-            onMouseEnter={(e) =>
-              ((e.target as HTMLAnchorElement).style.color = "#ffffff")
-            }
-            onMouseLeave={(e) =>
-              ((e.target as HTMLAnchorElement).style.color =
-                "rgba(255,255,255,0.75)")
-            }
+            onMouseEnter={(e) => {
+              const a = e.currentTarget;
+              a.style.color = "#ffffff";
+              a.style.background = "rgba(255,255,255,0.08)";
+            }}
+            onMouseLeave={(e) => {
+              const a = e.currentTarget;
+              a.style.color = "rgba(255,255,255,0.75)";
+              a.style.background = "transparent";
+            }}
           >
             {link}
           </a>
         ))}
       </div>
 
-      {/* Register button right — white border outline like p1 Connect Wallet */}
+      {/* ── Register button — solid white pill like p1 ── */}
       <button
         style={{
-          padding: "7px 18px",
-          background: "rgba(255,255,255,0.05)",
-          color: "#ffffff",
+          padding: "8px 20px",
+          background: "#ffffff",
+          color: "#07071a",
           fontSize: "13px",
-          fontWeight: 400,
-          borderRadius: "8px",
-          border: "1px solid rgba(255,255,255,0.6)",
+          fontWeight: 600,
+          borderRadius: "999px",
+          border: "none",
           cursor: "pointer",
-          backdropFilter: "blur(6px)",
-          WebkitBackdropFilter: "blur(6px)",
-          letterSpacing: "0.02em",
-          whiteSpace: "nowrap",
-          transition: "background 0.18s, border-color 0.18s",
+          letterSpacing: "0.01em",
           flexShrink: 0,
+          transition: "opacity 0.18s, transform 0.15s",
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.12)";
-          e.currentTarget.style.borderColor = "rgba(255,255,255,0.85)";
+          e.currentTarget.style.opacity = "0.88";
+          e.currentTarget.style.transform = "scale(1.03)";
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.background = "rgba(255,255,255,0.05)";
-          e.currentTarget.style.borderColor = "rgba(255,255,255,0.6)";
+          e.currentTarget.style.opacity = "1";
+          e.currentTarget.style.transform = "scale(1)";
         }}
       >
         Register

@@ -6,13 +6,13 @@ import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.18 + 0.5,
-      duration: 0.95,
+      delay: i * 0.15 + 0.4,
+      duration: 0.9,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
   }),
@@ -28,63 +28,43 @@ export default function HeroSection() {
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
+        fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}
     >
-      {/* ── Dark purple background — matches p1 exactly ── */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background: "#080014",
-          zIndex: 0,
-        }}
-      />
-      {/* Subtle gradient depth — darker at top, slightly more purple toward sphere */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "linear-gradient(180deg, #050010 0%, #080018 40%, #0C0022 70%, #0E0030 100%)",
-          zIndex: 0,
-        }}
-      />
+      {/* ── Base background: #07071a — exact p1 color ── */}
+      <div style={{ position: "absolute", inset: 0, background: "#07071a", zIndex: 0 }} />
 
-      {/* ── Edge vignette (darkens corners like p1) ── */}
+      {/* ── Radial purple spotlight at center-top — exact p1 spec ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 110% 90% at 50% 50%, transparent 45%, rgba(0,0,6,0.6) 100%)",
+            "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(100,60,200,0.35) 0%, rgba(80,40,160,0.1) 50%, transparent 75%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
       />
 
-      {/* ── Sky-light from top center — visible in p1 ── */}
+      {/* ── Edge vignette for depth ── */}
       <div
         style={{
           position: "absolute",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "60%",
-          height: "55%",
+          inset: 0,
           background:
-            "radial-gradient(ellipse 50% 45% at 50% 0%, rgba(120, 30, 255, 0.2) 0%, rgba(80, 10, 200, 0.08) 50%, transparent 75%)",
+            "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 50%, rgba(0,0,10,0.5) 100%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
       />
 
-      {/* ── Interactive particle network ── */}
+      {/* ── White-dot star particles (canvas) ── */}
       <ParticleCanvas />
 
-      {/* ── Fixed Navbar ── */}
+      {/* ── Navbar ── */}
       <Navbar />
 
-      {/* ── Hero text — upper 58vh ── */}
+      {/* ── Hero text ── */}
       <div
         style={{
           flex: "0 0 auto",
@@ -98,95 +78,94 @@ export default function HeroSection() {
           zIndex: 10,
           textAlign: "center",
           padding: "0 24px",
-          paddingTop: "64px",
+          paddingTop: "60px",
         }}
       >
-        {/* 14th Edition glowing badge */}
-        <motion.div
-          custom={0}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          style={{ marginBottom: "28px" }}
-        >
+        {/* Badge — pill with border + purple dot + text */}
+        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" style={{ marginBottom: "24px" }}>
           <div
             className="edition-badge"
             style={{
               display: "inline-flex",
               alignItems: "center",
-              justifyContent: "center",
-              padding: "7px 28px",
-              borderRadius: "100px",
-              background:
-                "linear-gradient(135deg, rgba(155,48,255,0.2) 0%, rgba(80,8,180,0.12) 100%)",
-              border: "1px solid rgba(155,48,255,0.65)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
+              gap: "8px",
+              padding: "6px 16px",
+              background: "rgba(0,0,0,0.35)",
+              border: "1px solid rgba(255,255,255,0.15)",
+              borderRadius: "999px",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
             }}
           >
-            <span
+            {/* Purple dot icon */}
+            <div
               style={{
-                fontSize: "clamp(10px, 1vw, 13px)",
-                fontWeight: 600,
-                letterSpacing: "0.22em",
-                textTransform: "uppercase",
-                color: "#D4A0FF",
+                width: "7px",
+                height: "7px",
+                borderRadius: "50%",
+                background: "#9b30ff",
+                boxShadow: "0 0 6px rgba(155,48,255,0.8)",
+                flexShrink: 0,
               }}
-            >
-              14th Edition
+            />
+            <span style={{ fontSize: "12px", fontWeight: 400, color: "rgba(255,255,255,0.7)", letterSpacing: "0.03em" }}>
+              TSYP — 14th Edition
             </span>
           </div>
         </motion.div>
 
-        {/* Main headline */}
-        <motion.div
-          custom={1}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-        >
+        {/* Heading line 1 — bright white */}
+        <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
           <h1
             style={{
-              fontSize: "clamp(28px, 5vw, 62px)",
-              fontWeight: 800,
-              lineHeight: 1.18,
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 700,
+              lineHeight: 1.12,
               letterSpacing: "-0.02em",
-              background:
-                "linear-gradient(180deg, #FFFFFF 0%, #EAD8FF 55%, #B07AE8 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              maxWidth: "720px",
+              color: "#ffffff",
+              marginBottom: "4px",
             }}
           >
             Tunisian Student and Young
-            <br />
+          </h1>
+        </motion.div>
+
+        {/* Heading line 2 — muted gray like p1 */}
+        <motion.div custom={2} variants={fadeUp} initial="hidden" animate="visible">
+          <h1
+            style={{
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 700,
+              lineHeight: 1.12,
+              letterSpacing: "-0.02em",
+              color: "#9ca3af",
+              marginBottom: "20px",
+            }}
+          >
             Professional Congress
           </h1>
         </motion.div>
 
-        {/* Subtle divider */}
-        <motion.div
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-          style={{ marginTop: "22px" }}
-        >
-          <div
+        {/* Subtitle */}
+        <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible">
+          <p
             style={{
-              width: "60px",
-              height: "2px",
-              background:
-                "linear-gradient(90deg, transparent, rgba(155,48,255,0.85), transparent)",
-              borderRadius: "2px",
+              fontSize: "clamp(13px, 1.2vw, 15px)",
+              fontWeight: 400,
+              lineHeight: 1.65,
+              color: "rgba(156,163,175,0.85)",
+              maxWidth: "500px",
               margin: "0 auto",
             }}
-          />
+          >
+            The premier annual congress for IEEE student and young professional
+            members across Tunisia — fostering innovation, networking, and
+            technical leadership.
+          </p>
         </motion.div>
       </div>
 
-      {/* ── Demi-sphere at the bottom — no rectangl artifact ── */}
+      {/* ── Demi-sphere ── */}
       <DemiSphere />
     </section>
   );
