@@ -1,16 +1,17 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 32 },
+  hidden: { opacity: 0, y: 28 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
     transition: {
-      delay: i * 0.18 + 0.4,
+      delay: i * 0.18 + 0.5,
       duration: 0.95,
       ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
     },
@@ -19,60 +20,94 @@ const fadeUp = {
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen w-full overflow-hidden flex flex-col items-center justify-center">
-      {/* ── Deep space gradient background ── */}
+    <section
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden",
+      }}
+    >
+      {/* ── Deep space background ── */}
       <div
-        className="absolute inset-0"
         style={{
+          position: "absolute",
+          inset: 0,
           background:
-            "linear-gradient(180deg, #05000E 0%, #090020 35%, #0E002E 60%, #110038 80%, #130040 100%)",
+            "linear-gradient(180deg, #02000A 0%, #05001A 30%, #07002A 58%, #080030 78%, #060020 100%)",
           zIndex: 0,
         }}
       />
 
-      {/* Subtle central radial bloom */}
+      {/* ── Sky-light beam from top — like p1 ── */}
       <div
-        className="absolute inset-0"
         style={{
+          position: "absolute",
+          top: 0,
+          left: "50%",
+          transform: "translateX(-50%)",
+          width: "70%",
+          height: "55%",
           background:
-            "radial-gradient(ellipse 70% 50% at 50% 65%, rgba(95, 15, 230, 0.13) 0%, transparent 70%)",
-          zIndex: 0,
+            "radial-gradient(ellipse 60% 55% at 50% 0%, rgba(110, 28, 255, 0.22) 0%, rgba(70, 10, 180, 0.1) 40%, transparent 75%)",
+          pointerEvents: "none",
+          zIndex: 1,
         }}
       />
 
       {/* ── Interactive particle network ── */}
       <ParticleCanvas />
 
-      {/* ── Hero text content ── */}
+      {/* ── Fixed Navbar ── */}
+      <Navbar />
+
+      {/* ── Hero text — upper 58vh ── */}
       <div
-        className="relative flex flex-col items-center justify-center text-center px-6"
-        style={{ zIndex: 10, marginBottom: "clamp(60px, 10vw, 120px)" }}
+        style={{
+          flex: "0 0 auto",
+          height: "calc(100vh - 460px)",
+          minHeight: "320px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          zIndex: 10,
+          textAlign: "center",
+          padding: "0 24px",
+          paddingTop: "64px",
+        }}
       >
-        {/* 14th Edition glowing badge — shape only, not a button */}
+        {/* 14th Edition glowing badge */}
         <motion.div
           custom={0}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mb-7"
+          style={{ marginBottom: "28px" }}
         >
           <div
-            className="edition-badge inline-flex items-center justify-center"
+            className="edition-badge"
             style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
               padding: "7px 28px",
               borderRadius: "100px",
               background:
-                "linear-gradient(135deg, rgba(155, 48, 255, 0.18) 0%, rgba(100, 10, 200, 0.12) 100%)",
-              border: "1px solid rgba(155, 48, 255, 0.7)",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
+                "linear-gradient(135deg, rgba(155,48,255,0.2) 0%, rgba(80,8,180,0.12) 100%)",
+              border: "1px solid rgba(155,48,255,0.65)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
             }}
           >
             <span
               style={{
-                fontSize: "clamp(11px, 1.1vw, 14px)",
+                fontSize: "clamp(10px, 1vw, 13px)",
                 fontWeight: 600,
-                letterSpacing: "0.2em",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
                 color: "#D4A0FF",
               }}
@@ -82,7 +117,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* IEEE — oversized display word */}
+        {/* Main headline */}
         <motion.div
           custom={1}
           variants={fadeUp}
@@ -91,59 +126,38 @@ export default function HeroSection() {
         >
           <h1
             style={{
-              fontSize: "clamp(52px, 10vw, 130px)",
-              fontWeight: 900,
-              lineHeight: 1,
-              letterSpacing: "-0.03em",
+              fontSize: "clamp(28px, 5vw, 62px)",
+              fontWeight: 800,
+              lineHeight: 1.18,
+              letterSpacing: "-0.02em",
               background:
-                "linear-gradient(180deg, #FFFFFF 0%, #E8D4FF 55%, #A870FF 100%)",
+                "linear-gradient(180deg, #FFFFFF 0%, #EAD8FF 55%, #B07AE8 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              marginBottom: "clamp(6px, 1vw, 14px)",
-            }}
-          >
-            IEEE
-          </h1>
-        </motion.div>
-
-        {/* Main headline */}
-        <motion.div
-          custom={2}
-          variants={fadeUp}
-          initial="hidden"
-          animate="visible"
-        >
-          <h2
-            style={{
-              fontSize: "clamp(18px, 3vw, 40px)",
-              fontWeight: 700,
-              lineHeight: 1.25,
-              color: "#F0E8FF",
-              maxWidth: "680px",
-              textShadow: "0 0 40px rgba(155,48,255,0.3)",
+              maxWidth: "720px",
             }}
           >
             Tunisian Student and Young
             <br />
             Professional Congress
-          </h2>
+          </h1>
         </motion.div>
 
-        {/* Subtle divider line */}
+        {/* Subtle divider */}
         <motion.div
-          custom={3}
+          custom={2}
           variants={fadeUp}
           initial="hidden"
           animate="visible"
-          className="mt-7"
+          style={{ marginTop: "22px" }}
         >
           <div
             style={{
-              width: "clamp(40px, 6vw, 72px)",
+              width: "60px",
               height: "2px",
               background:
-                "linear-gradient(90deg, transparent, rgba(155,48,255,0.8), transparent)",
+                "linear-gradient(90deg, transparent, rgba(155,48,255,0.85), transparent)",
               borderRadius: "2px",
               margin: "0 auto",
             }}
@@ -151,7 +165,7 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ── Demi sphere at the bottom ── */}
+      {/* ── Demi-sphere at the bottom — no rectangl artifact ── */}
       <DemiSphere />
     </section>
   );

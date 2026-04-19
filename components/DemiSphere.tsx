@@ -5,68 +5,70 @@ import { Sparkles } from "./Sparkles";
 export default function DemiSphere() {
   return (
     <div
-      className="absolute bottom-0 left-1/2 overflow-hidden pointer-events-none"
       style={{
-        transform: "translateX(-50%)",
-        width: "clamp(520px, 65vw, 860px)",
-        height: "clamp(270px, 34vw, 450px)",
+        position: "relative",
+        width: "100%",
+        height: "460px",
+        overflow: "hidden",
+        flexShrink: 0,
+        maskImage: "radial-gradient(50% 50%, white, transparent)",
+        WebkitMaskImage: "radial-gradient(50% 50%, white, transparent)",
         zIndex: 2,
       }}
     >
-      {/* Sparkles — purple glow dots matching p1 outline colour */}
-      <Sparkles
-        className="absolute inset-0 w-full h-full"
-        color={["#9B30FF", "#CC00FF", "#D4A0FF", "#7B10DF"]}
-        size={1.4}
-        minSize={0.4}
-        density={90}
-        speed={0.7}
-        opacity={0.95}
-        minOpacity={0.2}
-        background="transparent"
-      />
-
-      {/* Outer ambient glow layer */}
+      {/* Soft purple bloom rising from sphere */}
       <div
-        className="absolute bottom-0 left-1/2"
         style={{
-          transform: "translateX(-50%)",
-          width: "clamp(520px, 65vw, 860px)",
-          height: "clamp(520px, 65vw, 860px)",
-          borderRadius: "50%",
+          position: "absolute",
+          inset: 0,
           background:
-            "radial-gradient(circle at 50% 50%, rgba(120,40,255,0.18) 0%, rgba(80,10,180,0.08) 50%, transparent 75%)",
-          filter: "blur(30px)",
+            "radial-gradient(circle at bottom center, rgba(65, 5, 150, 0.52) 0%, rgba(20, 0, 60, 0.25) 45%, transparent 70%)",
         }}
       />
 
-      {/* The sphere body */}
+      {/* Hemisphere — black-dominant with faint purple tint on rim */}
       <div
-        className="sphere-element absolute bottom-0 left-1/2"
         style={{
-          transform: "translateX(-50%)",
-          width: "clamp(520px, 65vw, 860px)",
-          height: "clamp(520px, 65vw, 860px)",
-          borderRadius: "50%",
+          position: "absolute",
+          left: "-50%",
+          top: "40%",
+          width: "200%",
+          aspectRatio: "1 / 0.72",
+          zIndex: 10,
+          borderRadius: "100%",
+          /* Rim outline fades with the mask so no hard rectangle */
+          borderTop: "1px solid rgba(155, 48, 255, 0.32)",
+          /* Mostly black, ultra-dark purple only at the very top */
           background:
-            "radial-gradient(circle at 38% 28%, #1c0055 0%, #0e0030 30%, #08001e 60%, #040012 85%, #020009 100%)",
-          border: "1.5px solid rgba(155, 48, 255, 0.65)",
+            "linear-gradient(180deg, #07000E 0%, #040009 18%, #020006 40%, #010004 65%, #000000 100%)",
         }}
       />
 
-      {/* Inner rim highlight — bright purple arc at the top of the sphere */}
+      {/* Sparkles — purple, concentrated in centre by inner mask */}
       <div
-        className="absolute bottom-0 left-1/2"
         style={{
-          transform: "translateX(-50%)",
-          width: "clamp(520px, 65vw, 860px)",
-          height: "clamp(520px, 65vw, 860px)",
-          borderRadius: "50%",
-          background: "transparent",
-          boxShadow:
-            "inset 0 6px 40px 4px rgba(180, 80, 255, 0.22), inset 0 0 120px 0px rgba(100, 20, 220, 0.1)",
+          position: "absolute",
+          inset: 0,
+          zIndex: 15,
+          maskImage:
+            "radial-gradient(50% 50%, white, transparent 85%)",
+          WebkitMaskImage:
+            "radial-gradient(50% 50%, white, transparent 85%)",
         }}
-      />
+      >
+        <Sparkles
+          density={1100}
+          className="absolute inset-0 w-full h-full"
+          color={["#9B30FF", "#B050FF", "#7010DF", "#CC00FF", "#D4A0FF"]}
+          size={1.3}
+          minSize={0.3}
+          speed={0.9}
+          minSpeed={0.1}
+          opacity={0.95}
+          minOpacity={0.15}
+          background="transparent"
+        />
+      </div>
     </div>
   );
 }
