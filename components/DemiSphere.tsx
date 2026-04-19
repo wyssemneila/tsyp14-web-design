@@ -15,18 +15,7 @@ export default function DemiSphere() {
         WebkitMaskImage: "radial-gradient(50% 50%, white, transparent)",
       }}
     >
-      {/* Wide purple bloom — dramatic like p1 */}
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 1,
-          background:
-            "radial-gradient(ellipse 90% 50% at 50% 100%, rgba(120,50,240,0.8) 0%, rgba(90,30,190,0.45) 35%, rgba(60,15,130,0.15) 60%, transparent 75%)",
-        }}
-      />
-
-      {/* Sparkles BEHIND sphere */}
+      {/* Sparkles BEHIND the sphere */}
       <div
         style={{
           position: "absolute",
@@ -46,7 +35,7 @@ export default function DemiSphere() {
         />
       </div>
 
-      {/* Hemisphere — larger (w-[220%]), darker surface, strong rim glow */}
+      {/* FULLY BLACK sphere — glow ONLY at the rim, not bleeding upward */}
       <div
         style={{
           position: "absolute",
@@ -56,15 +45,10 @@ export default function DemiSphere() {
           aspectRatio: "1 / 0.7",
           zIndex: 10,
           borderRadius: "100%",
-          background:
-            "radial-gradient(circle at 40% 26%, #1a0048 0%, #0d001e 22%, #080018 48%, #07071a 75%)",
-          borderTop: "1px solid rgba(180, 130, 255, 0.6)",
-          boxShadow: `
-            0 -6px 80px 15px rgba(130, 55, 240, 0.7),
-            0 -3px 160px 30px rgba(100, 30, 200, 0.45),
-            0 -1px 240px 60px rgba(75, 15, 160, 0.2),
-            inset 0 6px 60px rgba(150, 80, 255, 0.1)
-          `,
+          background: "#000000",
+          borderTop: "1.5px solid rgba(160, 80, 255, 0.9)",
+          boxShadow:
+            "0 -4px 40px 8px rgba(130, 50, 255, 0.85), 0 -2px 80px 15px rgba(100, 30, 220, 0.4), inset 0 4px 30px rgba(120, 50, 255, 0.08)",
         }}
       />
     </div>
