@@ -15,7 +15,7 @@ export default function LogoScrollBar() {
         padding: "22px 0",
         overflow: "hidden",
         position: "relative",
-        borderTop: "1px solid rgba(155, 48, 255, 0.25)",
+        borderTop: "none",
       }}
     >
       {/* Left fade vignette */}
