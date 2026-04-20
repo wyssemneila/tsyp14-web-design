@@ -11,11 +11,11 @@ export default function LogoScrollBar() {
     <div
       style={{
         width: "100%",
-        background: "#000000",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.55) 100%)",
         padding: "22px 0",
         overflow: "hidden",
         position: "relative",
-        borderTop: "1px solid rgba(155, 48, 255, 0.12)",
+        borderTop: "1px solid rgba(155, 48, 255, 0.18)",
       }}
     >
       {/* Left fade vignette */}
@@ -26,7 +26,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to right, #000000, transparent)",
+          background: "linear-gradient(to right, rgba(0,0,0,0.7), transparent)",
           zIndex: 10,
           pointerEvents: "none",
         }}
@@ -39,7 +39,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to left, #000000, transparent)",
+          background: "linear-gradient(to left, rgba(0,0,0,0.7), transparent)",
           zIndex: 10,
           pointerEvents: "none",
         }}

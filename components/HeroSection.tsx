@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
+import LogoScrollBar from "./LogoScrollBar";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -167,6 +168,11 @@ export default function HeroSection() {
 
       {/* ── Demi-sphere ── */}
       <DemiSphere />
+
+      {/* ── Logo scroll bar pinned at bottom ── */}
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 20 }}>
+        <LogoScrollBar />
+      </div>
     </section>
   );
 }
