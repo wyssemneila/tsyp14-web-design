@@ -27,30 +27,45 @@ function MiniCountdown() {
   }, []);
 
   const units = [
-    { v: t.days,    l: "D" },
-    { v: t.hours,   l: "H" },
-    { v: t.minutes, l: "M" },
-    { v: t.seconds, l: "S" },
+    { v: t.days,    l: "DAYS" },
+    { v: t.hours,   l: "HRS"  },
+    { v: t.minutes, l: "MIN"  },
+    { v: t.seconds, l: "SEC"  },
   ];
 
   return (
-    <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-      <span style={{ fontSize: "10px", color: "rgba(155,48,255,0.8)", letterSpacing: "0.2em", marginRight: "8px", fontWeight: 500 }}>
-        21 DEC
-      </span>
-      {units.map(({ v, l }, i) => (
-        <div key={l} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
-          <div style={{
-            display: "flex", flexDirection: "column", alignItems: "center",
-            background: "rgba(0,0,0,0.55)", border: "1px solid rgba(155,48,255,0.3)",
-            borderRadius: "6px", padding: "4px 8px", backdropFilter: "blur(8px)",
+    <div style={{
+      display: "flex",
+      alignItems: "flex-start",
+      gap: "clamp(20px, 4vw, 48px)",
+    }}>
+      {units.map(({ v, l }) => (
+        <div key={l} style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "6px",
+        }}>
+          <span style={{
+            fontSize: "clamp(32px, 5vw, 56px)",
+            fontWeight: 800,
+            lineHeight: 1,
+            letterSpacing: "-0.02em",
+            fontVariantNumeric: "tabular-nums",
+            color: "#ffffff",
+            textShadow: "0 0 30px rgba(255,255,255,0.55), 0 0 60px rgba(180,200,255,0.25)",
           }}>
-            <span style={{ fontSize: "16px", fontWeight: 700, color: "#fff", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
-              {String(v).padStart(2, "0")}
-            </span>
-            <span style={{ fontSize: "8px", color: "rgba(155,48,255,0.7)", letterSpacing: "0.15em", marginTop: "2px" }}>{l}</span>
-          </div>
-          {i < 3 && <span style={{ color: "rgba(155,48,255,0.6)", fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>:</span>}
+            {String(v).padStart(2, "0")}
+          </span>
+          <span style={{
+            fontSize: "clamp(9px, 1vw, 11px)",
+            fontWeight: 600,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: "#5b9bd5",
+          }}>
+            {l}
+          </span>
         </div>
       ))}
     </div>
