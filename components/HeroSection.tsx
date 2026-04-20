@@ -75,34 +75,47 @@ const SPRING = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 function WordReveal({
   text,
-  color,
   baseDelay = 0,
+  gradient = false,
 }: {
   text: string;
-  color: string;
   baseDelay?: number;
+  gradient?: boolean;
 }) {
   const words = text.split(" ");
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.28em", overflow: "hidden" }}>
+    <div style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: "0 0.28em",
+      paddingBottom: "6px",
+    }}>
       {words.map((word, i) => (
-        <div key={i} style={{ overflow: "hidden", display: "inline-block" }}>
+        <div key={i} style={{ overflow: "hidden", display: "inline-block", paddingBottom: "4px" }}>
           <motion.span
             initial={{ y: "110%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{
               delay: baseDelay + i * 0.07,
-              duration: 0.75,
+              duration: 0.8,
               ease: SPRING,
             }}
             style={{
               display: "inline-block",
-              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontSize: "clamp(34px, 5.5vw, 64px)",
               fontWeight: 800,
-              lineHeight: 1.12,
+              lineHeight: 1.1,
               letterSpacing: "-0.02em",
               fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-              color,
+              ...(gradient ? {
+                background: "linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #9b30ff 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              } : {
+                color: "#ffffff",
+              }),
             }}
           >
             {word}
@@ -184,54 +197,64 @@ export default function HeroSection() {
           zIndex: 10,
           textAlign: "center",
           padding: "0 24px",
-          paddingTop: "60px",
-          paddingBottom: "80px",
+          paddingTop: "72px",
+          paddingBottom: "160px",
         }}
       >
-        {/* Badge — pill with border + purple dot + text */}
-        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" style={{ marginBottom: "24px", marginTop: "-60px" }}>
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6, ease: SPRING }}
+          style={{ marginBottom: "28px" }}
+        >
           <div
             className="edition-badge"
             style={{
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              padding: "6px 16px",
-              background: "rgba(0,0,0,0.35)",
-              border: "1px solid rgba(255,255,255,0.15)",
+              padding: "6px 18px",
+              background: "rgba(155,48,255,0.08)",
+              border: "1px solid rgba(155,48,255,0.3)",
               borderRadius: "999px",
               backdropFilter: "blur(8px)",
               WebkitBackdropFilter: "blur(8px)",
             }}
           >
-            {/* Purple dot icon */}
             <div
               style={{
-                width: "7px",
-                height: "7px",
+                width: "6px",
+                height: "6px",
                 borderRadius: "50%",
                 background: "#9b30ff",
-                boxShadow: "0 0 6px rgba(155,48,255,0.8)",
+                boxShadow: "0 0 8px rgba(155,48,255,1)",
                 flexShrink: 0,
               }}
             />
-            <span style={{ fontSize: "12px", fontWeight: 400, color: "rgba(255,255,255,0.7)", letterSpacing: "0.03em" }}>
-              TSYP — 14th Edition
+            <span style={{
+              fontSize: "11px",
+              fontWeight: 500,
+              color: "rgba(200,160,255,0.9)",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              fontFamily: "var(--font-inter), 'Inter', sans-serif",
+            }}>
+              TSYP · 14th Edition
             </span>
           </div>
         </motion.div>
 
         {/* Headline — Poppins word-by-word reveal */}
-        <div style={{ marginTop: "28px", textAlign: "center" }}>
+        <div style={{ textAlign: "center" }}>
           <WordReveal
             text="Tunisian Student and Young"
-            color="#ffffff"
-            baseDelay={0.3}
+            baseDelay={0.45}
           />
           <WordReveal
             text="Professional Congress"
-            color="#9ca3af"
-            baseDelay={0.65}
+            gradient={true}
+            baseDelay={0.82}
           />
         </div>
 
