@@ -19,10 +19,10 @@ export default function DemiSphere() {
           objectFit: "cover",
           objectPosition: "center 60%",
           maskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
+            "radial-gradient(ellipse 75% 65% at 50% 65%, black 15%, rgba(0,0,0,0.45) 50%, transparent 78%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
-          opacity: 0.95,
+            "radial-gradient(ellipse 75% 65% at 50% 65%, black 15%, rgba(0,0,0,0.45) 50%, transparent 78%)",
+          opacity: 0.6,
         }}
       />
     </div>

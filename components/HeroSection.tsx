@@ -161,7 +161,7 @@ export default function HeroSection() {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 70% 55% at 50% 0%, rgba(100,60,200,0.35) 0%, rgba(80,40,160,0.1) 50%, transparent 75%)",
+            "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(100,60,200,0.18) 0%, rgba(80,40,160,0.06) 55%, transparent 75%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
@@ -201,12 +201,12 @@ export default function HeroSection() {
           paddingBottom: "160px",
         }}
       >
-        {/* Badge */}
+        {/* Badge with pulsing dot */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.6, ease: SPRING }}
-          style={{ marginBottom: "28px" }}
+          transition={{ delay: 0.15, duration: 0.6, ease: SPRING }}
+          style={{ marginBottom: "32px" }}
         >
           <div
             className="edition-badge"
@@ -214,29 +214,31 @@ export default function HeroSection() {
               display: "inline-flex",
               alignItems: "center",
               gap: "8px",
-              padding: "6px 18px",
+              padding: "7px 18px",
               background: "rgba(155,48,255,0.08)",
-              border: "1px solid rgba(155,48,255,0.3)",
+              border: "1px solid rgba(155,48,255,0.28)",
               borderRadius: "999px",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
             }}
           >
-            <div
+            <motion.div
+              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 width: "6px",
                 height: "6px",
                 borderRadius: "50%",
                 background: "#9b30ff",
-                boxShadow: "0 0 8px rgba(155,48,255,1)",
+                boxShadow: "0 0 8px rgba(155,48,255,0.9)",
                 flexShrink: 0,
               }}
             />
             <span style={{
               fontSize: "11px",
               fontWeight: 500,
-              color: "rgba(200,160,255,0.9)",
-              letterSpacing: "0.12em",
+              color: "rgba(200,160,255,0.88)",
+              letterSpacing: "0.14em",
               textTransform: "uppercase",
               fontFamily: "var(--font-inter), 'Inter', sans-serif",
             }}>
@@ -247,16 +249,73 @@ export default function HeroSection() {
 
         {/* Headline — Poppins word-by-word reveal */}
         <div style={{ textAlign: "center" }}>
-          <WordReveal
-            text="Tunisian Student and Young"
-            baseDelay={0.45}
-          />
-          <WordReveal
-            text="Professional Congress"
-            gradient={true}
-            baseDelay={0.82}
-          />
+          <WordReveal text="Tunisian Student and Young" baseDelay={0.4} />
+          <WordReveal text="Professional Congress" gradient baseDelay={0.76} />
         </div>
+
+        {/* Date + location line */}
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.15, duration: 0.6, ease: SPRING }}
+          style={{
+            marginTop: "20px",
+            fontSize: "12px",
+            fontWeight: 400,
+            letterSpacing: "0.18em",
+            textTransform: "uppercase",
+            color: "rgba(180,150,255,0.5)",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+          }}
+        >
+          December 21, 2026 &nbsp;·&nbsp; Tunis, Tunisia
+        </motion.p>
+
+        {/* Primary CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.35, duration: 0.6, ease: SPRING }}
+          style={{ marginTop: "36px" }}
+        >
+          <button
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              padding: "13px 32px",
+              background: "linear-gradient(135deg, rgba(155,48,255,0.22), rgba(155,48,255,0.10))",
+              border: "1px solid rgba(155,48,255,0.45)",
+              borderRadius: "10px",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              color: "rgba(220,190,255,0.95)",
+              fontSize: "13px",
+              fontWeight: 600,
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              fontFamily: "var(--font-inter), 'Inter', sans-serif",
+              cursor: "pointer",
+              boxShadow: "0 0 24px rgba(155,48,255,0.12), inset 0 1px 0 rgba(255,255,255,0.06)",
+              transition: "all 0.2s ease",
+            }}
+            onMouseEnter={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, rgba(155,48,255,0.35), rgba(155,48,255,0.18))";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(155,48,255,0.7)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 36px rgba(155,48,255,0.22), inset 0 1px 0 rgba(255,255,255,0.08)";
+            }}
+            onMouseLeave={e => {
+              (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, rgba(155,48,255,0.22), rgba(155,48,255,0.10))";
+              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(155,48,255,0.45)";
+              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 24px rgba(155,48,255,0.12), inset 0 1px 0 rgba(255,255,255,0.06)";
+            }}
+          >
+            Register Now
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: 0.8 }}>
+              <path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
+        </motion.div>
 
       </div>
 
@@ -264,20 +323,24 @@ export default function HeroSection() {
       <DemiSphere />
 
       {/* ── Mini countdown in the black space above logo bar ── */}
-      <div style={{
-        position: "absolute",
-        bottom: "110px",
-        left: 0,
-        right: 0,
-        zIndex: 25,
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: "6px",
-        pointerEvents: "none",
-      }}>
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.6, duration: 0.7, ease: SPRING }}
+        style={{
+          position: "absolute",
+          bottom: "110px",
+          left: 0,
+          right: 0,
+          zIndex: 25,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          pointerEvents: "none",
+        }}
+      >
         <MiniCountdown />
-      </div>
+      </motion.div>
 
       {/* ── Logo scroll bar pinned at bottom ── */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 30 }}>
