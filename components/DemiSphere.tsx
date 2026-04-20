@@ -17,7 +17,7 @@ export default function DemiSphere() {
         priority
         style={{
           objectFit: "cover",
-          objectPosition: "center 67%",
+          objectPosition: "center 82%",
           maskImage:
             "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
           WebkitMaskImage:
