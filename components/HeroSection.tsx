@@ -37,16 +37,17 @@ function CyclingWord() {
   const word = WORDS[index];
 
   return (
-    <div style={{ position: "relative", textAlign: "center" }}>
+    <div style={{ perspective: "400px", textAlign: "center" }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ opacity: 0, filter: "blur(10px)", scale: 0.96 }}
-          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
-          exit={{ opacity: 0, filter: "blur(10px)", scale: 1.04 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ rotateX: 60, opacity: 0, y: 6 }}
+          animate={{ rotateX: 0, opacity: 1, y: 0 }}
+          exit={{ rotateX: -60, opacity: 0, y: -6 }}
+          transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
           style={{
             display: "block",
+            transformOrigin: "center center",
             fontSize: "clamp(16px, 1.8vw, 22px)",
             fontWeight: 400,
             color: word.color,
@@ -402,7 +403,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
-          style={{ marginTop: "150px" }}
+          style={{ marginTop: "127px" }}
         >
           <StatsRow />
         </motion.div>
