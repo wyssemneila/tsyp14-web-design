@@ -123,6 +123,18 @@ body {
 }
 
 /* Animated gradient border via pseudo-element */
+/* ── Memories Carousel ── */
+@keyframes memoriesScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.memories-track {
+  animation: memoriesScroll 32s linear infinite;
+}
+.memories-track:hover {
+  animation-play-state: paused;
+}
+
 .flip-card-border {
   position: relative;
   border-radius: 22px;

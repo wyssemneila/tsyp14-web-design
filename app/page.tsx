@@ -3,6 +3,7 @@ import CountdownSection from "@/components/CountdownSection";
 import AboutSection from "@/components/AboutSection";
 import WhoWeAreSection from "@/components/WhoWeAreSection";
 import ThemeSection from "@/components/ThemeSection";
+import MemoriesSection from "@/components/MemoriesSection";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <AboutSection />
       <WhoWeAreSection />
       <ThemeSection />
+      <MemoriesSection />
     </main>
   );
 }
