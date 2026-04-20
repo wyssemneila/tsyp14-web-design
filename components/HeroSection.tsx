@@ -35,34 +35,29 @@ function CyclingWord() {
   }, []);
 
   const word = WORDS[index];
-  const LINE_H = "clamp(32px, 3.8vw, 48px)";
 
   return (
     <div style={{
-      position: "relative",
-      height: LINE_H,
+      height: "clamp(36px, 4.2vw, 54px)",
       overflow: "hidden",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
+      textAlign: "center",
     }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ y: "110%", opacity: 0 }}
+          initial={{ y: "100%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-110%", opacity: 0 }}
-          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           style={{
             display: "block",
-            position: "absolute",
-            fontSize: LINE_H,
+            fontSize: "clamp(28px, 3.8vw, 48px)",
             fontWeight: 800,
             color: word.color,
             fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             letterSpacing: "-0.02em",
-            lineHeight: 1,
-            textShadow: `0 0 32px ${word.color}99`,
+            lineHeight: 1.1,
+            textShadow: `0 0 32px ${word.color}88`,
             whiteSpace: "nowrap",
           }}
         >
