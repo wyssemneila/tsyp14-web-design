@@ -35,7 +35,7 @@ export default function DemiSphere() {
         />
       </div>
 
-      {/* FULLY BLACK sphere — glow ONLY at the rim, not bleeding upward */}
+      {/* Sphere — bg matches page so only the glowing rim is visible */}
       <div
         style={{
           position: "absolute",
@@ -45,7 +45,7 @@ export default function DemiSphere() {
           aspectRatio: "1 / 0.7",
           zIndex: 10,
           borderRadius: "100%",
-          background: "#000000",
+          background: "radial-gradient(ellipse at 50% 30%, #0d0d2b 0%, #07071a 60%)",
           borderTop: "1.5px solid rgba(160, 80, 255, 0.9)",
           boxShadow:
             "0 -4px 40px 8px rgba(130, 50, 255, 0.85), 0 -2px 80px 15px rgba(100, 30, 220, 0.4), inset 0 4px 30px rgba(120, 50, 255, 0.08)",
