@@ -68,9 +68,7 @@ export default function HeroSection() {
       {/* ── Hero text ── */}
       <div
         style={{
-          flex: "0 0 auto",
-          height: "calc(100vh - 560px)",
-          minHeight: "320px",
+          flex: 1,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -80,6 +78,7 @@ export default function HeroSection() {
           textAlign: "center",
           padding: "0 24px",
           paddingTop: "60px",
+          paddingBottom: "80px",
         }}
       >
         {/* Badge — pill with border + purple dot + text */}
@@ -166,13 +165,14 @@ export default function HeroSection() {
         </motion.div>
       </div>
 
-      {/* ── Demi-sphere ── */}
+      {/* ── Demi-sphere — absolute background ── */}
       <DemiSphere />
 
       {/* ── Logo scroll bar pinned at bottom ── */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 20 }}>
         <LogoScrollBar />
       </div>
+
     </section>
   );
 }
