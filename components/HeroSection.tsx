@@ -270,51 +270,6 @@ export default function HeroSection() {
           paddingBottom: "80px",
         }}
       >
-        {/* Badge with pulsing dot */}
-        <motion.div
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.15, duration: 0.6, ease: SPRING }}
-          style={{ marginBottom: "32px" }}
-        >
-          <div
-            className="edition-badge"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "7px 18px",
-              background: "rgba(155,48,255,0.08)",
-              border: "1px solid rgba(155,48,255,0.28)",
-              borderRadius: "999px",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-            }}
-          >
-            <motion.div
-              animate={{ scale: [1, 1.4, 1], opacity: [0.7, 0.3, 0.7] }}
-              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#9b30ff",
-                boxShadow: "0 0 6px rgba(155,48,255,0.7)",
-                flexShrink: 0,
-              }}
-            />
-            <span style={{
-              fontSize: "11px",
-              fontWeight: 500,
-              color: "rgba(200,160,255,0.88)",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              fontFamily: "var(--font-inter), 'Inter', sans-serif",
-            }}>
-              TSYP · 14th Edition
-            </span>
-          </div>
-        </motion.div>
 
         {/* Headline — luxury line reveal + vector draw lines */}
         <div style={{ textAlign: "center" }}>
