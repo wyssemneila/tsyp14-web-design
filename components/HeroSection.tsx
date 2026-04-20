@@ -104,11 +104,11 @@ function WordReveal({
             }}
             style={{
               display: "inline-block",
-              fontSize: "clamp(40px, 6vw, 78px)",
-              fontWeight: 700,
-              lineHeight: 1.05,
-              letterSpacing: "0.04em",
-              fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
+              fontSize: "clamp(34px, 5.5vw, 66px)",
+              fontWeight: 800,
+              lineHeight: 1.1,
+              letterSpacing: "-0.025em",
+              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
             {word}
