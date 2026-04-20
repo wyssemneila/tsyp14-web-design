@@ -88,7 +88,7 @@ function WordReveal({
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center",
-      gap: "0 0.3em",
+      gap: "0 0.5em",
       paddingBottom: "6px",
     }}>
       {words.map((word, i) => (
@@ -108,7 +108,7 @@ function WordReveal({
               fontWeight: 800,
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
-              fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
+              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               ...(gradient ? {} : { color: "#ffffff" }),
             }}
           >
