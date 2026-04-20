@@ -9,106 +9,91 @@ export default function DemiSphere() {
         overflow: "hidden",
       }}
     >
-      {/* ── Purple atmosphere glow — rises above the sphere ── */}
+      {/* ── Purple atmosphere rising from sphere ── */}
       <div
         style={{
           position: "absolute",
           left: "50%",
-          bottom: "8%",
+          bottom: "14%",
           transform: "translateX(-50%)",
-          width: "90%",
-          height: "55%",
+          width: "85%",
+          height: "60%",
           background:
-            "radial-gradient(ellipse 70% 90% at 50% 100%, rgba(120,30,220,0.55) 0%, rgba(90,20,180,0.28) 35%, rgba(60,10,140,0.10) 60%, transparent 80%)",
-          filter: "blur(32px)",
+            "radial-gradient(ellipse 65% 85% at 50% 100%, rgba(110,20,220,0.65) 0%, rgba(80,10,170,0.35) 30%, rgba(50,5,120,0.12) 58%, transparent 78%)",
+          filter: "blur(28px)",
+          zIndex: 1,
         }}
       />
 
-      {/* ── Base sphere — dark oval with white rim inset ── */}
+      {/* ── Base sphere — large dark oval with white rim ── */}
       <div
         style={{
           position: "absolute",
           left: "50%",
-          bottom: "-38%",
+          bottom: "-42%",
           transform: "translateX(-50%)",
-          width: "190%",
+          width: "185%",
           aspectRatio: "2.35 / 1",
-          background: "#06060e",
+          background: "radial-gradient(ellipse 100% 100% at 50% 50%, #110820 0%, #07040f 40%, #030208 100%)",
           borderRadius: "100%",
           boxShadow:
-            "inset 0px 3px 28px 2px rgba(255,255,255,0.85), 0px -12px 60px 4px rgba(200,180,255,0.18)",
+            "inset 0px 2px 24px 1px rgba(255,255,255,0.9), inset 0px 0px 60px 0px rgba(180,140,255,0.15), 0px -8px 80px 10px rgba(160,100,255,0.12)",
+          zIndex: 3,
         }}
       >
-        {/* Ellipse — top-edge gradient glow on sphere surface */}
+        {/* Top rim gradient — white fade on sphere edge */}
         <div
           style={{
             position: "absolute",
             inset: 0,
             borderRadius: "100%",
             background:
-              "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(180,140,255,0.15) 12%, transparent 28%)",
+              "linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(200,170,255,0.2) 8%, rgba(140,80,220,0.05) 20%, transparent 35%)",
           }}
         />
 
-        {/* Radial — bright center hotspot on rim */}
+        {/* Radial hotspot — bright center on the rim */}
         <div
           style={{
             position: "absolute",
             left: "50%",
-            top: "1%",
+            top: "0%",
             transform: "translateX(-50%)",
-            width: "38%",
-            height: "20%",
+            width: "35%",
+            height: "22%",
             background:
-              "radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.65) 0%, rgba(200,180,255,0.2) 50%, transparent 100%)",
-            filter: "blur(18px)",
+              "radial-gradient(50% 50% at 50% 50%, rgba(255,255,255,0.7) 0%, rgba(210,190,255,0.3) 45%, transparent 100%)",
+            filter: "blur(14px)",
           }}
         />
       </div>
 
-      {/* ── FX Blur — atmospheric haze above sphere ── */}
+      {/* ── Extra purple depth above sphere ── */}
       <div
         style={{
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "62%",
-          backdropFilter: "blur(56px)",
-          WebkitBackdropFilter: "blur(56px)",
+          left: "50%",
+          bottom: "18%",
+          transform: "translateX(-50%)",
+          width: "55%",
+          height: "30%",
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(5,0,15,0.22) 100%)",
-          maskImage:
-            "linear-gradient(180deg, transparent 0%, black 35%, black 100%)",
-          WebkitMaskImage:
-            "linear-gradient(180deg, transparent 0%, black 35%, black 100%)",
+            "radial-gradient(ellipse 80% 70% at 50% 100%, rgba(155,48,255,0.28) 0%, rgba(100,20,200,0.12) 50%, transparent 80%)",
+          filter: "blur(40px)",
+          zIndex: 2,
         }}
       />
 
-      {/* ── FX Linear — hard fade at very top to blend into black bg ── */}
+      {/* ── FX Linear — fade at very top ── */}
       <div
         style={{
           position: "absolute",
           top: 0,
           left: 0,
           right: 0,
-          height: "140px",
+          height: "130px",
           background: "linear-gradient(180deg, #000000 0%, transparent 100%)",
-        }}
-      />
-
-      {/* ── FX Gradient — extra purple depth layer ── */}
-      <div
-        style={{
-          position: "absolute",
-          left: "50%",
-          bottom: "12%",
-          transform: "translateX(-50%)",
-          width: "70%",
-          height: "38%",
-          background:
-            "radial-gradient(ellipse 80% 70% at 50% 100%, rgba(155,48,255,0.22) 0%, rgba(100,20,200,0.10) 50%, transparent 75%)",
-          filter: "blur(48px)",
+          zIndex: 5,
         }}
       />
     </div>
