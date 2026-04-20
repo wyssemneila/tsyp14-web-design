@@ -27,9 +27,9 @@ function CarouselCard({ src, tilt }: { src: string; tilt: number }) {
     <div
       style={{
         flex: "0 0 auto",
-        width: "clamp(160px, 18vw, 240px)",
-        height: "clamp(220px, 26vw, 340px)",
-        borderRadius: "16px",
+        width: "clamp(240px, 26vw, 360px)",
+        aspectRatio: "16 / 9",
+        borderRadius: "14px",
         overflow: "hidden",
         transform: `rotate(${tilt}deg)`,
         position: "relative",

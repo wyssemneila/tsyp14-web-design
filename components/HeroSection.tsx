@@ -19,6 +19,59 @@ function calcDiff() {
   };
 }
 
+const WORDS = [
+  { text: "ideas",         color: "#a78bfa" },
+  { text: "minds",         color: "#c026d3" },
+  { text: "tomorrow",      color: "#7c3aed" },
+  { text: "the noosphere", color: "#9b30ff" },
+];
+
+function CyclingWord() {
+  const [index, setIndex] = useState(0);
+  const [visible, setVisible] = useState(true);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisible(false);
+      setTimeout(() => {
+        setIndex(i => (i + 1) % WORDS.length);
+        setVisible(true);
+      }, 320);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const word = WORDS[index];
+
+  return (
+    <span style={{
+      display: "inline-block",
+      overflow: "hidden",
+      verticalAlign: "bottom",
+      height: "1.3em",
+      position: "relative",
+    }}>
+      <motion.span
+        key={index}
+        initial={{ y: "100%", opacity: 0 }}
+        animate={visible ? { y: "0%", opacity: 1 } : { y: "-100%", opacity: 0 }}
+        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        style={{
+          display: "inline-block",
+          fontSize: "clamp(18px, 2.2vw, 28px)",
+          fontWeight: 700,
+          color: word.color,
+          fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+          letterSpacing: "0.01em",
+          textShadow: `0 0 24px ${word.color}88`,
+        }}
+      >
+        {word.text}
+      </motion.span>
+    </span>
+  );
+}
+
 function MiniCountdown() {
   const [t, setT] = useState(calcDiff);
   useEffect(() => {
@@ -286,7 +339,7 @@ export default function HeroSection() {
           <DrawLine delay={1.55} color="linear-gradient(90deg, transparent, rgba(200,80,180,0.35), rgba(155,48,255,0.5), transparent)" width="40%" />
         </div>
 
-        {/* Tagline with blinking cursor */}
+        {/* Tagline with animated cycling word */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -296,31 +349,21 @@ export default function HeroSection() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: "2px",
+            gap: "0",
+            flexWrap: "wrap",
           }}
         >
           <span style={{
-            fontSize: "clamp(13px, 1.4vw, 16px)",
+            fontSize: "clamp(18px, 2.2vw, 28px)",
             fontWeight: 500,
-            color: "rgba(255,255,255,0.65)",
-            letterSpacing: "0.02em",
+            color: "rgba(255,255,255,0.75)",
+            letterSpacing: "0.01em",
             fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+            marginRight: "10px",
           }}>
-            Together, We Shape the Future of Tech.
+            We architect
           </span>
-          <motion.span
-            animate={{ opacity: [1, 1, 0, 0] }}
-            transition={{ duration: 0.9, repeat: Infinity, ease: "linear", times: [0, 0.49, 0.5, 1] }}
-            style={{
-              display: "inline-block",
-              width: "2px",
-              height: "1.1em",
-              background: "rgba(155,48,255,0.85)",
-              marginLeft: "3px",
-              verticalAlign: "text-bottom",
-              borderRadius: "1px",
-            }}
-          />
+          <CyclingWord />
         </motion.div>
 
         {/* Location + Date */}
