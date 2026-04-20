@@ -9,19 +9,7 @@ export default function DemiSphere() {
         overflow: "hidden",
       }}
     >
-      {/* Purple atmospheric glow — sits behind sphere */}
-      <div style={{
-        position: "absolute",
-        left: "50%",
-        top: "38%",
-        transform: "translateX(-50%)",
-        width: "100vw",
-        height: "62vh",
-        background: "radial-gradient(ellipse 80% 100% at 50% 100%, rgba(80,10,180,0.85) 0%, rgba(60,5,140,0.45) 30%, rgba(30,2,80,0.15) 60%, transparent 80%)",
-        zIndex: 1,
-      }} />
-
-      {/* Base sphere — #0a0a0a + white inset rim (exact Framer) */}
+      {/* Base sphere — dark #0a0a0a, inset white rim only, no outer white glow */}
       <div style={{
         position: "absolute",
         left: "50%",
@@ -31,18 +19,17 @@ export default function DemiSphere() {
         height: "calc(185vw / 2.347)",
         backgroundColor: "#0a0a0a",
         borderRadius: "100%",
-        boxShadow: "inset 0px 2px 20px 0px #ffffff, 0px -10px 50px 1px rgba(255,255,255,0.49)",
-        zIndex: 4,
+        boxShadow: "inset 0px 2px 20px 0px #ffffff",
+        zIndex: 3,
       }}>
-        {/* Elipse — white fade on top of sphere */}
+        {/* Ellipse — white fade on top rim */}
         <div style={{
           position: "absolute",
           inset: 0,
           borderRadius: "100%",
-          background: "linear-gradient(180deg, rgba(255,255,255,0.55) 0%, rgba(10,10,10,0) 20%)",
+          background: "linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(10,10,10,0) 18%)",
         }} />
-
-        {/* Radial — white hotspot center of rim */}
+        {/* Radial hotspot */}
         <div style={{
           position: "absolute",
           left: "50%",
@@ -55,14 +42,26 @@ export default function DemiSphere() {
         }} />
       </div>
 
-      {/* Top linear fade — black at top, fades out */}
+      {/* Purple atmosphere — ON TOP of sphere, fades downward to transparent */}
+      <div style={{
+        position: "absolute",
+        left: "50%",
+        top: "28%",
+        transform: "translateX(-50%)",
+        width: "110vw",
+        height: "55vh",
+        background: "radial-gradient(ellipse 75% 100% at 50% 100%, rgba(90,15,200,0.95) 0%, rgba(65,8,155,0.55) 25%, rgba(40,4,110,0.22) 52%, transparent 75%)",
+        zIndex: 5,
+      }} />
+
+      {/* Top fade to black */}
       <div style={{
         position: "absolute",
         top: 0,
         left: 0,
         right: 0,
-        height: "25vh",
-        background: "linear-gradient(180deg, #000000 0%, rgba(10,10,10,0) 100%)",
+        height: "30vh",
+        background: "linear-gradient(180deg, #000000 0%, transparent 100%)",
         zIndex: 6,
       }} />
     </div>
