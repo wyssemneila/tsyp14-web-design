@@ -17,11 +17,11 @@ export default function DemiSphere() {
         priority
         style={{
           objectFit: "cover",
-          objectPosition: "center 55%",
+          objectPosition: "center 60%",
           maskImage:
-            "linear-gradient(to bottom, transparent 0%, black 20%, black 60%, transparent 85%)",
+            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
           WebkitMaskImage:
-            "linear-gradient(to bottom, transparent 0%, black 20%, black 60%, transparent 85%)",
+            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
           opacity: 0.95,
         }}
       />

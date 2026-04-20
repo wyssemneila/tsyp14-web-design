@@ -1,10 +1,61 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
 import LogoScrollBar from "./LogoScrollBar";
+
+const TARGET = new Date("2025-12-21T00:00:00");
+
+function calcDiff() {
+  const diff = Math.max(0, TARGET.getTime() - Date.now());
+  return {
+    days:    Math.floor(diff / 864e5),
+    hours:   Math.floor((diff % 864e5) / 36e5),
+    minutes: Math.floor((diff % 36e5) / 6e4),
+    seconds: Math.floor((diff % 6e4) / 1000),
+  };
+}
+
+function MiniCountdown() {
+  const [t, setT] = useState(calcDiff);
+  useEffect(() => {
+    const id = setInterval(() => setT(calcDiff()), 1000);
+    return () => clearInterval(id);
+  }, []);
+
+  const units = [
+    { v: t.days,    l: "D" },
+    { v: t.hours,   l: "H" },
+    { v: t.minutes, l: "M" },
+    { v: t.seconds, l: "S" },
+  ];
+
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+      <span style={{ fontSize: "10px", color: "rgba(155,48,255,0.8)", letterSpacing: "0.2em", marginRight: "8px", fontWeight: 500 }}>
+        21 DEC
+      </span>
+      {units.map(({ v, l }, i) => (
+        <div key={l} style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+          <div style={{
+            display: "flex", flexDirection: "column", alignItems: "center",
+            background: "rgba(0,0,0,0.55)", border: "1px solid rgba(155,48,255,0.3)",
+            borderRadius: "6px", padding: "4px 8px", backdropFilter: "blur(8px)",
+          }}>
+            <span style={{ fontSize: "16px", fontWeight: 700, color: "#fff", lineHeight: 1, fontVariantNumeric: "tabular-nums" }}>
+              {String(v).padStart(2, "0")}
+            </span>
+            <span style={{ fontSize: "8px", color: "rgba(155,48,255,0.7)", letterSpacing: "0.15em", marginTop: "2px" }}>{l}</span>
+          </div>
+          {i < 3 && <span style={{ color: "rgba(155,48,255,0.6)", fontSize: "14px", fontWeight: 700, marginBottom: "8px" }}>:</span>}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -167,6 +218,22 @@ export default function HeroSection() {
 
       {/* ── Demi-sphere — absolute background ── */}
       <DemiSphere />
+
+      {/* ── Mini countdown in the black space above logo bar ── */}
+      <div style={{
+        position: "absolute",
+        bottom: "74px",
+        left: 0,
+        right: 0,
+        zIndex: 25,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        gap: "6px",
+        pointerEvents: "none",
+      }}>
+        <MiniCountdown />
+      </div>
 
       {/* ── Logo scroll bar pinned at bottom ── */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 30 }}>
