@@ -11,7 +11,7 @@ export default function DemiSphere() {
       }}
     >
       <Image
-        src="/sphere.webp"
+        src="/sphere.png"
         alt=""
         fill
         priority
