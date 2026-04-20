@@ -337,7 +337,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
           style={{
-            marginTop: "110px",
+            marginTop: "150px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
