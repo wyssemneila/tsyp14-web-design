@@ -7,7 +7,7 @@ import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
 import LogoScrollBar from "./LogoScrollBar";
 
-const TARGET = new Date("2025-12-21T00:00:00");
+const TARGET = new Date("2026-12-21T00:00:00");
 
 function calcDiff() {
   const diff = Math.max(0, TARGET.getTime() - Date.now());
