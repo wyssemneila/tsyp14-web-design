@@ -160,7 +160,11 @@ export default function ParticleCanvas() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ zIndex: 0 }}
+      style={{
+        zIndex: 0,
+        maskImage: "linear-gradient(to bottom, black 45%, transparent 72%)",
+        WebkitMaskImage: "linear-gradient(to bottom, black 45%, transparent 72%)",
+      }}
     />
   );
 }
