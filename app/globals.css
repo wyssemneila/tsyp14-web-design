@@ -1,26 +1,171 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* ── Tailwind v4 theme tokens ── */
+@theme {
+  --color-bg-base:      #050008;
+  --color-purple:       #9B30FF;
+  --color-magenta:      #CC00FF;
+  --color-indigo:       #4B0082;
+  --color-light-purple: #CC99FF;
+  --color-card-dark:    #0d0020;
+  --color-card-dark2:   #1a0033;
+
+  --font-poppins: var(--font-poppins-var), 'Poppins', sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Base ── */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html::-webkit-scrollbar { display: none; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #050008;
+  color: #ffffff;
+  font-family: var(--font-poppins-var, 'Poppins', sans-serif);
+  overflow-x: hidden;
+}
+
+/* ── Keyframes ── */
+@keyframes sphere-sweep {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes float-hint {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(7px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+/* ── Demi Sphere ── */
+.demi-sphere {
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(255, 255, 255, 0.20) 0%,
+    #CC00FF 7%,
+    #9B30FF 20%,
+    #6a0dad 38%,
+    #2a0050 60%,
+    rgba(5, 0, 8, 0) 82%
+  );
+  box-shadow:
+    0 0 60px 20px rgba(204, 0, 255, 0.55),
+    0 0 120px 50px rgba(155, 48, 255, 0.38),
+    0 0 220px 90px rgba(75, 0, 130, 0.22),
+    inset 0 0 40px rgba(255, 255, 255, 0.08);
+  position: relative;
+}
+
+.demi-sphere::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(5, 0, 8, 0) 0deg,
+    rgba(255, 255, 255, 0.18) 20deg,
+    rgba(5, 0, 8, 0) 40deg,
+    rgba(5, 0, 8, 0) 360deg
+  );
+  animation: sphere-sweep 4s linear infinite;
+}
+
+.demi-sphere::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(204, 0, 255, 0.30);
+  box-shadow:
+    0 0 16px rgba(204, 0, 255, 0.5),
+    inset 0 0 16px rgba(204, 0, 255, 0.15);
+}
+
+/* fade bottom edge of sphere container into bg */
+.demi-sphere-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60%;
+  background: linear-gradient(to top, #050008 0%, rgba(5,0,8,0) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Scroll hint ── */
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  animation: float-hint 2.2s ease-in-out infinite;
+}
+
+/* ── Section title underline ── */
+.title-underline::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #9B30FF, transparent);
+  margin: 10px auto 0;
+}
+
+/* ── Count box inner glow ── */
+.count-box-inner {
+  background: radial-gradient(circle at 50% 0%, rgba(204,0,255,0.07) 0%, transparent 65%);
+}
+
+/* ── Card border glow on hover ── */
+.edition-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(204, 0, 255, 0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.edition-card:hover::before {
+  opacity: 1;
+}
+
+/* ── Map filter (dark/purple theme) ── */
+.map-iframe {
+  filter: invert(92%) hue-rotate(200deg) saturate(1.3) brightness(0.85);
+}
+
+/* ── Gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, #CC00FF 0%, #9B30FF 50%, #CC99FF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Navbar active glow ── */
+.nav-link-hover {
+  position: relative;
+}
+.nav-link-hover::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #9B30FF;
+  transition: width 0.25s ease;
+}
+.nav-link-hover:hover::after {
+  width: 100%;
 }
