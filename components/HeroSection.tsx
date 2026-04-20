@@ -109,7 +109,6 @@ function WordReveal({
               lineHeight: 1.05,
               letterSpacing: "0.04em",
               fontFamily: "var(--font-cormorant), 'Cormorant Garamond', serif",
-              letterSpacing: "0.04em",
             }}
           >
             {word}
