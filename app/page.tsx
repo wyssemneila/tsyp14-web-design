@@ -2,6 +2,7 @@ import HeroSection from "@/components/HeroSection";
 import CountdownSection from "@/components/CountdownSection";
 import AboutSection from "@/components/AboutSection";
 import WhoWeAreSection from "@/components/WhoWeAreSection";
+import ThemeSection from "@/components/ThemeSection";
 
 export default function Home() {
   return (
@@ -10,6 +11,7 @@ export default function Home() {
       <CountdownSection />
       <AboutSection />
       <WhoWeAreSection />
+      <ThemeSection />
     </main>
   );
 }
