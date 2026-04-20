@@ -147,7 +147,7 @@ export default function HeroSection() {
         }}
       >
         {/* Badge — pill with border + purple dot + text */}
-        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" style={{ marginBottom: "24px" }}>
+        <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" style={{ marginBottom: "24px", marginTop: "-60px" }}>
           <div
             className="edition-badge"
             style={{
@@ -179,55 +179,6 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Heading line 1 — bright white */}
-        <motion.div custom={1} variants={fadeUp} initial="hidden" animate="visible">
-          <h1
-            style={{
-              fontSize: "clamp(36px, 5.5vw, 64px)",
-              fontWeight: 700,
-              lineHeight: 1.12,
-              letterSpacing: "-0.02em",
-              color: "#ffffff",
-              marginBottom: "4px",
-            }}
-          >
-            Tunisian Student and Young
-          </h1>
-        </motion.div>
-
-        {/* Heading line 2 — muted gray like p1 */}
-        <motion.div custom={2} variants={fadeUp} initial="hidden" animate="visible">
-          <h1
-            style={{
-              fontSize: "clamp(36px, 5.5vw, 64px)",
-              fontWeight: 700,
-              lineHeight: 1.12,
-              letterSpacing: "-0.02em",
-              color: "#9ca3af",
-              marginBottom: "20px",
-            }}
-          >
-            Professional Congress
-          </h1>
-        </motion.div>
-
-        {/* Subtitle */}
-        <motion.div custom={3} variants={fadeUp} initial="hidden" animate="visible">
-          <p
-            style={{
-              fontSize: "clamp(13px, 1.2vw, 15px)",
-              fontWeight: 400,
-              lineHeight: 1.65,
-              color: "rgba(156,163,175,0.85)",
-              maxWidth: "500px",
-              margin: "0 auto",
-            }}
-          >
-            The premier annual congress for IEEE student and young professional
-            members across Tunisia — fostering innovation, networking, and
-            technical leadership.
-          </p>
-        </motion.div>
       </div>
 
       {/* ── Demi-sphere — absolute background ── */}
