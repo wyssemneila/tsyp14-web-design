@@ -198,7 +198,7 @@ export default function HeroSection() {
           textAlign: "center",
           padding: "0 24px",
           paddingTop: "72px",
-          paddingBottom: "160px",
+          paddingBottom: "80px",
         }}
       >
         {/* Badge with pulsing dot */}
@@ -223,14 +223,14 @@ export default function HeroSection() {
             }}
           >
             <motion.div
-              animate={{ scale: [1, 1.5, 1], opacity: [1, 0.5, 1] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
+              animate={{ scale: [1, 1.4, 1], opacity: [0.7, 0.3, 0.7] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 width: "6px",
                 height: "6px",
                 borderRadius: "50%",
                 background: "#9b30ff",
-                boxShadow: "0 0 8px rgba(155,48,255,0.9)",
+                boxShadow: "0 0 6px rgba(155,48,255,0.7)",
                 flexShrink: 0,
               }}
             />
@@ -253,68 +253,137 @@ export default function HeroSection() {
           <WordReveal text="Professional Congress" gradient baseDelay={0.76} />
         </div>
 
-        {/* Date + location line */}
-        <motion.p
+        {/* Tagline with blinking cursor */}
+        <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.15, duration: 0.6, ease: SPRING }}
+          transition={{ delay: 1.1, duration: 0.6, ease: SPRING }}
           style={{
             marginTop: "20px",
-            fontSize: "12px",
-            fontWeight: 400,
-            letterSpacing: "0.18em",
-            textTransform: "uppercase",
-            color: "rgba(180,150,255,0.5)",
-            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "2px",
           }}
         >
-          December 21, 2026 &nbsp;·&nbsp; Tunis, Tunisia
-        </motion.p>
-
-        {/* Primary CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.35, duration: 0.6, ease: SPRING }}
-          style={{ marginTop: "36px" }}
-        >
-          <button
+          <span style={{
+            fontSize: "clamp(13px, 1.4vw, 16px)",
+            fontWeight: 500,
+            color: "rgba(255,255,255,0.65)",
+            letterSpacing: "0.02em",
+            fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+          }}>
+            Together, We Shape the Future of Tech.
+          </span>
+          <motion.span
+            animate={{ opacity: [1, 1, 0, 0] }}
+            transition={{ duration: 0.9, repeat: Infinity, ease: "linear", times: [0, 0.49, 0.5, 1] }}
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "13px 32px",
-              background: "linear-gradient(135deg, rgba(155,48,255,0.22), rgba(155,48,255,0.10))",
-              border: "1px solid rgba(155,48,255,0.45)",
-              borderRadius: "10px",
-              backdropFilter: "blur(12px)",
-              WebkitBackdropFilter: "blur(12px)",
-              color: "rgba(220,190,255,0.95)",
-              fontSize: "13px",
-              fontWeight: 600,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              fontFamily: "var(--font-inter), 'Inter', sans-serif",
-              cursor: "pointer",
-              boxShadow: "0 0 24px rgba(155,48,255,0.12), inset 0 1px 0 rgba(255,255,255,0.06)",
-              transition: "all 0.2s ease",
+              display: "inline-block",
+              width: "2px",
+              height: "1.1em",
+              background: "rgba(155,48,255,0.85)",
+              marginLeft: "3px",
+              verticalAlign: "text-bottom",
+              borderRadius: "1px",
             }}
-            onMouseEnter={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, rgba(155,48,255,0.35), rgba(155,48,255,0.18))";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(155,48,255,0.7)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 36px rgba(155,48,255,0.22), inset 0 1px 0 rgba(255,255,255,0.08)";
-            }}
-            onMouseLeave={e => {
-              (e.currentTarget as HTMLButtonElement).style.background = "linear-gradient(135deg, rgba(155,48,255,0.22), rgba(155,48,255,0.10))";
-              (e.currentTarget as HTMLButtonElement).style.borderColor = "rgba(155,48,255,0.45)";
-              (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 24px rgba(155,48,255,0.12), inset 0 1px 0 rgba(255,255,255,0.06)";
-            }}
-          >
-            Register Now
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ opacity: 0.8 }}>
-              <path d="M1 7h12M8 3l5 4-5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          />
+        </motion.div>
+
+        {/* Location + Date */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.3, duration: 0.6, ease: SPRING }}
+          style={{
+            marginTop: "16px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "20px",
+            flexWrap: "wrap",
+          }}
+        >
+          <span style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            fontSize: "12px", fontWeight: 400,
+            color: "rgba(180,150,255,0.55)",
+            letterSpacing: "0.06em",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+          }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
             </svg>
-          </button>
+            Tunis, Tunisia
+          </span>
+          <span style={{ display: "block", width: "1px", height: "12px", background: "rgba(155,48,255,0.25)" }} />
+          <span style={{
+            display: "flex", alignItems: "center", gap: "6px",
+            fontSize: "12px", fontWeight: 400,
+            color: "rgba(180,150,255,0.55)",
+            letterSpacing: "0.06em",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+          }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            21 December 2026
+          </span>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
+          style={{
+            marginTop: "40px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "0",
+            flexWrap: "wrap",
+          }}
+        >
+          {[
+            { value: "1200+", label: "Participants" },
+            { value: "50+",   label: "Speakers"     },
+            { value: "60+",   label: "Workshops"    },
+          ].map(({ value, label }, i, arr) => (
+            <div key={label} style={{ display: "flex", alignItems: "center" }}>
+              <div style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                padding: "0 clamp(20px, 4vw, 48px)",
+              }}>
+                <span style={{
+                  fontSize: "clamp(22px, 3vw, 32px)",
+                  fontWeight: 700,
+                  lineHeight: 1,
+                  color: "#ffffff",
+                  fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+                  letterSpacing: "-0.02em",
+                }}>
+                  {value}
+                </span>
+                <span style={{
+                  marginTop: "5px",
+                  fontSize: "11px",
+                  fontWeight: 500,
+                  color: "rgba(180,150,255,0.55)",
+                  letterSpacing: "0.1em",
+                  textTransform: "uppercase",
+                  fontFamily: "var(--font-inter), 'Inter', sans-serif",
+                }}>
+                  {label}
+                </span>
+              </div>
+              {i < arr.length - 1 && (
+                <div style={{ width: "1px", height: "36px", background: "rgba(155,48,255,0.2)" }} />
+              )}
+            </div>
+          ))}
         </motion.div>
 
       </div>
@@ -322,25 +391,6 @@ export default function HeroSection() {
       {/* ── Demi-sphere — absolute background ── */}
       <DemiSphere />
 
-      {/* ── Mini countdown in the black space above logo bar ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.7, ease: SPRING }}
-        style={{
-          position: "absolute",
-          bottom: "110px",
-          left: 0,
-          right: 0,
-          zIndex: 25,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          pointerEvents: "none",
-        }}
-      >
-        <MiniCountdown />
-      </motion.div>
 
       {/* ── Logo scroll bar pinned at bottom ── */}
       <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 30 }}>
