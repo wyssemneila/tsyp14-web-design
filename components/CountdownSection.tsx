@@ -4,9 +4,6 @@ import { useState, useEffect, useRef } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const TARGET = new Date("2026-12-21T00:00:00");
-// approximate start for progress bar
-const START = new Date("2025-12-21T00:00:00");
-const TOTAL_MS = TARGET.getTime() - START.getTime();
 
 interface TimeLeft {
   days: number;
@@ -30,43 +27,193 @@ function pad(n: number) { return String(n).padStart(2, "0"); }
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 const UNITS: { key: keyof TimeLeft; label: string }[] = [
-  { key: "days",    label: "DAYS"  },
-  { key: "hours",   label: "HRS"   },
-  { key: "minutes", label: "MIN"   },
-  { key: "seconds", label: "SEC"   },
+  { key: "days",    label: "Days"    },
+  { key: "hours",   label: "Hours"   },
+  { key: "minutes", label: "Minutes" },
+  { key: "seconds", label: "Seconds" },
 ];
 
 function DigitRoll({ value }: { value: string }) {
   return (
-    <span style={{ display: "inline-block", overflow: "hidden", position: "relative" }}>
-      <AnimatePresence mode="popLayout">
-        <motion.span
-          key={value}
-          initial={{ y: "-60%", opacity: 0 }}
-          animate={{ y: "0%",  opacity: 1 }}
-          exit={{    y:  "60%", opacity: 0 }}
-          transition={{ duration: 0.22, ease: EASE }}
-          style={{ display: "inline-block" }}
+    <span
+      style={{
+        display: "inline-flex",
+        gap: "0.04em",
+        fontVariantNumeric: "tabular-nums",
+      }}
+    >
+      {value.split("").map((char, i) => (
+        <span
+          key={i}
+          style={{ display: "inline-block", overflow: "hidden", lineHeight: 1 }}
         >
-          {value}
-        </motion.span>
-      </AnimatePresence>
+          <AnimatePresence mode="popLayout">
+            <motion.span
+              key={`${i}-${char}`}
+              initial={{ y: "-80%", opacity: 0, filter: "blur(4px)" }}
+              animate={{ y: "0%",   opacity: 1, filter: "blur(0px)" }}
+              exit={{    y:  "80%", opacity: 0, filter: "blur(4px)" }}
+              transition={{ duration: 0.3, ease: EASE }}
+              style={{ display: "inline-block" }}
+            >
+              {char}
+            </motion.span>
+          </AnimatePresence>
+        </span>
+      ))}
     </span>
+  );
+}
+
+function UnitCard({
+  value,
+  label,
+  index,
+  inView,
+}: {
+  value: number;
+  label: string;
+  index: number;
+  inView: boolean;
+}) {
+  const isSeconds = label === "Seconds";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, ease: EASE, delay: 0.2 + index * 0.08 }}
+      style={{ position: "relative", flex: "1 1 0" }}
+    >
+      {/* Glow behind card */}
+      {isSeconds && (
+        <motion.div
+          style={{
+            position: "absolute",
+            inset: "-1px",
+            borderRadius: "18px",
+            background:
+              "radial-gradient(ellipse 80% 80% at 50% 50%, rgba(155,48,255,0.18) 0%, transparent 70%)",
+            pointerEvents: "none",
+            zIndex: 0,
+          }}
+          animate={{ opacity: [0.6, 1, 0.6] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}
+        />
+      )}
+
+      {/* Card */}
+      <div
+        style={{
+          position: "relative",
+          zIndex: 1,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "clamp(28px, 4vw, 52px) clamp(12px, 2vw, 24px) clamp(22px, 3vw, 40px)",
+          background: isSeconds
+            ? "linear-gradient(155deg, rgba(100,40,200,0.14) 0%, rgba(20,10,40,0.85) 100%)"
+            : "linear-gradient(155deg, rgba(255,255,255,0.04) 0%, rgba(10,8,20,0.80) 100%)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderRadius: "16px",
+          border: isSeconds
+            ? "1px solid rgba(155,48,255,0.3)"
+            : "1px solid rgba(255,255,255,0.07)",
+          boxShadow: isSeconds
+            ? "0 0 40px rgba(155,48,255,0.12), inset 0 1px 0 rgba(255,255,255,0.07)"
+            : "0 4px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.05)",
+        }}
+      >
+        {/* Number */}
+        <div
+          style={{
+            fontSize: "clamp(3rem, 8vw, 7rem)",
+            fontWeight: 700,
+            lineHeight: 1,
+            letterSpacing: "-0.04em",
+            color: isSeconds ? "#c4b5fd" : "#ffffff",
+            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+          }}
+        >
+          <DigitRoll value={pad(value)} />
+        </div>
+
+        {/* Divider */}
+        <div
+          style={{
+            width: "clamp(24px, 3vw, 40px)",
+            height: "1px",
+            background: isSeconds
+              ? "rgba(155,48,255,0.55)"
+              : "rgba(255,255,255,0.12)",
+            margin: "clamp(12px, 2vw, 20px) 0 clamp(10px, 1.5vw, 16px)",
+          }}
+        />
+
+        {/* Label */}
+        <span
+          style={{
+            fontSize: "clamp(8px, 0.9vw, 10px)",
+            fontWeight: 600,
+            letterSpacing: "0.35em",
+            textTransform: "uppercase",
+            color: isSeconds
+              ? "rgba(155,48,255,0.75)"
+              : "rgba(180,180,200,0.38)",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+          }}
+        >
+          {label}
+        </span>
+      </div>
+    </motion.div>
+  );
+}
+
+function Colon({ inView, delay }: { inView: boolean; delay: number }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={inView ? { opacity: 1 } : {}}
+      transition={{ duration: 0.6, ease: EASE, delay }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+        alignItems: "center",
+        justifyContent: "center",
+        paddingBottom: "30px",
+        flexShrink: 0,
+      }}
+    >
+      {[0, 1].map((i) => (
+        <motion.div
+          key={i}
+          animate={{ opacity: [1, 0.2, 1] }}
+          transition={{ duration: 1, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+          style={{
+            width: "5px",
+            height: "5px",
+            borderRadius: "50%",
+            background: "rgba(155,48,255,0.55)",
+          }}
+        />
+      ))}
+    </motion.div>
   );
 }
 
 export default function CountdownSection() {
   const [time, setTime] = useState<TimeLeft>(calcTimeLeft);
   const sectionRef = useRef<HTMLElement>(null);
-  const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const inView = useInView(sectionRef, { once: true, margin: "-60px" });
 
   useEffect(() => {
     const id = setInterval(() => setTime(calcTimeLeft()), 1000);
     return () => clearInterval(id);
   }, []);
-
-  const elapsed = Math.max(0, Date.now() - START.getTime());
-  const progress = Math.min(100, (elapsed / TOTAL_MS) * 100);
 
   return (
     <section
@@ -75,224 +222,167 @@ export default function CountdownSection() {
       style={{
         position: "relative",
         width: "100%",
-        padding: "120px 24px 100px",
+        padding: "100px 24px 110px",
         background: "#000000",
         overflow: "hidden",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}
     >
-      {/* deep purple ambient under grid */}
-      <div aria-hidden style={{
-        position: "absolute",
-        left: "50%",
-        top: "50%",
-        transform: "translate(-50%, -50%)",
-        width: "800px",
-        height: "400px",
-        background: "radial-gradient(ellipse, rgba(100,40,220,0.10) 0%, transparent 70%)",
-        pointerEvents: "none",
-      }} />
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        style={{
+          position: "absolute",
+          left: "50%",
+          top: "40%",
+          transform: "translate(-50%, -50%)",
+          width: "900px",
+          height: "500px",
+          background:
+            "radial-gradient(ellipse, rgba(100,40,220,0.09) 0%, transparent 65%)",
+          pointerEvents: "none",
+        }}
+      />
 
-      {/* ── Heading ── */}
+      {/* ── Title block ── */}
       <motion.div
-        style={{ textAlign: "center", marginBottom: "64px" }}
-        initial={{ opacity: 0, y: 14 }}
+        style={{ textAlign: "center", marginBottom: "56px" }}
+        initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.75, ease: EASE }}
       >
         {/* eyebrow */}
-        <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", marginBottom: "18px" }}>
-          <span style={{ display: "block", width: "28px", height: "1px", background: "rgba(155,48,255,0.5)" }} />
-          <span style={{
-            fontSize: "9px",
-            fontWeight: 600,
-            letterSpacing: "0.5em",
-            textTransform: "uppercase",
-            color: "rgba(155,48,255,0.75)",
-          }}>Countdown</span>
-          <span style={{ display: "block", width: "28px", height: "1px", background: "rgba(155,48,255,0.5)" }} />
-        </div>
-
-        {/* date */}
-        <h2 style={{
-          fontSize: "clamp(2rem, 4vw, 3.75rem)",
-          fontWeight: 300,
-          letterSpacing: "-0.035em",
-          lineHeight: 1,
-          color: "#fff",
-          margin: 0,
-        }}>
-          21{" "}
-          <span style={{ color: "rgba(255,255,255,0.2)" }}>·</span>
-          {" "}December{" "}
-          <span style={{
-            fontWeight: 700,
-            background: "linear-gradient(130deg, #e2d9ff 0%, #a78bfa 40%, #7c3aed 100%)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-          }}>2026</span>
-        </h2>
-
-        <p style={{
-          marginTop: "12px",
-          fontSize: "12px",
-          color: "rgba(156,163,175,0.4)",
-          letterSpacing: "0.1em",
-        }}>
-          Tunis, Tunisia
-        </p>
-      </motion.div>
-
-      {/* ── Digit grid ── */}
-      <motion.div
-        style={{ maxWidth: "880px", margin: "0 auto", position: "relative" }}
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.7, ease: EASE, delay: 0.15 }}
-      >
-        {/* top rule */}
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.07)", marginBottom: "0" }} />
-
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-        }}>
-          {UNITS.map(({ key, label }, idx) => {
-            const isSec = key === "seconds";
-            return (
-              <div key={key} style={{
-                position: "relative",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: "clamp(24px, 5vw, 48px) 8px clamp(20px, 4vw, 36px)",
-                borderRight: idx < UNITS.length - 1
-                  ? "1px solid rgba(255,255,255,0.06)"
-                  : "none",
-              }}>
-                {/* subtle cell glow for seconds */}
-                {isSec && (
-                  <motion.div
-                    aria-hidden
-                    style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(124,58,237,0.07) 0%, transparent 70%)",
-                      pointerEvents: "none",
-                    }}
-                    animate={{ opacity: [0.5, 1, 0.5] }}
-                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
-                  />
-                )}
-
-                {/* number */}
-                <div style={{
-                  fontSize: "clamp(3rem, 9vw, 7.5rem)",
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  letterSpacing: "-0.04em",
-                  fontVariantNumeric: "tabular-nums",
-                  color: isSec ? "#c4b5fd" : "#ffffff",
-                  transition: "color 0.3s",
-                }}>
-                  <DigitRoll value={pad(time[key])} />
-                </div>
-
-                {/* rule */}
-                <div style={{
-                  width: "clamp(20px, 4vw, 40px)",
-                  height: "1px",
-                  background: isSec
-                    ? "rgba(155,48,255,0.7)"
-                    : "rgba(255,255,255,0.14)",
-                  margin: "clamp(10px, 2vw, 18px) 0 clamp(8px, 1.5vw, 14px)",
-                  transition: "background 0.3s",
-                }} />
-
-                {/* label */}
-                <span style={{
-                  fontSize: "clamp(7px, 1vw, 9px)",
-                  fontWeight: 600,
-                  letterSpacing: "0.4em",
-                  textTransform: "uppercase",
-                  color: isSec
-                    ? "rgba(155,48,255,0.7)"
-                    : "rgba(156,163,175,0.38)",
-                  transition: "color 0.3s",
-                }}>
-                  {label}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* bottom rule */}
-        <div style={{ height: "1px", background: "rgba(255,255,255,0.07)" }} />
-      </motion.div>
-
-      {/* ── Progress bar ── */}
-      <motion.div
-        style={{ maxWidth: "880px", margin: "28px auto 0" }}
-        initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.6, ease: EASE, delay: 0.4 }}
-      >
-        <div style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: "7px",
-        }}>
-          <span style={{ fontSize: "8px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(156,163,175,0.25)" }}>
-            Dec 2025
-          </span>
-          <span style={{ fontSize: "8px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(156,163,175,0.25)" }}>
-            {Math.round(progress)}% elapsed
-          </span>
-          <span style={{ fontSize: "8px", letterSpacing: "0.3em", textTransform: "uppercase", color: "rgba(156,163,175,0.25)" }}>
-            Dec 2026
-          </span>
-        </div>
-
-        {/* track */}
-        <div style={{
-          height: "1px",
-          background: "rgba(255,255,255,0.05)",
-          borderRadius: "1px",
-          overflow: "hidden",
-        }}>
-          <motion.div
+        <div
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "12px",
+            marginBottom: "22px",
+          }}
+        >
+          <span
             style={{
-              height: "100%",
-              background: "linear-gradient(90deg, rgba(100,40,200,0.6) 0%, rgba(155,48,255,1) 100%)",
+              display: "block",
+              width: "32px",
+              height: "1px",
+              background: "rgba(155,48,255,0.45)",
             }}
-            initial={{ width: "0%" }}
-            animate={inView ? { width: `${progress}%` } : {}}
-            transition={{ duration: 1.4, ease: EASE, delay: 0.55 }}
+          />
+          <span
+            style={{
+              fontSize: "9px",
+              fontWeight: 600,
+              letterSpacing: "0.5em",
+              textTransform: "uppercase",
+              color: "rgba(155,48,255,0.7)",
+            }}
+          >
+            Event Countdown
+          </span>
+          <span
+            style={{
+              display: "block",
+              width: "32px",
+              height: "1px",
+              background: "rgba(155,48,255,0.45)",
+            }}
           />
         </div>
 
-        {/* footer label */}
-        <div style={{
-          marginTop: "28px",
+        {/* main title */}
+        <h2
+          style={{
+            fontSize: "clamp(1.6rem, 3.5vw, 3rem)",
+            fontWeight: 300,
+            letterSpacing: "-0.03em",
+            lineHeight: 1.1,
+            color: "#ffffff",
+            margin: 0,
+            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+          }}
+        >
+          The Wait{" "}
+          <span
+            style={{
+              fontWeight: 700,
+              background:
+                "linear-gradient(130deg, #e2d9ff 0%, #a78bfa 45%, #7c3aed 100%)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+            }}
+          >
+            Ends In
+          </span>
+        </h2>
+      </motion.div>
+
+      {/* ── Digit cards ── */}
+      <div
+        style={{
+          maxWidth: "960px",
+          margin: "0 auto",
+          display: "flex",
+          alignItems: "center",
+          gap: "clamp(8px, 1.5vw, 16px)",
+        }}
+      >
+        {UNITS.map(({ key, label }, i) => (
+          <>
+            <UnitCard
+              key={key}
+              value={time[key]}
+              label={label}
+              index={i}
+              inView={inView}
+            />
+            {i < UNITS.length - 1 && (
+              <Colon key={`sep-${i}`} inView={inView} delay={0.3 + i * 0.08} />
+            )}
+          </>
+        ))}
+      </div>
+
+      {/* ── Footer ── */}
+      <motion.div
+        style={{
+          marginTop: "52px",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          gap: "10px",
-        }}>
-          <span style={{ display: "block", width: "24px", height: "1px", background: "rgba(255,255,255,0.07)" }} />
-          <span style={{
-            fontSize: "8px",
+          gap: "12px",
+        }}
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, ease: EASE, delay: 0.6 }}
+      >
+        <span
+          style={{
+            display: "block",
+            width: "28px",
+            height: "1px",
+            background: "rgba(255,255,255,0.07)",
+          }}
+        />
+        <span
+          style={{
+            fontSize: "9px",
             fontWeight: 500,
-            letterSpacing: "0.45em",
+            letterSpacing: "0.4em",
             textTransform: "uppercase",
             color: "rgba(156,163,175,0.25)",
-          }}>
-            TSYP XIV · IEEE INSAT · Tunisia
-          </span>
-          <span style={{ display: "block", width: "24px", height: "1px", background: "rgba(255,255,255,0.07)" }} />
-        </div>
+          }}
+        >
+          TSYP XIV · IEEE INSAT · Tunis, Tunisia · 21 Dec 2026
+        </span>
+        <span
+          style={{
+            display: "block",
+            width: "28px",
+            height: "1px",
+            background: "rgba(255,255,255,0.07)",
+          }}
+        />
       </motion.div>
     </section>
   );
