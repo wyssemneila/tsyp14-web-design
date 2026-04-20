@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
@@ -28,47 +28,48 @@ const WORDS = [
 
 function CyclingWord() {
   const [index, setIndex] = useState(0);
-  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false);
-      setTimeout(() => {
-        setIndex(i => (i + 1) % WORDS.length);
-        setVisible(true);
-      }, 320);
-    }, 2000);
-    return () => clearInterval(interval);
+    const id = setInterval(() => setIndex(i => (i + 1) % WORDS.length), 2500);
+    return () => clearInterval(id);
   }, []);
 
   const word = WORDS[index];
+  const LINE_H = "clamp(32px, 3.8vw, 48px)";
 
   return (
-    <span style={{
-      display: "inline-block",
-      overflow: "hidden",
-      verticalAlign: "bottom",
-      height: "1.3em",
+    <div style={{
       position: "relative",
+      height: LINE_H,
+      overflow: "hidden",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
     }}>
-      <motion.span
-        key={index}
-        initial={{ y: "100%", opacity: 0 }}
-        animate={visible ? { y: "0%", opacity: 1 } : { y: "-100%", opacity: 0 }}
-        transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
-        style={{
-          display: "inline-block",
-          fontSize: "clamp(18px, 2.2vw, 28px)",
-          fontWeight: 700,
-          color: word.color,
-          fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-          letterSpacing: "0.01em",
-          textShadow: `0 0 24px ${word.color}88`,
-        }}
-      >
-        {word.text}
-      </motion.span>
-    </span>
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ y: "110%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-110%", opacity: 0 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            display: "block",
+            position: "absolute",
+            fontSize: LINE_H,
+            fontWeight: 800,
+            color: word.color,
+            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+            letterSpacing: "-0.02em",
+            lineHeight: 1,
+            textShadow: `0 0 32px ${word.color}99`,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {word.text}
+        </motion.span>
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -339,27 +340,26 @@ export default function HeroSection() {
           <DrawLine delay={1.55} color="linear-gradient(90deg, transparent, rgba(200,80,180,0.35), rgba(155,48,255,0.5), transparent)" width="40%" />
         </div>
 
-        {/* Tagline with animated cycling word */}
+        {/* Tagline — two lines */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6, ease: SPRING }}
           style={{
-            marginTop: "20px",
+            marginTop: "24px",
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            justifyContent: "center",
-            gap: "0",
-            flexWrap: "wrap",
+            gap: "4px",
           }}
         >
           <span style={{
-            fontSize: "clamp(18px, 2.2vw, 28px)",
-            fontWeight: 500,
-            color: "rgba(255,255,255,0.75)",
-            letterSpacing: "0.01em",
-            fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-            marginRight: "10px",
+            fontSize: "clamp(16px, 1.8vw, 22px)",
+            fontWeight: 400,
+            color: "rgba(255,255,255,0.55)",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
           }}>
             We architect
           </span>
