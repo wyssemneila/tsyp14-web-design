@@ -12,28 +12,41 @@ export default function ThemeSection() {
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
 
   useEffect(() => {
+    function initTubes() {
+      if (canvasRef.current && (window as any).__TubesCursor) {
+        appRef.current = (window as any).__TubesCursor(canvasRef.current, {
+          tubes: {
+            colors: ["#9b30ff", "#7c3aed", "#c026d3", "#6d28d9"],
+            lights: {
+              intensity: 180,
+              colors: ["#9b30ff", "#b721ff", "#7c3aed", "#c026d3"],
+            },
+          },
+        });
+      }
+    }
+
     const timer = setTimeout(() => {
-      // @ts-ignore
-      import("https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js")
-        .then((module: any) => {
-          const TubesCursor = module.default;
-          if (canvasRef.current) {
-            appRef.current = TubesCursor(canvasRef.current, {
-              tubes: {
-                colors: ["#9b30ff", "#7c3aed", "#c026d3", "#6d28d9"],
-                lights: {
-                  intensity: 180,
-                  colors: ["#9b30ff", "#b721ff", "#7c3aed", "#c026d3"],
-                },
-              },
-            });
-          }
-        })
-        .catch((err: any) => console.error("Tubes load error:", err));
+      if ((window as any).__TubesCursor) {
+        initTubes();
+        return;
+      }
+      // Inject an ES module script that loads from CDN and exposes on window
+      const script = document.createElement("script");
+      script.type = "module";
+      script.id = "__tubes-loader";
+      script.textContent = `
+        import TubesCursor from 'https://cdn.jsdelivr.net/npm/threejs-components@0.0.19/build/cursors/tubes1.min.js';
+        window.__TubesCursor = TubesCursor;
+        window.dispatchEvent(new CustomEvent('__tubes_ready'));
+      `;
+      window.addEventListener("__tubes_ready", initTubes as EventListener, { once: true });
+      document.head.appendChild(script);
     }, 150);
 
     return () => {
       clearTimeout(timer);
+      window.removeEventListener("__tubes_ready", initTubes as EventListener);
       if (appRef.current?.dispose) appRef.current.dispose();
     };
   }, []);
