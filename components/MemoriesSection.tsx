@@ -88,6 +88,7 @@ export default function MemoriesSection() {
         initial={{ opacity: 0, y: 16 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.75, ease: EASE }}
+        className="memories-header"
         style={{ textAlign: "center", padding: "80px 24px 60px" }}
       >
         <div style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>

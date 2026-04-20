@@ -163,12 +163,11 @@ export default function ThemeSection() {
       </div>
 
       {/* ── Description zone ── */}
-      <div style={{
+      <div className="theme-desc-pad" style={{
         position: "relative",
         zIndex: 4,
         maxWidth: "740px",
         margin: "0 auto",
-        padding: "0 32px 100px",
         textAlign: "center",
       }}>
         {/* Divider */}
@@ -189,18 +188,13 @@ export default function ThemeSection() {
           initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, ease: EASE, delay: 0.55 }}
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1px 1fr",
-            gap: "0 28px",
-            textAlign: "left",
-            marginBottom: "20px",
-          }}
+          className="theme-desc-grid"
+          style={{ textAlign: "left", marginBottom: "20px" }}
         >
           <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(210,200,235,0.72)", fontWeight: 400, margin: 0 }}>
             Architects of the Noosphere is a vision where innovation connects minds to serve humanity with dignity and transparency.
           </p>
-          <div style={{ width: "1px", background: "linear-gradient(180deg, transparent, rgba(155,48,255,0.25), transparent)" }} />
+          <div className="theme-desc-divider" style={{ width: "1px", background: "linear-gradient(180deg, transparent, rgba(155,48,255,0.25), transparent)" }} />
           <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(175,160,210,0.5)", fontWeight: 300, margin: 0 }}>
             It inspires young engineers to build a shared intellectual space — where collaboration, ethics, and emerging technology truly serve people.
           </p>

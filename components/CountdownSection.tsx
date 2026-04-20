@@ -161,7 +161,7 @@ export default function CountdownSection() {
       </motion.div>
 
       {/* Countdown row */}
-      <div style={{
+      <div className="countdown-row" style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

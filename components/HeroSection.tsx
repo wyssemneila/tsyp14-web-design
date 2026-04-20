@@ -256,10 +256,11 @@ function StatsRow() {
 export default function HeroSection() {
   return (
     <section
+      className="hero-min-h"
       style={{
         position: "relative",
         width: "100%",
-        height: "100vh",
+        minHeight: "100dvh",
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
@@ -403,6 +404,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
+          className="hero-stats-mt"
           style={{ marginTop: "127px" }}
         >
           <StatsRow />

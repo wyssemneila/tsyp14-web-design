@@ -106,20 +106,17 @@ export default function AboutSection() {
 
       {/* ── Main content grid ── */}
       <div
+        className="about-grid"
         style={{
           position: "relative",
           zIndex: 1,
           maxWidth: "1200px",
           margin: "0 auto",
-          padding: "100px 48px 100px",
-          display: "grid",
-          gridTemplateColumns: "1fr 2fr 1fr",
-          gap: "64px",
           alignItems: "start",
         }}
       >
         {/* ── Col 1: Eyebrow + edition ── */}
-        <div style={{ paddingTop: "8px" }}>
+        <div className="about-col-side" style={{ paddingTop: "8px" }}>
           <FadeUp delay={0.1}>
             <div style={{
               display: "flex",
@@ -235,7 +232,7 @@ export default function AboutSection() {
         </div>
 
         {/* ── Col 3: Facts list ── */}
-        <div style={{ paddingTop: "8px" }}>
+        <div className="about-col-side" style={{ paddingTop: "8px" }}>
           <FadeUp delay={0.15}>
             <div style={{
               display: "flex",

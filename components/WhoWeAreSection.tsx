@@ -106,7 +106,8 @@ function FlipCard({ card, index, inView }: { card: typeof CARDS[0]; index: numbe
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.85, ease: EASE, delay: 0.2 + index * 0.12 }}
-      style={{ position: "relative", flex: "1 1 0", minWidth: 0, maxWidth: "360px" }}
+      className="flip-card-item"
+      style={{ position: "relative", minWidth: 0 }}
     >
       {/* Glow behind card */}
       <div style={{
@@ -234,11 +235,11 @@ export default function WhoWeAreSection() {
     <section
       id="who-we-are"
       ref={ref}
+      className="who-section-pad"
       style={{
         position: "relative",
         width: "100%",
         background: "#000000",
-        padding: "100px 48px 120px",
         overflow: "hidden",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}
@@ -283,8 +284,8 @@ export default function WhoWeAreSection() {
       </motion.div>
 
       {/* Cards */}
-      <div style={{
-        display: "flex", gap: "clamp(20px, 3vw, 36px)",
+      <div className="cards-flex" style={{
+        gap: "clamp(20px, 3vw, 36px)",
         justifyContent: "center", alignItems: "stretch",
         maxWidth: "1140px", margin: "0 auto", flexWrap: "wrap",
       }}>
