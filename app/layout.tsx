@@ -27,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable} h-full antialiased`}>
-      <body className="min-h-full bg-[#07071a]">{children}</body>
+      <body className="min-h-full bg-black">{children}</body>
     </html>
   );
 }

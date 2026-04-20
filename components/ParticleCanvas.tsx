@@ -160,7 +160,7 @@ export default function ParticleCanvas() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full"
-      style={{ zIndex: 1 }}
+      style={{ zIndex: 0 }}
     />
   );
 }

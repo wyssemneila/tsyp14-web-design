@@ -76,7 +76,7 @@ export default function CountdownSection() {
         position: "relative",
         width: "100%",
         padding: "120px 24px 100px",
-        background: "#07071a",
+        background: "#000000",
         overflow: "hidden",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}

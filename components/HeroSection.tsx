@@ -153,7 +153,7 @@ export default function HeroSection() {
       }}
     >
       {/* ── Base background: #07071a — exact p1 color ── */}
-      <div style={{ position: "absolute", inset: 0, background: "#07071a", zIndex: 0 }} />
+      <div style={{ position: "absolute", inset: 0, background: "#000000", zIndex: 0 }} />
 
       {/* ── Radial purple spotlight at center-top — exact p1 spec ── */}
       <div
