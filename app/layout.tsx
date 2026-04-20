@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Syne } from "next/font/google";
+import { Inter, Poppins, Raleway } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,10 +16,10 @@ const poppins = Poppins({
   display: "swap",
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const raleway = Raleway({
+  variable: "--font-raleway",
   subsets: ["latin"],
-  weight: ["700", "800"],
+  weight: ["700", "800", "900"],
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${syne.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${raleway.variable} h-full antialiased`}>
       <body className="min-h-full bg-black">{children}</body>
     </html>
   );

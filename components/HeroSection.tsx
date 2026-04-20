@@ -108,7 +108,7 @@ function WordReveal({
               fontWeight: 800,
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
-              fontFamily: "var(--font-syne), 'Syne', sans-serif",
+              fontFamily: "var(--font-raleway), 'Raleway', sans-serif",
               ...(gradient ? {} : { color: "#ffffff" }),
             }}
           >
