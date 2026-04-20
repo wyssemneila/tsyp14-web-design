@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
@@ -73,48 +73,54 @@ function MiniCountdown() {
 
 const SPRING = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
-function WordReveal({
-  text,
-  baseDelay = 0,
-  gradient = false,
+const HEADLINE_STYLE: React.CSSProperties = {
+  fontSize: "clamp(34px, 5.5vw, 68px)",
+  fontWeight: 800,
+  lineHeight: 1.1,
+  letterSpacing: "-0.02em",
+  fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+  display: "block",
+  whiteSpace: "nowrap",
+};
+
+function LineReveal({
+  children,
+  delay = 0,
+  className = "",
 }: {
-  text: string;
-  baseDelay?: number;
-  gradient?: boolean;
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
 }) {
-  const words = text.split(" ");
   return (
-    <div style={{
-      display: "flex",
-      flexWrap: "wrap",
-      justifyContent: "center",
-      gap: "0 0.5em",
-      paddingBottom: "6px",
-    }}>
-      {words.map((word, i) => (
-        <div key={i} style={{ overflow: "hidden", display: "inline-block", paddingBottom: "4px" }}>
-          <motion.span
-            className={gradient ? "gradient-flow" : "shimmer-white"}
-            initial={{ y: "110%", opacity: 0 }}
-            animate={{ y: "0%", opacity: 1 }}
-            transition={{
-              delay: baseDelay + i * 0.07,
-              duration: 0.8,
-              ease: SPRING,
-            }}
-            style={{
-              display: "inline-block",
-              fontSize: "clamp(34px, 5.5vw, 66px)",
-              fontWeight: 800,
-              lineHeight: 1.1,
-              letterSpacing: "-0.025em",
-              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-            }}
-          >
-            {word}
-          </motion.span>
-        </div>
-      ))}
+    <div style={{ overflow: "hidden", display: "block" }}>
+      <motion.div
+        initial={{ y: "110%", opacity: 0 }}
+        animate={{ y: "0%",   opacity: 1 }}
+        transition={{ duration: 1.0, ease: SPRING, delay }}
+        className={className}
+        style={HEADLINE_STYLE}
+      >
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+function DrawLine({ delay = 0, color = "rgba(155,48,255,0.45)", width = "55%" }: { delay?: number; color?: string; width?: string }) {
+  return (
+    <div style={{ display: "flex", justifyContent: "center", margin: "6px 0" }}>
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 0.65, ease: SPRING, delay }}
+        style={{
+          height: "1px",
+          width,
+          background: color,
+          transformOrigin: "left center",
+        }}
+      />
     </div>
   );
 }
@@ -310,10 +316,19 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Headline — Poppins word-by-word reveal */}
+        {/* Headline — luxury line reveal + vector draw lines */}
         <div style={{ textAlign: "center" }}>
-          <WordReveal text="Tunisian Student and Young" baseDelay={0.4} />
-          <WordReveal text="Professional Congress" gradient baseDelay={0.76} />
+          <LineReveal delay={0.35}>
+            <span style={{ color: "#ffffff" }}>Tunisian Student and Young</span>
+          </LineReveal>
+
+          <DrawLine delay={1.1} color="linear-gradient(90deg, transparent, rgba(155,48,255,0.5), rgba(200,80,180,0.4), transparent)" width="60%" />
+
+          <LineReveal delay={0.8} className="gradient-flow">
+            Professional Congress
+          </LineReveal>
+
+          <DrawLine delay={1.55} color="linear-gradient(90deg, transparent, rgba(200,80,180,0.35), rgba(155,48,255,0.5), transparent)" width="40%" />
         </div>
 
         {/* Tagline with blinking cursor */}
