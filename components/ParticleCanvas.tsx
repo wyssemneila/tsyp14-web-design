@@ -70,7 +70,7 @@ export default function ParticleCanvas() {
 
     function init() {
       particles = [];
-      const count = (canvas!.height * canvas!.width) / 7500;
+      const count = (canvas!.height * canvas!.width) / 6500;
       for (let i = 0; i < count; i++) {
         const size = Math.random() * 1.8 + 0.5;
         const x = Math.random() * (canvas!.width - size * 4) + size * 2;
