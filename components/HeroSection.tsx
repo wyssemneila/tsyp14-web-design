@@ -88,12 +88,13 @@ function WordReveal({
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center",
-      gap: "0 0.28em",
+      gap: "0 0.3em",
       paddingBottom: "6px",
     }}>
       {words.map((word, i) => (
         <div key={i} style={{ overflow: "hidden", display: "inline-block", paddingBottom: "4px" }}>
           <motion.span
+            className={gradient ? "gradient-flow" : ""}
             initial={{ y: "110%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{
@@ -103,19 +104,12 @@ function WordReveal({
             }}
             style={{
               display: "inline-block",
-              fontSize: "clamp(34px, 5.5vw, 64px)",
+              fontSize: "clamp(34px, 5.5vw, 66px)",
               fontWeight: 800,
               lineHeight: 1.1,
-              letterSpacing: "-0.02em",
-              fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-              ...(gradient ? {
-                background: "linear-gradient(135deg, #c084fc 0%, #a855f7 40%, #9b30ff 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              } : {
-                color: "#ffffff",
-              }),
+              letterSpacing: "-0.025em",
+              fontFamily: "var(--font-syne), 'Syne', sans-serif",
+              ...(gradient ? {} : { color: "#ffffff" }),
             }}
           >
             {word}

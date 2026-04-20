@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Inter, Poppins, Syne } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({
@@ -16,6 +16,13 @@ const poppins = Poppins({
   display: "swap",
 });
 
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["700", "800"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "TSYP 14 — IEEE Tunisian Student and Young Professional Congress",
   description:
@@ -26,7 +33,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} ${syne.variable} h-full antialiased`}>
       <body className="min-h-full bg-black">{children}</body>
     </html>
   );

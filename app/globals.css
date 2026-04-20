@@ -22,6 +22,21 @@ body {
   overflow-x: hidden;
 }
 
+/* Moving gradient headline */
+@keyframes gradientShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.gradient-flow {
+  background: linear-gradient(135deg, #c70898, #a855f7, #7c3aed, #9a1e9d, #c70898);
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 5s ease infinite;
+}
+
 /* Badge glow pulse */
 @keyframes badgeGlow {
   0%, 100% {
