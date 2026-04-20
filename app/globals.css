@@ -81,3 +81,60 @@ body {
   animation: marquee 28s linear infinite;
 }
 .logo-scroll-track:hover { animation-play-state: paused; }
+
+/* ── Flip Cards ── */
+@keyframes borderRotate {
+  0%   { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+@keyframes borderSpin {
+  to { --angle: 360deg; }
+}
+
+.flip-card-wrapper {
+  perspective: 1200px;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.flip-card-wrapper:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  overflow: hidden;
+}
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* Animated gradient border via pseudo-element */
+.flip-card-border {
+  position: relative;
+  border-radius: 22px;
+  padding: 1.5px;
+  animation: borderSpin 3s linear infinite;
+  background: conic-gradient(
+    from var(--angle),
+    rgba(155,48,255,0.0) 0%,
+    rgba(155,48,255,0.9) 20%,
+    rgba(200,80,220,1)   40%,
+    rgba(100,20,200,0.9) 60%,
+    rgba(155,48,255,0.4) 80%,
+    rgba(155,48,255,0.0) 100%
+  );
+}
