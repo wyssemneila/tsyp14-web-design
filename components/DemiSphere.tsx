@@ -5,10 +5,7 @@ export default function DemiSphere() {
     <div
       style={{
         position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "55%",
+        inset: 0,
         zIndex: 2,
         pointerEvents: "none",
       }}
@@ -20,11 +17,11 @@ export default function DemiSphere() {
         priority
         style={{
           objectFit: "cover",
-          objectPosition: "center bottom",
+          objectPosition: "center 30%",
           maskImage:
-            "radial-gradient(ellipse 100% 90% at 50% 100%, black 25%, rgba(0,0,0,0.55) 55%, transparent 80%)",
+            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
           WebkitMaskImage:
-            "radial-gradient(ellipse 100% 90% at 50% 100%, black 25%, rgba(0,0,0,0.55) 55%, transparent 80%)",
+            "radial-gradient(ellipse 90% 80% at 50% 65%, black 30%, rgba(0,0,0,0.6) 60%, transparent 85%)",
           opacity: 0.95,
         }}
       />
