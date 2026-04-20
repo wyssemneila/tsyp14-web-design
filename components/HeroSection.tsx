@@ -37,28 +37,23 @@ function CyclingWord() {
   const word = WORDS[index];
 
   return (
-    <div style={{
-      height: "clamp(36px, 4.2vw, 54px)",
-      overflow: "hidden",
-      textAlign: "center",
-    }}>
+    <div style={{ position: "relative", textAlign: "center" }}>
       <AnimatePresence mode="wait">
         <motion.span
           key={index}
-          initial={{ y: "100%", opacity: 0 }}
-          animate={{ y: "0%", opacity: 1 }}
-          exit={{ y: "-100%", opacity: 0 }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          initial={{ opacity: 0, filter: "blur(10px)", scale: 0.96 }}
+          animate={{ opacity: 1, filter: "blur(0px)", scale: 1 }}
+          exit={{ opacity: 0, filter: "blur(10px)", scale: 1.04 }}
+          transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
           style={{
             display: "block",
-            fontSize: "clamp(28px, 3.8vw, 48px)",
-            fontWeight: 800,
+            fontSize: "clamp(16px, 1.8vw, 22px)",
+            fontWeight: 400,
             color: word.color,
-            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-            letterSpacing: "-0.02em",
-            lineHeight: 1.1,
-            textShadow: `0 0 32px ${word.color}88`,
-            whiteSpace: "nowrap",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            textShadow: `0 0 20px ${word.color}66`,
           }}
         >
           {word.text}
