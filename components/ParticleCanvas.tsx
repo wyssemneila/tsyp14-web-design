@@ -105,10 +105,10 @@ export default function ParticleCanvas() {
               const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
               ctx!.strokeStyle =
                 mdist < mouse.radius
-                  ? `rgba(255, 255, 255, ${opacity * 0.75})`
-                  : `rgba(220, 220, 230, ${opacity * 0.35})`;
+                  ? `rgba(255, 255, 255, ${opacity * 0.95})`
+                  : `rgba(230, 230, 240, ${opacity * 0.65})`;
             } else {
-              ctx!.strokeStyle = `rgba(210, 210, 225, ${opacity * 0.28})`;
+              ctx!.strokeStyle = `rgba(220, 220, 235, ${opacity * 0.55})`;
             }
             ctx!.lineWidth = 0.5;
             ctx!.beginPath();

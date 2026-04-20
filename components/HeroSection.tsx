@@ -169,7 +169,7 @@ export default function HeroSection() {
       <DemiSphere />
 
       {/* ── Logo scroll bar pinned at bottom ── */}
-      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 20 }}>
+      <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, zIndex: 30 }}>
         <LogoScrollBar />
       </div>
 
