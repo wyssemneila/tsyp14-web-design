@@ -266,7 +266,7 @@ export default function HeroSection() {
           zIndex: 10,
           textAlign: "center",
           padding: "0 24px",
-          paddingTop: "90px",
+          paddingTop: "150px",
           paddingBottom: "80px",
         }}
       >
@@ -369,7 +369,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
-          style={{ marginTop: "240px" }}
+          style={{ marginTop: "228px" }}
         >
           <StatsRow />
         </motion.div>
