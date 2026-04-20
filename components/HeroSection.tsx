@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
@@ -65,6 +65,48 @@ function MiniCountdown() {
           }}>
             {l}
           </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const SPRING = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+function WordReveal({
+  text,
+  color,
+  baseDelay = 0,
+}: {
+  text: string;
+  color: string;
+  baseDelay?: number;
+}) {
+  const words = text.split(" ");
+  return (
+    <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 0.28em", overflow: "hidden" }}>
+      {words.map((word, i) => (
+        <div key={i} style={{ overflow: "hidden", display: "inline-block" }}>
+          <motion.span
+            initial={{ y: "110%", opacity: 0 }}
+            animate={{ y: "0%", opacity: 1 }}
+            transition={{
+              delay: baseDelay + i * 0.07,
+              duration: 0.75,
+              ease: SPRING,
+            }}
+            style={{
+              display: "inline-block",
+              fontSize: "clamp(36px, 5.5vw, 64px)",
+              fontWeight: 800,
+              lineHeight: 1.12,
+              letterSpacing: "-0.02em",
+              fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+              color,
+            }}
+          >
+            {word}
+          </motion.span>
         </div>
       ))}
     </div>
@@ -178,6 +220,20 @@ export default function HeroSection() {
             </span>
           </div>
         </motion.div>
+
+        {/* Headline — Poppins word-by-word reveal */}
+        <div style={{ marginTop: "28px", textAlign: "center" }}>
+          <WordReveal
+            text="Tunisian Student and Young"
+            color="#ffffff"
+            baseDelay={0.3}
+          />
+          <WordReveal
+            text="Professional Congress"
+            color="#9ca3af"
+            baseDelay={0.65}
+          />
+        </div>
 
       </div>
 
