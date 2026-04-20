@@ -53,7 +53,6 @@ function MiniCountdown() {
             letterSpacing: "-0.02em",
             fontVariantNumeric: "tabular-nums",
             color: "#ffffff",
-            textShadow: "0 0 30px rgba(255,255,255,0.55), 0 0 60px rgba(180,200,255,0.25)",
           }}>
             {String(v).padStart(2, "0")}
           </span>
@@ -62,7 +61,7 @@ function MiniCountdown() {
             fontWeight: 600,
             letterSpacing: "0.22em",
             textTransform: "uppercase",
-            color: "#5b9bd5",
+            color: "rgba(155,48,255,0.85)",
           }}>
             {l}
           </span>
@@ -237,7 +236,7 @@ export default function HeroSection() {
       {/* ── Mini countdown in the black space above logo bar ── */}
       <div style={{
         position: "absolute",
-        bottom: "74px",
+        bottom: "110px",
         left: 0,
         right: 0,
         zIndex: 25,
