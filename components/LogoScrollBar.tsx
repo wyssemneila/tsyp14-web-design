@@ -11,7 +11,7 @@ export default function LogoScrollBar() {
     <div
       style={{
         width: "100%",
-        background: "transparent",
+        background: "#000000",
         padding: "22px 0",
         overflow: "hidden",
         position: "relative",
@@ -26,7 +26,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to right, rgba(7,7,26,0.85), transparent)",
+          background: "linear-gradient(to right, #000000, transparent)",
           zIndex: 10,
           pointerEvents: "none",
         }}
@@ -39,7 +39,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to left, rgba(7,7,26,0.85), transparent)",
+          background: "linear-gradient(to left, #000000, transparent)",
           zIndex: 10,
           pointerEvents: "none",
         }}
