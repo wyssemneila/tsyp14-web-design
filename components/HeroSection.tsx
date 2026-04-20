@@ -197,7 +197,7 @@ export default function HeroSection() {
           zIndex: 10,
           textAlign: "center",
           padding: "0 24px",
-          paddingTop: "48px",
+          paddingTop: "20px",
           paddingBottom: "80px",
         }}
       >
@@ -337,7 +337,7 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
           style={{
-            marginTop: "72px",
+            marginTop: "110px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
