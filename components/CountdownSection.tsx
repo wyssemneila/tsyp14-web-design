@@ -165,10 +165,11 @@ export default function CountdownSection() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        flexWrap: "wrap",
-        gap: "clamp(16px, 4vw, 56px)",
-        maxWidth: "1100px",
+        flexWrap: "nowrap",
+        gap: "clamp(12px, 3vw, 48px)",
+        maxWidth: "1200px",
         margin: "0 auto",
+        overflowX: "auto",
       }}>
         {UNITS.map(({ key, label }, i) => (
           <UnitGroup
