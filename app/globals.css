@@ -22,6 +22,26 @@ body {
   overflow-x: hidden;
 }
 
+/* Shimmer sweep on white headline */
+@keyframes shimmerWhite {
+  0%   { background-position: -300% center; }
+  100% { background-position: 300% center; }
+}
+.shimmer-white {
+  background: linear-gradient(90deg,
+    #ffffff 30%,
+    rgba(210,185,255,0.75) 47%,
+    #ffffff 52%,
+    rgba(210,185,255,0.75) 57%,
+    #ffffff 70%
+  );
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmerWhite 6s linear infinite;
+}
+
 /* Moving gradient headline */
 @keyframes gradientShift {
   0%   { background-position: 0% 50%; }

@@ -94,7 +94,7 @@ function WordReveal({
       {words.map((word, i) => (
         <div key={i} style={{ overflow: "hidden", display: "inline-block", paddingBottom: "4px" }}>
           <motion.span
-            className={gradient ? "gradient-flow" : ""}
+            className={gradient ? "gradient-flow" : "shimmer-white"}
             initial={{ y: "110%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             transition={{
@@ -109,7 +109,6 @@ function WordReveal({
               lineHeight: 1.1,
               letterSpacing: "-0.025em",
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-              ...(gradient ? {} : { color: "#ffffff" }),
             }}
           >
             {word}
@@ -132,6 +131,76 @@ const fadeUp = {
     },
   }),
 };
+
+function StatItem({ target, suffix, label, tick }: { target: number; suffix: string; label: string; tick: number }) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    let raf: number;
+    const duration = 1800;
+    const start = performance.now();
+    const step = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      setCount(Math.round(eased * target));
+      if (p < 1) raf = requestAnimationFrame(step);
+      else setCount(target);
+    };
+    raf = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(raf);
+  }, [target, tick]);
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", padding: "0 clamp(20px, 4vw, 48px)" }}>
+      <span style={{
+        fontSize: "clamp(22px, 3vw, 32px)",
+        fontWeight: 700,
+        lineHeight: 1,
+        color: "#ffffff",
+        fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
+        letterSpacing: "-0.02em",
+      }}>
+        {count}{suffix}
+      </span>
+      <span style={{
+        marginTop: "5px",
+        fontSize: "11px",
+        fontWeight: 500,
+        color: "rgba(180,150,255,0.55)",
+        letterSpacing: "0.1em",
+        textTransform: "uppercase",
+        fontFamily: "var(--font-inter), 'Inter', sans-serif",
+      }}>
+        {label}
+      </span>
+    </div>
+  );
+}
+
+const STATS = [
+  { target: 1200, suffix: "+", label: "Participants" },
+  { target: 50,   suffix: "+", label: "Speakers"     },
+  { target: 60,   suffix: "+", label: "Workshops"    },
+];
+
+function StatsRow() {
+  const [tick, setTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 5000);
+    return () => clearInterval(id);
+  }, []);
+  return (
+    <div style={{ display: "flex", alignItems: "center" }}>
+      {STATS.map(({ target, suffix, label }, i) => (
+        <div key={label} style={{ display: "flex", alignItems: "center" }}>
+          <StatItem target={target} suffix={suffix} label={label} tick={tick} />
+          {i < STATS.length - 1 && (
+            <div style={{ width: "1px", height: "36px", background: "rgba(155,48,255,0.2)" }} />
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function HeroSection() {
   return (
@@ -300,9 +369,9 @@ export default function HeroSection() {
         >
           <span style={{
             display: "flex", alignItems: "center", gap: "6px",
-            fontSize: "12px", fontWeight: 400,
-            color: "rgba(180,150,255,0.55)",
-            letterSpacing: "0.06em",
+            fontSize: "14px", fontWeight: 500,
+            color: "rgba(180,150,255,0.7)",
+            letterSpacing: "0.05em",
             fontFamily: "var(--font-inter), 'Inter', sans-serif",
           }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -313,9 +382,9 @@ export default function HeroSection() {
           <span style={{ display: "block", width: "1px", height: "12px", background: "rgba(155,48,255,0.25)" }} />
           <span style={{
             display: "flex", alignItems: "center", gap: "6px",
-            fontSize: "12px", fontWeight: 400,
-            color: "rgba(180,150,255,0.55)",
-            letterSpacing: "0.06em",
+            fontSize: "14px", fontWeight: 500,
+            color: "rgba(180,150,255,0.7)",
+            letterSpacing: "0.05em",
             fontFamily: "var(--font-inter), 'Inter', sans-serif",
           }}>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -325,59 +394,14 @@ export default function HeroSection() {
           </span>
         </motion.div>
 
-        {/* Stats row */}
+        {/* Stats row — count-up every 5s */}
         <motion.div
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.7, ease: SPRING }}
-          style={{
-            marginTop: "150px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0",
-            flexWrap: "wrap",
-          }}
+          style={{ marginTop: "150px" }}
         >
-          {[
-            { value: "1200+", label: "Participants" },
-            { value: "50+",   label: "Speakers"     },
-            { value: "60+",   label: "Workshops"    },
-          ].map(({ value, label }, i, arr) => (
-            <div key={label} style={{ display: "flex", alignItems: "center" }}>
-              <div style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                padding: "0 clamp(20px, 4vw, 48px)",
-              }}>
-                <span style={{
-                  fontSize: "clamp(22px, 3vw, 32px)",
-                  fontWeight: 700,
-                  lineHeight: 1,
-                  color: "#ffffff",
-                  fontFamily: "var(--font-poppins), 'Poppins', sans-serif",
-                  letterSpacing: "-0.02em",
-                }}>
-                  {value}
-                </span>
-                <span style={{
-                  marginTop: "5px",
-                  fontSize: "11px",
-                  fontWeight: 500,
-                  color: "rgba(180,150,255,0.55)",
-                  letterSpacing: "0.1em",
-                  textTransform: "uppercase",
-                  fontFamily: "var(--font-inter), 'Inter', sans-serif",
-                }}>
-                  {label}
-                </span>
-              </div>
-              {i < arr.length - 1 && (
-                <div style={{ width: "1px", height: "36px", background: "rgba(155,48,255,0.2)" }} />
-              )}
-            </div>
-          ))}
+          <StatsRow />
         </motion.div>
 
       </div>
