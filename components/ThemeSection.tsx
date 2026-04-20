@@ -138,26 +138,23 @@ export default function ThemeSection() {
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 1.0, ease: EASE, delay: 0.2 }}
             style={{
-              fontSize: "clamp(52px, 10vw, 130px)",
+              fontSize: "clamp(36px, 7vw, 88px)",
               fontWeight: 800,
-              lineHeight: 0.95,
-              letterSpacing: "-0.04em",
+              lineHeight: 1,
+              letterSpacing: "-0.03em",
               textAlign: "center",
-              color: "#ffffff",
-              textShadow: "0 0 80px rgba(155,48,255,0.5), 0 0 30px rgba(155,48,255,0.3)",
-              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               margin: 0,
               userSelect: "none",
+              whiteSpace: "nowrap",
+              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
-            THE
-            <br />
+            <span style={{ color: "#ffffff", textShadow: "0 0 60px rgba(155,48,255,0.4)" }}>THE </span>
             <span style={{
               background: "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
-              textShadow: "none",
             }}>
               NOOSPHERE
             </span>
@@ -187,50 +184,63 @@ export default function ThemeSection() {
           }}
         />
 
-        {/* Three paragraphs, staggered */}
-        {[
-          "Architects of the Noosphere represents a vision where innovation connects minds to serve humanity with dignity and transparency.",
-          "It emphasizes collaboration over rivalry, encouraging meaningful exchange among Student Branches to build a shared intellectual space.",
-          "Rooted in Culture, Knowledge, Ethics, and Ideas, it inspires young engineers to shape a future where technology truly serves people.",
-        ].map((text, i) => (
-          <motion.p
-            key={i}
-            initial={{ opacity: 0, y: 16 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8, ease: EASE, delay: 0.55 + i * 0.12 }}
-            style={{
-              fontSize: "clamp(14px, 1.4vw, 16px)",
-              lineHeight: 1.8,
-              color: i === 0 ? "rgba(210,200,235,0.75)" : "rgba(175,160,210,0.5)",
-              fontWeight: i === 0 ? 400 : 300,
-              marginBottom: i < 2 ? "20px" : 0,
-              letterSpacing: "0.01em",
-            }}
-          >
-            {text}
-          </motion.p>
-        ))}
+        {/* Structured description */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EASE, delay: 0.55 }}
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1px 1fr",
+            gap: "0 28px",
+            textAlign: "left",
+            marginBottom: "20px",
+          }}
+        >
+          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(210,200,235,0.72)", fontWeight: 400, margin: 0 }}>
+            Architects of the Noosphere is a vision where innovation connects minds to serve humanity with dignity and transparency.
+          </p>
+          <div style={{ width: "1px", background: "linear-gradient(180deg, transparent, rgba(155,48,255,0.25), transparent)" }} />
+          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(175,160,210,0.5)", fontWeight: 300, margin: 0 }}>
+            It inspires young engineers to build a shared intellectual space — where collaboration, ethics, and emerging technology truly serve people.
+          </p>
+        </motion.div>
 
-        {/* Pillars row */}
+        {/* Pillars — two rows by size */}
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7, ease: EASE, delay: 0.9 }}
+          transition={{ duration: 0.7, ease: EASE, delay: 0.75 }}
           style={{
             display: "flex", alignItems: "center", justifyContent: "center",
-            gap: "clamp(12px, 2vw, 28px)", flexWrap: "wrap", marginTop: "36px",
+            gap: "8px", flexWrap: "wrap", marginTop: "32px",
           }}
         >
-          {["Culture", "Knowledge", "Ethics", "Ideas"].map((pillar, i) => (
-            <span key={pillar} style={{
-              fontSize: "10px", fontWeight: 600, letterSpacing: "0.3em",
-              textTransform: "uppercase", color: "rgba(155,48,255,0.65)",
-              padding: "6px 14px",
-              border: "1px solid rgba(155,48,255,0.18)",
+          {[
+            { label: "Culture", accent: true },
+            { label: "Knowledge", accent: true },
+            { label: "Ethics", accent: true },
+            { label: "Ideas", accent: true },
+            { label: "AI & Human Synergy", accent: false },
+            { label: "Global Mind", accent: false },
+            { label: "Knowledge Sharing", accent: false },
+            { label: "Legacy Information Networks", accent: false },
+            { label: "Emerging Technologies", accent: false },
+            { label: "Consciousness", accent: false },
+          ].map(({ label, accent }) => (
+            <span key={label} style={{
+              fontSize: accent ? "9px" : "8px",
+              fontWeight: accent ? 600 : 500,
+              letterSpacing: accent ? "0.28em" : "0.15em",
+              textTransform: "uppercase",
+              color: accent ? "rgba(155,48,255,0.75)" : "rgba(155,48,255,0.42)",
+              padding: accent ? "5px 13px" : "4px 11px",
+              border: `1px solid ${accent ? "rgba(155,48,255,0.22)" : "rgba(155,48,255,0.1)"}`,
               borderRadius: "100px",
-              background: "rgba(155,48,255,0.06)",
+              background: accent ? "rgba(155,48,255,0.07)" : "rgba(155,48,255,0.03)",
+              whiteSpace: "nowrap",
             }}>
-              {pillar}
+              {label}
             </span>
           ))}
         </motion.div>
