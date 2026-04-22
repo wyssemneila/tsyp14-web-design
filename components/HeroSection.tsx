@@ -119,13 +119,14 @@ function MiniCountdown() {
 const SPRING = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 const HEADLINE_STYLE: React.CSSProperties = {
-  fontSize: "clamp(34px, 5.5vw, 68px)",
+  fontSize: "clamp(24px, 5.5vw, 68px)",
   fontWeight: 800,
   lineHeight: 1.1,
   letterSpacing: "-0.02em",
   fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
   display: "block",
-  whiteSpace: "nowrap",
+  overflowWrap: "break-word",
+  wordBreak: "break-word",
 };
 
 function LineReveal({

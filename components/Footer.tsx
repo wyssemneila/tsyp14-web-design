@@ -95,14 +95,7 @@ export default function Footer() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: EASE, delay: 0.14 }}
-          style={{
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: "16px",
-          }}
+          className="footer-bottom"
         >
           <p style={{
             fontSize: "10px", color: "rgba(255,255,255,0.2)",

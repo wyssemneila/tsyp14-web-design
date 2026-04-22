@@ -194,6 +194,7 @@ export default function CountdownSection() {
             <UnitBlock value={time[key]} label={label} index={i} inView={inView} />
             {i < UNITS.length - 1 && (
               <motion.div
+                className="countdown-sep"
                 initial={{ scaleY: 0, opacity: 0 }}
                 animate={inView ? { scaleY: 1, opacity: 1 } : {}}
                 transition={{ duration: 0.7, ease: EASE, delay: 0.3 + i * 0.08 }}

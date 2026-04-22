@@ -213,6 +213,22 @@ body {
   /* Section hero */
   .hero-min-h { min-height: 100dvh !important; height: auto !important; }
   .hero-stats-mt { margin-top: 40px !important; }
+
+  /* Countdown separators — hide when units wrap 2×2 */
+  .countdown-sep { display: none !important; }
+
+  /* Footer bottom row — center on mobile */
+  .footer-bottom {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+
+  /* Footer social buttons — meet 44px touch target */
+  .footer-social-btn {
+    width: 44px !important;
+    height: 44px !important;
+  }
 }
 
 /* ── ≥ 768px (tablet+) ── */
@@ -531,6 +547,7 @@ body {
   border: 1px solid rgba(155,48,255,0.15);
   border-radius: 8px;
   text-decoration: none;
+  touch-action: manipulation;
   transition: color 0.22s, border-color 0.22s, background 0.22s, transform 0.22s;
 }
 .footer-social-btn:hover {
@@ -539,6 +556,24 @@ body {
   background: rgba(155,48,255,0.1);
   transform: scale(1.08);
 }
+
+/* ── Footer bottom row ── */
+.footer-bottom {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ── Global touch optimization ── */
+button, a {
+  touch-action: manipulation;
+}
+
+/* ── Countdown separators (hide when wrapping 2×2 on mobile) ── */
+.countdown-sep { display: flex; }
 
 .flip-card-border {
   position: relative;

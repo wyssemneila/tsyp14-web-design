@@ -260,6 +260,7 @@ export default function SpeakersSection() {
             cursor: isDragging ? "grabbing" : "grab",
             userSelect: "none",
             WebkitUserSelect: "none",
+            touchAction: "pan-y",
             maskImage: "linear-gradient(90deg, transparent, black 4%, black 96%, transparent)",
             WebkitMaskImage: "linear-gradient(90deg, transparent, black 4%, black 96%, transparent)",
           }}

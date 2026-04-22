@@ -138,14 +138,14 @@ export default function ThemeSection() {
             animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
             transition={{ duration: 1.0, ease: EASE, delay: 0.2 }}
             style={{
-              fontSize: "clamp(36px, 7vw, 88px)",
+              fontSize: "clamp(28px, 7vw, 88px)",
               fontWeight: 800,
-              lineHeight: 1,
+              lineHeight: 1.1,
               letterSpacing: "-0.03em",
               textAlign: "center",
               margin: 0,
               userSelect: "none",
-              whiteSpace: "nowrap",
+              wordBreak: "break-word",
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
