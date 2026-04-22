@@ -96,7 +96,7 @@ export default function Navbar() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           style={{
             background: "none", border: "none", cursor: "pointer",
-            padding: "10px", display: "flex", flexDirection: "column",
+            padding: "10px", flexDirection: "column",
             gap: "5px", alignItems: "center", justifyContent: "center",
             minWidth: "44px", minHeight: "44px",
           }}

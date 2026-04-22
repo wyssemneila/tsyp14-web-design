@@ -196,7 +196,7 @@ body {
   /* Countdown */
   .countdown-row {
     flex-wrap: wrap !important;
-    gap: 20px 28px !important;
+    gap: 12px !important;
     justify-content: center !important;
   }
 
