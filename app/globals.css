@@ -229,6 +229,118 @@ body {
 }
 
 /* ══════════════════════════════════════════
+   SPEAKERS SECTION
+══════════════════════════════════════════ */
+
+@keyframes speakerUp {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+@keyframes speakerDown {
+  from { transform: translateY(-50%); }
+  to   { transform: translateY(0); }
+}
+
+/* 4-column grid */
+.speakers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 0 clamp(16px, 3vw, 48px);
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 680px;
+  overflow: hidden;
+}
+
+/* Each column: fade top + bottom */
+.speaker-col-wrap {
+  overflow: hidden;
+  height: 100%;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+/* Vertical tracks */
+.speaker-track-up,
+.speaker-track-down {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  will-change: transform;
+}
+.speaker-track-up   { animation: speakerUp   linear infinite; }
+.speaker-track-down { animation: speakerDown linear infinite; }
+
+.speaker-track-up:hover,
+.speaker-track-down:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .speaker-track-up,
+  .speaker-track-down { animation: none; }
+}
+
+/* Mobile: 2 columns */
+@media (max-width: 767px) {
+  .speakers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    height: 560px;
+  }
+  .speakers-grid > div:nth-child(3),
+  .speakers-grid > div:nth-child(4) { display: none; }
+}
+
+/* Speaker card */
+.speaker-card {
+  position: relative;
+  background: rgba(6, 2, 22, 0.8);
+  border: 1px solid rgba(155, 48, 255, 0.16);
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+  transition:
+    transform    0.4s cubic-bezier(0.16,1,0.3,1),
+    box-shadow   0.4s cubic-bezier(0.16,1,0.3,1),
+    border-color 0.4s cubic-bezier(0.16,1,0.3,1);
+}
+.speaker-card:hover {
+  transform:    translateY(-6px) scale(1.02);
+  border-color: rgba(155, 48, 255, 0.5);
+  box-shadow:
+    0 0 30px rgba(155,48,255,0.16),
+    0 16px 48px rgba(0,0,0,0.55);
+}
+
+/* Scan line */
+@keyframes speakerScan {
+  0%   { top: -60px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+.speaker-scan {
+  position: absolute; left: 0; right: 0; height: 60px; top: -60px;
+  background: linear-gradient(to bottom, transparent, rgba(155,48,255,0.09), transparent);
+  pointer-events: none; z-index: 10; opacity: 0;
+}
+.speaker-card:hover .speaker-scan { animation: speakerScan 2.5s linear infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .speaker-card:hover .speaker-scan { animation: none; }
+}
+
+/* Top glow */
+.speaker-top-glow {
+  position: absolute; top: 0; left: 20%; right: 20%; height: 1.5px; z-index: 5;
+  background: linear-gradient(90deg, transparent, rgba(155,48,255,0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.speaker-card:hover .speaker-top-glow { opacity: 1; }
+
+/* ══════════════════════════════════════════
    EDITIONS SECTION
 ══════════════════════════════════════════ */
 
