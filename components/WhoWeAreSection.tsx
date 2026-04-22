@@ -267,16 +267,13 @@ export default function WhoWeAreSection() {
           <span style={{ width: "32px", height: "1px", background: "rgba(155,48,255,0.45)", display: "block" }} />
         </div>
         <h2 style={{
-          fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 300,
-          letterSpacing: "-0.03em", lineHeight: 1.1, color: "#ffffff",
+          fontSize: "clamp(2rem, 4vw, 3.5rem)", fontWeight: 800,
+          letterSpacing: "-0.03em", lineHeight: 1.1,
           fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+          margin: 0,
         }}>
-          The{" "}
-          <span style={{
-            fontWeight: 800,
-            background: "linear-gradient(130deg, #e2d9ff 0%, #a78bfa 45%, #7c3aed 100%)",
-            WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text",
-          }}>Organizations</span>{" "}Behind TSYP 14
+          <span style={{ color: "#ffffff" }}>The Organizations </span>
+          <span style={{ color: "transparent", WebkitTextStroke: "1px rgba(155,48,255,0.75)" }}>Behind TSYP 14</span>
         </h2>
         <p style={{ marginTop: "14px", fontSize: "13px", color: "rgba(180,160,220,0.45)", letterSpacing: "0.02em" }}>
           Hover each card to discover more

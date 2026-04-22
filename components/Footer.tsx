@@ -86,21 +86,6 @@ export default function Footer() {
             style={{ objectFit: "contain", opacity: 0.82 }} />
         </motion.div>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 6 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: EASE, delay: 0.07 }}
-          style={{
-            fontSize: "10px", fontWeight: 400, letterSpacing: "0.26em",
-            textTransform: "uppercase", color: "rgba(255,255,255,0.22)",
-            textAlign: "center", margin: 0,
-          }}
-        >
-          IEEE INSAT Students Young Professionals Congress
-        </motion.p>
-
         {/* Divider */}
         <div style={{ width: "100%", height: "1px", background: "rgba(155,48,255,0.07)" }} />
 

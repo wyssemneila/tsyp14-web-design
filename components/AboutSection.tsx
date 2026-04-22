@@ -169,28 +169,25 @@ export default function AboutSection() {
             <div style={{ marginBottom: "8px" }}>
               <span style={{
                 fontSize: "clamp(38px, 5.5vw, 72px)",
-                fontWeight: 300,
+                fontWeight: 800,
                 lineHeight: 1.05,
                 letterSpacing: "-0.035em",
-                color: "#ffffff",
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
                 display: "block",
               }}>
-                TSYP Congress
+                <span style={{ color: "#ffffff" }}>TSYP </span>
+                <span style={{ color: "transparent", WebkitTextStroke: "1px rgba(155,48,255,0.75)" }}>Congress</span>
               </span>
               <span style={{
                 fontSize: "clamp(38px, 5.5vw, 72px)",
                 fontWeight: 800,
                 lineHeight: 1.05,
                 letterSpacing: "-0.035em",
-                background: "linear-gradient(130deg, #e2d9ff 0%, #a78bfa 40%, #7c3aed 100%)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
                 display: "block",
               }}>
-                14th Edition
+                <span style={{ color: "#ffffff" }}>14th </span>
+                <span style={{ color: "transparent", WebkitTextStroke: "1px rgba(155,48,255,0.75)" }}>Edition</span>
               </span>
             </div>
           </FadeUp>
