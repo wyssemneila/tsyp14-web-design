@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { motion, useInView, AnimatePresence } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 
 const TARGET = new Date("2026-12-21T00:00:00");
 
@@ -18,41 +18,72 @@ function calcTimeLeft() {
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 const UNITS = [
-  { key: "days"    as const, label: "Days"    },
-  { key: "hours"   as const, label: "Hours"   },
-  { key: "minutes" as const, label: "Min"     },
-  { key: "seconds" as const, label: "Sec"     },
+  { key: "days"    as const, label: "Days"  },
+  { key: "hours"   as const, label: "Hours" },
+  { key: "minutes" as const, label: "Min"   },
+  { key: "seconds" as const, label: "Sec"   },
 ];
 
-function RollingDigit({ char }: { char: string }) {
+/* Slot-machine digit — a strip of 0-9 that slides to the correct position */
+function SlotDigit({ char }: { char: string }) {
+  const num = parseInt(char) || 0;
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [itemH, setItemH] = useState(0);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const ro = new ResizeObserver(() => {
+      if (containerRef.current) setItemH(containerRef.current.clientHeight);
+    });
+    ro.observe(containerRef.current);
+    return () => ro.disconnect();
+  }, []);
+
   return (
-    <div style={{
-      overflow: "hidden",
-      height: "clamp(68px, 10vw, 128px)",
-      display: "flex",
-      alignItems: "flex-start",
-    }}>
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
-          key={char}
-          initial={{ y: "110%", opacity: 0.4 }}
-          animate={{ y: "0%",   opacity: 1   }}
-          exit={{    y: "-110%", opacity: 0.4 }}
-          transition={{ duration: 0.38, ease: EASE }}
-          style={{
-            display: "block",
-            fontSize: "clamp(68px, 10vw, 128px)",
-            fontWeight: 800,
-            lineHeight: 1,
-            letterSpacing: "-0.045em",
-            fontVariantNumeric: "tabular-nums",
-            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-            color: "#ffffff",
-          }}
-        >
-          {char}
-        </motion.span>
-      </AnimatePresence>
+    <div
+      ref={containerRef}
+      style={{
+        height: "clamp(68px, 10vw, 124px)",
+        overflow: "hidden",
+        position: "relative",
+      }}
+    >
+      <motion.div
+        animate={{ y: itemH ? -num * itemH : 0 }}
+        transition={{ duration: 0.7, ease: EASE }}
+        style={{ willChange: "transform" }}
+      >
+        {Array.from({ length: 10 }, (_, i) => (
+          <div
+            key={i}
+            style={{
+              height: "clamp(68px, 10vw, 124px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <span style={{
+              fontSize: "clamp(68px, 10vw, 124px)",
+              fontWeight: 800,
+              lineHeight: 1,
+              letterSpacing: "-0.045em",
+              fontVariantNumeric: "tabular-nums",
+              fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+              color: "#ffffff",
+              display: "block",
+            }}>
+              {i}
+            </span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Top + bottom fade masks so the reel feels infinite */}
+      <div style={{
+        position: "absolute", inset: 0, pointerEvents: "none",
+        background: "linear-gradient(to bottom, #000 0%, transparent 28%, transparent 72%, #000 100%)",
+      }} />
     </div>
   );
 }
@@ -64,35 +95,32 @@ function UnitBlock({ value, label, index, inView }: {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 20 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.85, ease: EASE, delay: 0.08 * index }}
+      transition={{ duration: 0.8, ease: EASE, delay: 0.06 * index }}
       style={{
         flex: 1,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: 0,
-        padding: "0 clamp(12px, 2.5vw, 40px)",
+        padding: "0 clamp(10px, 2.5vw, 40px)",
       }}
     >
-      {/* Label — above */}
       <span style={{
-        display: "block",
-        fontSize: "clamp(9px, 0.85vw, 11px)",
+        fontSize: "10px",
         fontWeight: 700,
-        letterSpacing: "0.32em",
+        letterSpacing: "0.35em",
         textTransform: "uppercase",
-        color: "rgba(155, 48, 255, 0.65)",
+        color: "rgba(155, 48, 255, 0.6)",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
-        marginBottom: "clamp(10px, 1.6vw, 20px)",
+        marginBottom: "clamp(12px, 1.8vw, 22px)",
+        display: "block",
       }}>
         {label}
       </span>
 
-      {/* Digits */}
-      <div style={{ display: "flex", gap: "clamp(1px, 0.4vw, 6px)" }}>
-        {digits.map((d, i) => <RollingDigit key={i} char={d} />)}
+      <div style={{ display: "flex", gap: "clamp(2px, 0.4vw, 5px)" }}>
+        {digits.map((d, i) => <SlotDigit key={i} char={d} />)}
       </div>
     </motion.div>
   );
@@ -120,13 +148,12 @@ export default function CountdownSection() {
         overflow: "hidden",
       }}
     >
-      {/* Deep ambient glow */}
+      {/* Ambient */}
       <div aria-hidden style={{
-        position: "absolute",
-        left: "50%", top: "55%",
-        transform: "translate(-50%, -50%)",
+        position: "absolute", left: "50%", top: "55%",
+        transform: "translate(-50%,-50%)",
         width: "1000px", height: "500px",
-        background: "radial-gradient(ellipse, rgba(100, 28, 210, 0.11) 0%, transparent 65%)",
+        background: "radial-gradient(ellipse, rgba(100,28,210,0.11) 0%, transparent 65%)",
         pointerEvents: "none",
       }} />
 
@@ -138,28 +165,19 @@ export default function CountdownSection() {
         style={{ textAlign: "center", marginBottom: "clamp(44px, 6vw, 72px)" }}
       >
         <div style={{ display: "inline-flex", alignItems: "center", gap: "14px" }}>
-          <div style={{
-            width: "36px", height: "1px",
-            background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.5))",
-          }} />
+          <div style={{ width: "36px", height: "1px", background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.5))" }} />
           <span style={{
-            fontSize: "10px",
-            fontWeight: 700,
-            letterSpacing: "0.38em",
-            textTransform: "uppercase",
-            color: "rgba(180, 140, 255, 0.5)",
+            fontSize: "10px", fontWeight: 700, letterSpacing: "0.38em",
+            textTransform: "uppercase", color: "rgba(180,140,255,0.5)",
             fontFamily: "var(--font-inter), 'Inter', sans-serif",
           }}>
             The Wait Ends In
           </span>
-          <div style={{
-            width: "36px", height: "1px",
-            background: "linear-gradient(90deg, rgba(155,48,255,0.5), transparent)",
-          }} />
+          <div style={{ width: "36px", height: "1px", background: "linear-gradient(90deg, rgba(155,48,255,0.5), transparent)" }} />
         </div>
       </motion.div>
 
-      {/* Counter row */}
+      {/* Counter */}
       <div
         className="countdown-units"
         style={{
@@ -181,8 +199,8 @@ export default function CountdownSection() {
                 transition={{ duration: 0.7, ease: EASE, delay: 0.3 + i * 0.08 }}
                 style={{
                   width: "1px",
-                  height: "clamp(56px, 8vw, 100px)",
-                  background: "linear-gradient(to bottom, transparent, rgba(155,48,255,0.35), transparent)",
+                  height: "clamp(52px, 7vw, 90px)",
+                  background: "linear-gradient(to bottom, transparent, rgba(155,48,255,0.3), transparent)",
                   flexShrink: 0,
                   transformOrigin: "center",
                 }}
@@ -198,10 +216,8 @@ export default function CountdownSection() {
         animate={inView ? { scaleX: 1, opacity: 1 } : {}}
         transition={{ duration: 1.3, ease: EASE, delay: 0.5 }}
         style={{
-          maxWidth: "900px",
-          margin: "clamp(28px, 5vw, 48px) auto 0",
-          padding: "0 24px",
-          transformOrigin: "center",
+          maxWidth: "900px", margin: "clamp(28px,5vw,48px) auto 0",
+          padding: "0 24px", transformOrigin: "center",
         }}
       >
         <div style={{
@@ -209,13 +225,10 @@ export default function CountdownSection() {
           background: "linear-gradient(90deg, transparent 0%, rgba(155,48,255,0.45) 25%, rgba(200,80,220,0.35) 50%, rgba(155,48,255,0.45) 75%, transparent 100%)",
         }} />
         <p style={{
-          marginTop: "16px",
-          textAlign: "center",
-          fontSize: "10px",
-          color: "rgba(255,255,255,0.18)",
-          letterSpacing: "0.18em",
+          marginTop: "16px", textAlign: "center",
+          fontSize: "10px", color: "rgba(255,255,255,0.18)",
+          letterSpacing: "0.18em", textTransform: "uppercase",
           fontFamily: "var(--font-inter), 'Inter', sans-serif",
-          textTransform: "uppercase",
         }}>
           21 December 2026 · Tunis, Tunisia
         </p>
