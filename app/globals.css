@@ -228,6 +228,153 @@ body {
   .theme-desc-pad  { padding: 0 28px 80px !important; }
 }
 
+/* ══════════════════════════════════════════
+   EDITIONS SECTION
+══════════════════════════════════════════ */
+
+/* Marquee animations */
+@keyframes editionScrollLeft {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes editionScrollRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+.editions-track-left,
+.editions-track-right {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+.editions-track-left  { animation: editionScrollLeft  55s linear infinite; }
+.editions-track-right { animation: editionScrollRight 45s linear infinite; }
+.editions-track-left:hover,
+.editions-track-right:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .editions-track-left,
+  .editions-track-right { animation: none; }
+}
+
+/* Card */
+.edition-card {
+  position: relative;
+  flex-shrink: 0;
+  width: 260px;
+  height: 360px;
+  background: rgba(6, 2, 22, 0.82);
+  border: 1px solid rgba(155, 48, 255, 0.18);
+  border-radius: 20px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 20px;
+  box-sizing: border-box;
+  cursor: default;
+  transition:
+    transform      0.45s cubic-bezier(0.16,1,0.3,1),
+    box-shadow     0.45s cubic-bezier(0.16,1,0.3,1),
+    border-color   0.45s cubic-bezier(0.16,1,0.3,1);
+}
+.edition-card:hover {
+  transform:    translateY(-10px) scale(1.025);
+  border-color: rgba(155, 48, 255, 0.55);
+  box-shadow:
+    0 0 0 1px rgba(155,48,255,0.2),
+    0 0 40px rgba(155,48,255,0.18),
+    0 24px 64px rgba(0,0,0,0.6);
+}
+
+/* Dot grid */
+.edition-dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(155,48,255,0.13) 1px, transparent 1px);
+  background-size: 22px 22px;
+  pointer-events: none;
+  opacity: 0.55;
+  transition: opacity 0.45s;
+}
+.edition-card:hover .edition-dot-grid { opacity: 0.85; }
+
+/* Top glow */
+.edition-top-glow {
+  position: absolute;
+  top: 0; left: 15%; right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(155,48,255,0.8), rgba(192,38,211,0.6), transparent);
+  box-shadow: 0 0 14px rgba(155,48,255,0.6), 0 0 28px rgba(155,48,255,0.3);
+  border-radius: 0 0 2px 2px;
+  transition: opacity 0.45s;
+}
+.edition-card:hover .edition-top-glow { opacity: 1; }
+
+/* Scan line */
+@keyframes editionScan {
+  0%   { top: -80px; opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 110%; opacity: 0; }
+}
+.edition-scan-line {
+  position: absolute;
+  left: 0; right: 0;
+  height: 80px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(155,48,255,0.06) 40%,
+    rgba(155,48,255,0.12) 50%,
+    rgba(155,48,255,0.06) 60%,
+    transparent 100%
+  );
+  top: -80px;
+  pointer-events: none;
+  opacity: 0;
+}
+.edition-card:hover .edition-scan-line {
+  animation: editionScan 2.8s cubic-bezier(0.4,0,0.6,1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .edition-card:hover .edition-scan-line { animation: none; }
+}
+
+/* Corner brackets */
+.ed-corner {
+  position: absolute;
+  width: 14px; height: 14px;
+  border-color: rgba(155,48,255,0.45);
+  border-style: solid;
+  transition: border-color 0.45s;
+}
+.edition-card:hover .ed-corner { border-color: rgba(155,48,255,0.8); }
+.ed-corner-tl { top: 12px; left: 12px;  border-width: 1.5px 0 0 1.5px; border-radius: 3px 0 0 0; }
+.ed-corner-tr { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; border-radius: 0 3px 0 0; }
+.ed-corner-bl { bottom: 12px; left: 12px;  border-width: 0 0 1.5px 1.5px; border-radius: 0 0 0 3px; }
+.ed-corner-br { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; border-radius: 0 0 3px 0; }
+
+/* Roman numeral */
+.edition-roman {
+  font-size: clamp(52px, 7vw, 84px);
+  font-weight: 800;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(155,48,255,0.5);
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  user-select: none;
+  transition: -webkit-text-stroke-color 0.45s, text-shadow 0.45s;
+}
+.edition-card:hover .edition-roman {
+  -webkit-text-stroke-color: rgba(155,48,255,0.9);
+  text-shadow: 0 0 50px rgba(155,48,255,0.25), 0 0 100px rgba(155,48,255,0.12);
+}
+
 /* ── Memories Carousel ── */
 @keyframes memoriesScroll {
   from { transform: translateX(0); }
