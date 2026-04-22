@@ -199,6 +199,13 @@ body {
     gap: 12px !important;
     justify-content: center !important;
   }
+  .countdown-units {
+    flex-wrap: wrap !important;
+    gap: 24px 0 !important;
+  }
+  .countdown-units > div {
+    flex: 0 0 50% !important;
+  }
 
   /* Memories */
   .memories-header { padding: 48px 20px 40px !important; }
