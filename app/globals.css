@@ -320,8 +320,8 @@ body {
 .edition-card {
   position: relative;
   flex-shrink: 0;
-  width: 260px;
-  height: 360px;
+  width: 190px;
+  height: 270px;
   background: rgba(6, 2, 22, 0.82);
   border: 1px solid rgba(155, 48, 255, 0.18);
   border-radius: 20px;
@@ -330,7 +330,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  padding: 22px 22px 20px;
+  padding: 16px 16px 14px;
   box-sizing: border-box;
   cursor: default;
   transition:
@@ -417,7 +417,7 @@ body {
 
 /* Roman numeral */
 .edition-roman {
-  font-size: clamp(52px, 7vw, 84px);
+  font-size: clamp(36px, 5vw, 58px);
   font-weight: 800;
   color: transparent;
   -webkit-text-stroke: 1px rgba(155,48,255,0.5);
