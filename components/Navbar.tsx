@@ -4,10 +4,11 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const LINKS = ["About", "Speakers", "Agenda", "Sponsors", "Contact"];
+const LINKS = ["Home", "The Noosphere", "Program", "Veni Ambassadors", "About Us"];
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function Navbar() {
-  const [active, setActive] = useState<string | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -15,7 +16,7 @@ export default function Navbar() {
       <motion.nav
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.7, ease: EASE }}
         style={{
           position: "fixed",
           top: 0, left: 0, right: 0,
@@ -38,35 +39,57 @@ export default function Navbar() {
             style={{ objectFit: "contain" }} priority />
         </div>
 
-        {/* Desktop nav links */}
-        <div className="nav-links" style={{
-          position: "absolute", left: "50%", transform: "translateX(-50%)",
-          alignItems: "center", gap: "2px",
-        }}>
+        {/* Desktop nav — frosted pill group with magic-move highlight */}
+        <div
+          className="nav-links"
+          style={{
+            position: "absolute", left: "50%", transform: "translateX(-50%)",
+            alignItems: "center",
+            gap: "2px",
+            padding: "4px",
+            background: "rgba(255,255,255,0.025)",
+            borderRadius: "12px",
+            border: "1px solid rgba(155,48,255,0.1)",
+          }}
+        >
           {LINKS.map((link) => (
-            <a key={link} href="#"
-              onMouseEnter={() => setActive(link)}
-              onMouseLeave={() => setActive(null)}
-              style={{
-                position: "relative", padding: "6px 16px",
-                fontSize: "11px", fontWeight: 500, letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                color: active === link ? "#ffffff" : "rgba(255,255,255,0.5)",
-                textDecoration: "none", transition: "color 0.2s ease",
-              }}
+            <div
+              key={link}
+              style={{ position: "relative" }}
+              onMouseEnter={() => setHovered(link)}
+              onMouseLeave={() => setHovered(null)}
             >
-              {link}
-              <motion.span
-                animate={{ opacity: active === link ? 1 : 0, scaleX: active === link ? 1 : 0 }}
-                transition={{ duration: 0.2, ease: "easeOut" }}
+              {hovered === link && (
+                <motion.div
+                  layoutId="nav-pill"
+                  style={{
+                    position: "absolute", inset: 0,
+                    background: "linear-gradient(135deg, rgba(155,48,255,0.22) 0%, rgba(124,58,237,0.14) 100%)",
+                    borderRadius: "8px",
+                    border: "1px solid rgba(155,48,255,0.38)",
+                    boxShadow: "0 0 16px rgba(155,48,255,0.14), inset 0 1px 0 rgba(255,255,255,0.06)",
+                  }}
+                  initial={false}
+                  transition={{ duration: 0.2, ease: EASE }}
+                />
+              )}
+              <a
+                href="#"
                 style={{
-                  position: "absolute", bottom: 0, left: "16px", right: "16px",
-                  height: "1px",
-                  background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.8), transparent)",
-                  transformOrigin: "center", display: "block",
+                  position: "relative", zIndex: 1,
+                  display: "block",
+                  padding: "7px 12px",
+                  fontSize: "10px", fontWeight: 500, letterSpacing: "0.07em",
+                  textTransform: "uppercase",
+                  color: hovered === link ? "#ffffff" : "rgba(255,255,255,0.48)",
+                  textDecoration: "none",
+                  transition: "color 0.18s ease",
+                  whiteSpace: "nowrap",
                 }}
-              />
-            </a>
+              >
+                {link}
+              </a>
+            </div>
           ))}
         </div>
 

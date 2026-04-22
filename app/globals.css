@@ -432,16 +432,112 @@ body {
   text-shadow: 0 0 50px rgba(155,48,255,0.25), 0 0 100px rgba(155,48,255,0.12);
 }
 
-/* ── Memories Carousel ── */
-@keyframes memoriesScroll {
+/* ── Memories Carousel (two-row) ── */
+@keyframes memoriesScrollLeft {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }
 }
-.memories-track {
-  animation: memoriesScroll 32s linear infinite;
+@keyframes memoriesScrollRight {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
-.memories-track:hover {
-  animation-play-state: paused;
+.memories-track-left,
+.memories-track-right {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  will-change: transform;
+}
+.memories-track-left  { animation: memoriesScrollLeft  40s linear infinite; }
+.memories-track-right { animation: memoriesScrollRight 54s linear infinite; }
+.memories-track-left:hover,
+.memories-track-right:hover { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .memories-track-left,
+  .memories-track-right { animation: none; }
+}
+
+/* Memory card */
+.memory-card {
+  position: relative;
+  flex-shrink: 0;
+  width: clamp(260px, 28vw, 380px);
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(155,48,255,0.1);
+  cursor: default;
+  transition:
+    transform    0.45s cubic-bezier(0.16,1,0.3,1),
+    border-color 0.45s,
+    box-shadow   0.45s;
+}
+.memory-card:hover {
+  transform: scale(1.04);
+  border-color: rgba(155,48,255,0.42);
+  box-shadow: 0 0 28px rgba(155,48,255,0.18), 0 18px 52px rgba(0,0,0,0.55);
+  z-index: 2;
+}
+.memory-top-glow {
+  position: absolute;
+  top: 0; left: 15%; right: 15%; height: 1.5px; z-index: 5;
+  background: linear-gradient(90deg, transparent, rgba(155,48,255,0.7), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.memory-card:hover .memory-top-glow { opacity: 1; }
+
+/* ── Partner logo cards ── */
+.partner-logo-card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 72px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(155,48,255,0.15);
+  border-radius: 12px;
+  padding: 14px 22px;
+  cursor: default;
+  flex-shrink: 0;
+  overflow: hidden;
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s;
+}
+.partner-logo-card:hover {
+  border-color: rgba(155,48,255,0.42);
+  background: rgba(155,48,255,0.07);
+  box-shadow: 0 0 22px rgba(155,48,255,0.12);
+}
+.partner-logo-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+  filter: brightness(0) invert(1);
+  transition: opacity 0.3s;
+}
+.partner-logo-card:hover .partner-logo-img { opacity: 0.9; }
+
+/* ── Footer social buttons ── */
+.footer-social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  color: rgba(255,255,255,0.38);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(155,48,255,0.15);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: color 0.22s, border-color 0.22s, background 0.22s, transform 0.22s;
+}
+.footer-social-btn:hover {
+  color: #ffffff;
+  border-color: rgba(155,48,255,0.45);
+  background: rgba(155,48,255,0.1);
+  transform: scale(1.08);
 }
 
 .flip-card-border {
