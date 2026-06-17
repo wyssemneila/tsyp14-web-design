@@ -575,6 +575,59 @@ button, a {
 /* ── Countdown separators (hide when wrapping 2×2 on mobile) ── */
 .countdown-sep { display: flex; }
 
+/* ══════════════════════════════════════════
+   VENUE PAGE
+══════════════════════════════════════════ */
+
+/* Venue gallery marquee */
+@keyframes venueGalleryScroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.venue-gallery-track {
+  animation: venueGalleryScroll 45s linear infinite;
+}
+.venue-gallery-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .venue-gallery-track { animation: none; }
+}
+
+/* Venue feature card hover */
+.venue-feature-card:hover {
+  border-color: rgba(155,48,255,0.45) !important;
+  box-shadow: 0 0 32px rgba(155,48,255,0.12), 0 16px 48px rgba(0,0,0,0.5) !important;
+  transform: translateY(-4px) !important;
+}
+
+/* ── Venue responsive ── */
+@media (max-width: 767px) {
+  .venue-hero-grid {
+    grid-template-columns: 1fr !important;
+    text-align: center;
+  }
+  .venue-hero-grid > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .venue-discover-grid,
+  .venue-visa-grid,
+  .venue-currency-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .venue-hero-grid {
+    gap: 40px !important;
+  }
+  .venue-discover-grid,
+  .venue-visa-grid,
+  .venue-currency-grid {
+    gap: 40px !important;
+  }
+}
+
 .flip-card-border {
   position: relative;
   border-radius: 22px;
