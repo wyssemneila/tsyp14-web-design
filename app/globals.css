@@ -643,3 +643,22 @@ button, a {
     rgba(155,48,255,0.0) 100%
   );
 }
+
+/* ── About page ── */
+.about-value-card:hover {
+  border-color: rgba(155,48,255,0.3) !important;
+  box-shadow: 0 0 30px rgba(155,48,255,0.08), 0 12px 40px rgba(0,0,0,0.3) !important;
+  transform: translateY(-4px);
+}
+
+@media (max-width: 767px) {
+  .about-stats-row { grid-template-columns: repeat(2, 1fr) !important; gap: 16px !important; }
+  .about-values-grid { grid-template-columns: 1fr !important; }
+  .about-team-grid { grid-template-columns: 1fr !important; }
+  .about-tabs { flex-direction: column !important; align-items: stretch !important; width: 100% !important; }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .about-values-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .about-team-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}

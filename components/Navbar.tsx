@@ -11,7 +11,7 @@ const LINK_HREFS: Record<string, string> = {
   "The Noosphere": "/#theme",
   Program: "/#program",
   Venue: "/venue",
-  "About Us": "/#about",
+  "About Us": "/about",
 };
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
