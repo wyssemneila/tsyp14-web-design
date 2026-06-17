@@ -274,7 +274,7 @@ function VenueHero() {
               aspectRatio: "4/3",
             }}>
               <img
-                src="/venue/venue-hero.jpg"
+                src="/venue/venue-hero.webp"
                 alt="Medina Congress Center"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
