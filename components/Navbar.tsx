@@ -4,7 +4,15 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 
-const LINKS = ["Home", "The Noosphere", "Program", "Veni Ambassadors", "About Us"];
+const LINKS = ["Home", "The Noosphere", "Program", "Venue", "About Us"];
+
+const LINK_HREFS: Record<string, string> = {
+  Home: "/",
+  "The Noosphere": "/#theme",
+  Program: "/#program",
+  Venue: "/venue",
+  "About Us": "/#about",
+};
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
 export default function Navbar() {
@@ -74,7 +82,7 @@ export default function Navbar() {
                 />
               )}
               <a
-                href="#"
+                href={LINK_HREFS[link] || "#"}
                 style={{
                   position: "relative", zIndex: 1,
                   display: "block",
@@ -158,7 +166,7 @@ export default function Navbar() {
             {LINKS.map((link, i) => (
               <motion.a
                 key={link}
-                href="#"
+                href={LINK_HREFS[link] || "#"}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06, duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
