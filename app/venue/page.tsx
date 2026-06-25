@@ -914,14 +914,14 @@ function VisaChecker() {
                 </svg>
               </div>
 
-              {/* Floating country badges */}
+              {/* Floating country flags */}
               {[
-                { label: "🇹🇳", x: "5%", y: "15%" },
-                { label: "🇫🇷", x: "80%", y: "10%" },
-                { label: "🇺🇸", x: "85%", y: "65%" },
-                { label: "🇯🇵", x: "10%", y: "75%" },
-                { label: "🇩🇪", x: "50%", y: "5%" },
-                { label: "🇧🇷", x: "45%", y: "88%" },
+                { code: "tn", name: "Tunisia", x: "5%", y: "15%" },
+                { code: "fr", name: "France", x: "80%", y: "10%" },
+                { code: "us", name: "USA", x: "85%", y: "65%" },
+                { code: "jp", name: "Japan", x: "10%", y: "75%" },
+                { code: "de", name: "Germany", x: "50%", y: "5%" },
+                { code: "br", name: "Brazil", x: "45%", y: "88%" },
               ].map((b, i) => (
                 <motion.div
                   key={i}
@@ -929,15 +929,21 @@ function VisaChecker() {
                   transition={{ duration: 3, repeat: Infinity, delay: i * 0.5, ease: "easeInOut" }}
                   style={{
                     position: "absolute", left: b.x, top: b.y,
-                    width: "40px", height: "40px", borderRadius: "12px",
+                    width: "52px", height: "52px", borderRadius: "14px",
                     background: "rgba(6, 2, 22, 0.9)",
                     border: "1px solid rgba(155,48,255,0.2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
-                    fontSize: "20px",
+                    flexDirection: "column", gap: "2px",
                     boxShadow: "0 0 20px rgba(155,48,255,0.1)",
+                    overflow: "hidden",
                   }}
                 >
-                  {b.label}
+                  <img
+                    src={`https://flagcdn.com/w80/${b.code}.png`}
+                    alt={b.name}
+                    style={{ width: "32px", height: "22px", objectFit: "cover", borderRadius: "3px" }}
+                  />
+                  <span style={{ fontSize: "7px", fontWeight: 700, letterSpacing: "0.1em", color: "rgba(255,255,255,0.5)", textTransform: "uppercase" }}>{b.code}</span>
                 </motion.div>
               ))}
             </div>
