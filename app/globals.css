@@ -646,10 +646,10 @@ button, a {
 
 /* ── Challenges page ── */
 @media (max-width: 767px) {
-  .challenges-grid { grid-template-columns: 1fr !important; max-width: 320px !important; }
+  .challenges-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 14px !important; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .challenges-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .challenges-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
 
 /* ── About page ── */
