@@ -52,118 +52,82 @@ function IconSend() { return <svg {...ico}><path d="M22 2L11 13"/><path d="M22 2
 
 function MemberCard({ member, index, inView }: { member: Member; index: number; inView: boolean }) {
   const [hovered, setHovered] = useState(false);
-  const initials = member.name.split(" ").map(n => n[0]).join("");
-  const hue = 265 + (index * 8) % 35;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, scale: 0.95 }}
-      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
-      transition={{ delay: 0.05 + index * 0.04, duration: 0.55, ease: EASE }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: 0.05 + index * 0.04, duration: 0.5, ease: EASE }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{
         position: "relative",
-        borderRadius: "20px",
+        borderRadius: "16px",
         overflow: "hidden",
         cursor: "pointer",
-      }}
-    >
-      {/* Spinning conic border */}
-      <div style={{
-        position: "absolute", inset: -1, borderRadius: "20px",
-        background: `conic-gradient(from ${index * 45}deg, transparent 55%, rgba(155,48,255,${hovered ? 0.5 : 0}) 75%, rgba(200,132,252,${hovered ? 0.3 : 0}) 85%, transparent 100%)`,
-        opacity: hovered ? 1 : 0,
-        transition: "opacity 0.4s ease",
-        animation: hovered ? "borderSpin 3s linear infinite" : "none",
-        zIndex: 0,
-      }} />
-
-      {/* Inner card */}
-      <div style={{
-        position: "relative", zIndex: 1,
-        borderRadius: "19px",
-        background: hovered
-          ? "linear-gradient(170deg, rgba(18,6,32,0.98) 0%, rgba(6,2,14,0.98) 100%)"
-          : "linear-gradient(170deg, rgba(12,4,22,0.8) 0%, rgba(4,1,10,0.8) 100%)",
-        border: `1px solid ${hovered ? "rgba(155,48,255,0.2)" : "rgba(255,255,255,0.03)"}`,
+        background: "#0a0510",
+        border: `1px solid ${hovered ? "rgba(155,48,255,0.35)" : "rgba(255,255,255,0.04)"}`,
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         transform: hovered ? "translateY(-8px)" : "translateY(0)",
         boxShadow: hovered
-          ? "0 24px 64px rgba(155,48,255,0.12), 0 0 1px rgba(155,48,255,0.3)"
-          : "0 2px 8px rgba(0,0,0,0.2)",
-      }}>
-        {/* Photo — rounded square */}
+          ? "0 20px 50px rgba(155,48,255,0.15), 0 0 0 1px rgba(155,48,255,0.15)"
+          : "0 2px 8px rgba(0,0,0,0.3)",
+      }}
+    >
+      {/* Photo — flush to card edges */}
+      <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden" }}>
+        <motion.img
+          src="/team/placeholder.jpg"
+          alt={member.name}
+          animate={{ scale: hovered ? 1.08 : 1 }}
+          transition={{ duration: 0.5, ease: EASE }}
+          style={{
+            width: "100%", height: "100%", objectFit: "cover", display: "block",
+          }}
+        />
+        {/* Bottom fade into card bg */}
         <div style={{
-          margin: "14px 14px 0",
-          aspectRatio: "3/4",
-          borderRadius: "14px",
-          overflow: "hidden",
-          position: "relative",
+          position: "absolute", inset: 0, pointerEvents: "none",
+          background: "linear-gradient(to top, #0a0510 0%, rgba(10,5,16,0.4) 35%, transparent 60%)",
+        }} />
+        {/* Role badge overlaid on image */}
+        <div style={{
+          position: "absolute", top: "10px", left: "10px",
+          padding: "4px 10px", borderRadius: "6px",
+          background: hovered
+            ? "linear-gradient(135deg, rgba(155,48,255,0.85), rgba(124,58,237,0.8))"
+            : "rgba(0,0,0,0.6)",
+          backdropFilter: "blur(8px)",
+          border: `1px solid ${hovered ? "rgba(200,132,252,0.4)" : "rgba(255,255,255,0.08)"}`,
+          fontSize: "8px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
+          color: "#ffffff",
+          transition: "all 0.3s ease",
         }}>
-          <motion.img
-            src="/team/placeholder.jpg"
-            alt={member.name}
-            animate={{ scale: hovered ? 1.06 : 1 }}
-            transition={{ duration: 0.5, ease: EASE }}
-            style={{
-              width: "100%", height: "100%", objectFit: "cover", display: "block",
-              filter: hovered ? "brightness(1.1)" : "brightness(0.85)",
-              transition: "filter 0.4s ease",
-            }}
-          />
-
-          {/* Purple overlay on hover */}
-          <div style={{
-            position: "absolute", inset: 0,
-            background: `linear-gradient(to top, rgba(8,3,18,0.7) 0%, transparent 50%, rgba(155,48,255,${hovered ? 0.05 : 0}) 100%)`,
-            transition: "all 0.4s ease",
-            pointerEvents: "none",
-          }} />
+          {member.role}
         </div>
+      </div>
 
-        {/* Info area */}
-        <div style={{ padding: "16px 16px 18px" }}>
-          {/* Role badge */}
-          <motion.div
-            animate={{ y: hovered ? -3 : 0 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            style={{
-              display: "inline-block",
-              padding: "4px 12px", borderRadius: "8px",
-              background: hovered
-                ? "linear-gradient(135deg, rgba(155,48,255,0.2), rgba(124,58,237,0.1))"
-                : "rgba(155,48,255,0.05)",
-              border: `1px solid rgba(155,48,255,${hovered ? 0.3 : 0.08})`,
-              fontSize: "9px", fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase",
-              color: hovered ? "#c084fc" : "rgba(155,48,255,0.45)",
-              marginBottom: "10px",
-              transition: "all 0.3s ease",
-            }}
-          >
-            {member.role}
-          </motion.div>
+      {/* Info — compact */}
+      <div style={{ padding: "14px 14px 16px" }}>
+        <h3 style={{
+          fontSize: "13px", fontWeight: 700, color: "#ffffff", margin: "0 0 6px",
+          fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+          lineHeight: 1.3,
+        }}>{member.name}</h3>
 
-          <h3 style={{
-            fontSize: "14px", fontWeight: 700, color: "#ffffff", margin: "0 0 6px",
-            fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-            lineHeight: 1.3,
-          }}>{member.name}</h3>
-
-          <motion.a
-            href={`mailto:${member.email}`}
-            animate={{ opacity: hovered ? 1 : 0.3, y: hovered ? 0 : 3 }}
-            transition={{ duration: 0.3, ease: EASE }}
-            style={{
-              display: "inline-flex", alignItems: "center", gap: "5px",
-              fontSize: "9px", color: "rgba(155,48,255,0.55)", textDecoration: "none",
-              fontFamily: "var(--font-inter), 'Inter', sans-serif",
-            }}
-          >
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 7L2 4"/></svg>
-            {member.email}
-          </motion.a>
-        </div>
+        <a
+          href={`mailto:${member.email}`}
+          style={{
+            display: "inline-flex", alignItems: "center", gap: "5px",
+            fontSize: "9px", color: "rgba(155,48,255,0.5)", textDecoration: "none",
+            fontFamily: "var(--font-inter), 'Inter', sans-serif",
+            opacity: hovered ? 1 : 0.5,
+            transition: "opacity 0.3s ease",
+          }}
+        >
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4l-10 7L2 4"/></svg>
+          {member.email}
+        </a>
       </div>
     </motion.div>
   );
