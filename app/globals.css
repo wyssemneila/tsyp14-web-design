@@ -647,12 +647,12 @@ button, a {
 /* ── About page ── */
 .about-contact-card:hover {
   border-color: rgba(155,48,255,0.25) !important;
-  box-shadow: 0 0 24px rgba(155,48,255,0.08) !important;
+  box-shadow: 0 0 20px rgba(155,48,255,0.08) !important;
 }
 
 @media (max-width: 767px) {
-  .about-team-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 12px !important; }
-  .about-contact-grid { grid-template-columns: 1fr !important; }
+  .about-team-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
+  .about-contact-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
