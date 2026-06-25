@@ -1089,42 +1089,33 @@ function CurrencyConverter() {
             </motion.div>
           </motion.div>
 
-          {/* Decorative bills visual */}
+          {/* Tunisian banknotes image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.92 }}
             animate={inView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.9, ease: EASE, delay: 0.2 }}
-            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "20px" }}
+            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
           >
             <div style={{
-              display: "grid", gridTemplateColumns: "1fr 1fr",
-              gap: "12px", maxWidth: "360px",
+              position: "relative", borderRadius: "20px", overflow: "hidden",
+              border: "1px solid rgba(155,48,255,0.18)",
+              boxShadow: "0 0 40px rgba(155,48,255,0.1), 0 24px 64px rgba(0,0,0,0.4)",
+              maxWidth: "460px",
             }}>
-              {[5, 10, 20, 50].map((bill, i) => (
-                <motion.div
-                  key={bill}
-                  animate={{ y: [0, -4, 0] }}
-                  transition={{ duration: 3.5, repeat: Infinity, delay: i * 0.4, ease: "easeInOut" }}
-                  style={{
-                    aspectRatio: "1.6",
-                    borderRadius: "12px",
-                    background: `linear-gradient(135deg, rgba(155,48,255,${0.08 + i * 0.04}), rgba(124,58,237,${0.04 + i * 0.03}))`,
-                    border: "1px solid rgba(155,48,255,0.18)",
-                    display: "flex", flexDirection: "column",
-                    alignItems: "center", justifyContent: "center", gap: "4px",
-                    boxShadow: "0 0 20px rgba(155,48,255,0.06)",
-                  }}
-                >
-                  <span style={{
-                    fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800,
-                    color: "rgba(155,48,255,0.7)", fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-                  }}>{bill}</span>
-                  <span style={{
-                    fontSize: "8px", fontWeight: 600, letterSpacing: "0.2em",
-                    textTransform: "uppercase", color: "rgba(155,48,255,0.4)",
-                  }}>TND</span>
-                </motion.div>
-              ))}
+              <img
+                src="/venue/tnd-bills.png"
+                alt="Tunisian Dinar banknotes"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+              <div style={{
+                position: "absolute", inset: 0,
+                background: "linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 30%)",
+                pointerEvents: "none",
+              }} />
+              <div style={{
+                position: "absolute", top: 0, left: "15%", right: "15%", height: "2px",
+                background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.5), transparent)",
+              }} />
             </div>
           </motion.div>
         </div>
