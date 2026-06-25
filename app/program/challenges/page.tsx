@@ -66,7 +66,7 @@ function ChallengeCard({ challenge, index, inView }: { challenge: Challenge; ind
       }} />
 
       {/* Animated border */}
-      <div className="flip-card-border" style={{ position: "relative", zIndex: 1, height: "260px" }}>
+      <div className="flip-card-border" style={{ position: "relative", zIndex: 1, height: "290px" }}>
         <div className="flip-card-wrapper" style={{ width: "100%", height: "100%" }}>
           <div className="flip-card-inner">
 
@@ -78,7 +78,7 @@ function ChallengeCard({ challenge, index, inView }: { challenge: Challenge; ind
             }}>
               {/* Logo */}
               <div style={{
-                width: "60px", height: "60px", borderRadius: "14px",
+                width: "90px", height: "90px", borderRadius: "16px",
                 background: "rgba(255,255,255,0.03)", border: "1px solid rgba(255,255,255,0.06)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 overflow: "hidden", padding: "6px",
@@ -91,7 +91,7 @@ function ChallengeCard({ challenge, index, inView }: { challenge: Challenge; ind
               </div>
 
               <h3 style={{
-                fontSize: "12px", fontWeight: 700, color: "#ffffff", textAlign: "center",
+                fontSize: "15px", fontWeight: 700, color: "#ffffff", textAlign: "center",
                 lineHeight: 1.3, letterSpacing: "-0.01em",
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               }}>{challenge.name}</h3>
