@@ -93,81 +93,33 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
           ? "0 24px 64px rgba(155,48,255,0.12), 0 0 1px rgba(155,48,255,0.3)"
           : "0 2px 8px rgba(0,0,0,0.2)",
       }}>
-        {/* Image placeholder — rounded square */}
+        {/* Photo — rounded square */}
         <div style={{
-          margin: "16px 16px 0",
-          aspectRatio: "1",
+          margin: "14px 14px 0",
+          aspectRatio: "3/4",
           borderRadius: "14px",
           overflow: "hidden",
           position: "relative",
-          background: `linear-gradient(145deg, hsla(${hue}, 60%, 15%, 0.6), hsla(${hue}, 40%, 8%, 0.8))`,
         }}>
-          {/* Subtle grid texture */}
-          <div style={{
-            position: "absolute", inset: 0, opacity: 0.06,
-            backgroundImage: `
-              linear-gradient(rgba(155,48,255,0.4) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(155,48,255,0.4) 1px, transparent 1px)
-            `,
-            backgroundSize: "24px 24px",
-          }} />
-
-          {/* Gradient accent on hover */}
-          <motion.div
-            animate={{
-              opacity: hovered ? 1 : 0,
-              scale: hovered ? 1.2 : 0.8,
-            }}
+          <motion.img
+            src="/team/placeholder.jpg"
+            alt={member.name}
+            animate={{ scale: hovered ? 1.06 : 1 }}
             transition={{ duration: 0.5, ease: EASE }}
             style={{
-              position: "absolute", bottom: "-20%", left: "50%", transform: "translateX(-50%)",
-              width: "120%", height: "60%",
-              background: `radial-gradient(ellipse, hsla(${hue}, 80%, 50%, 0.15) 0%, transparent 70%)`,
-              pointerEvents: "none",
+              width: "100%", height: "100%", objectFit: "cover", display: "block",
+              filter: hovered ? "brightness(1.1)" : "brightness(0.85)",
+              transition: "filter 0.4s ease",
             }}
           />
 
-          {/* Initials */}
+          {/* Purple overlay on hover */}
           <div style={{
-            position: "relative", zIndex: 2,
-            width: "100%", height: "100%",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <motion.span
-              animate={{ scale: hovered ? 1.08 : 1 }}
-              transition={{ duration: 0.35, ease: EASE }}
-              style={{
-                fontSize: "clamp(32px, 3vw, 44px)", fontWeight: 800, letterSpacing: "-0.03em",
-                color: `hsla(${hue}, 70%, 65%, ${hovered ? 0.7 : 0.25})`,
-                fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-                transition: "color 0.4s ease",
-                userSelect: "none",
-              }}
-            >{initials}</motion.span>
-          </div>
-
-          {/* Floating particles */}
-          {hovered && [...Array(4)].map((_, pi) => (
-            <motion.div
-              key={pi}
-              initial={{ opacity: 0, y: 10, scale: 0 }}
-              animate={{
-                opacity: [0, 0.7, 0],
-                y: [-5, -40 - pi * 12],
-                scale: [0, 1, 0],
-              }}
-              transition={{ duration: 1.8 + pi * 0.2, repeat: Infinity, delay: pi * 0.35, ease: "easeOut" }}
-              style={{
-                position: "absolute",
-                width: 3 + pi, height: 3 + pi,
-                borderRadius: "50%",
-                background: "rgba(155,48,255,0.6)",
-                left: `${20 + pi * 18}%`,
-                bottom: "20%",
-                pointerEvents: "none",
-              }}
-            />
-          ))}
+            position: "absolute", inset: 0,
+            background: `linear-gradient(to top, rgba(8,3,18,0.7) 0%, transparent 50%, rgba(155,48,255,${hovered ? 0.05 : 0}) 100%)`,
+            transition: "all 0.4s ease",
+            pointerEvents: "none",
+          }} />
         </div>
 
         {/* Info area */}
@@ -234,19 +186,12 @@ export default function AboutPage() {
       <Navbar />
       <main style={{ background: "#000000", minHeight: "100vh" }}>
 
-        {/* ── Hero ── */}
+        {/* ── Hero — compact one-line ── */}
         <section ref={heroRef} style={{
-          position: "relative", padding: "160px 24px 80px", textAlign: "center", overflow: "hidden",
+          position: "relative", padding: "120px 24px 40px", textAlign: "center", overflow: "hidden",
         }}>
-          <div style={{
-            position: "absolute", top: "10%", left: "50%", transform: "translateX(-50%)",
-            width: "800px", height: "500px", borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(155,48,255,0.07) 0%, transparent 65%)",
-            pointerEvents: "none",
-          }} />
-
           <motion.div initial={{ opacity: 0, y: 20 }} animate={heroInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.6, ease: EASE }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "24px" }}>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: "12px", marginBottom: "20px" }}>
               <span style={{ width: "32px", height: "1px", background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.5))" }} />
               <span style={{ fontSize: "10px", fontWeight: 700, letterSpacing: "0.38em", textTransform: "uppercase", color: "rgba(155,48,255,0.6)" }}>TSYP 14 · Organisation Committee</span>
               <span style={{ width: "32px", height: "1px", background: "linear-gradient(90deg, rgba(155,48,255,0.5), transparent)" }} />
@@ -258,30 +203,16 @@ export default function AboutPage() {
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
             transition={{ delay: 0.1, duration: 0.7, ease: EASE }}
             style={{
-              fontSize: "clamp(44px, 8vw, 96px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 0.95,
-              margin: "0 0 28px", fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
+              fontSize: "clamp(36px, 6vw, 72px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1,
+              margin: 0, fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
-            <span style={{ color: "#ffffff" }}>The Minds</span>
-            <br />
+            <span style={{ color: "#ffffff" }}>The Minds </span>
             <span style={{
               background: "linear-gradient(135deg, #9b30ff 20%, #c084fc 80%)",
               WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
             }}>Shaping It</span>
           </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.2, duration: 0.6, ease: EASE }}
-            style={{
-              fontSize: "16px", lineHeight: 1.7, color: "rgba(255,255,255,0.4)", maxWidth: "520px", margin: "0 auto",
-              fontFamily: "var(--font-inter), 'Inter', sans-serif",
-            }}
-          >
-            Fifteen students from across Tunisia, one shared obsession:
-            building something unforgettable.
-          </motion.p>
         </section>
 
         <div style={{ width: "100%", height: "1px", background: "linear-gradient(90deg, transparent, rgba(155,48,255,0.2) 50%, transparent)" }} />
