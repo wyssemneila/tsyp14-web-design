@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function DemiSphere() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+
   return (
     <div
       style={{
@@ -11,7 +17,7 @@ export default function DemiSphere() {
       }}
     >
       <Image
-        src="/sphere.png"
+        src={isLight ? "/sphere-light.png" : "/sphere.png"}
         alt=""
         fill
         priority

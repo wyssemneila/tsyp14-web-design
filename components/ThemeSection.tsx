@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -10,6 +11,10 @@ export default function ThemeSection() {
   const appRef = useRef<any>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-80px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+  const sectionBg = isLight ? "#eeeaf4" : "#000000";
+  const fadeBg = isLight ? "#eeeaf4" : "#000000";
 
   useEffect(() => {
     function initTubes() {
@@ -58,7 +63,7 @@ export default function ThemeSection() {
       style={{
         position: "relative",
         width: "100%",
-        background: "#000000",
+        background: sectionBg,
         overflow: "hidden",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}
@@ -85,26 +90,26 @@ export default function ThemeSection() {
         {/* Top fade */}
         <div style={{
           position: "absolute", top: 0, left: 0, right: 0, height: "120px",
-          background: "linear-gradient(180deg, #000000 0%, transparent 100%)",
+          background: `linear-gradient(180deg, ${fadeBg} 0%, transparent 100%)`,
           zIndex: 2, pointerEvents: "none",
         }} />
 
         {/* Bottom fade */}
         <div style={{
           position: "absolute", bottom: 0, left: 0, right: 0, height: "160px",
-          background: "linear-gradient(0deg, #000000 0%, transparent 100%)",
+          background: `linear-gradient(0deg, ${fadeBg} 0%, transparent 100%)`,
           zIndex: 2, pointerEvents: "none",
         }} />
 
         {/* Side fades */}
         <div style={{
           position: "absolute", top: 0, left: 0, bottom: 0, width: "120px",
-          background: "linear-gradient(90deg, #000000 0%, transparent 100%)",
+          background: `linear-gradient(90deg, ${fadeBg} 0%, transparent 100%)`,
           zIndex: 2, pointerEvents: "none",
         }} />
         <div style={{
           position: "absolute", top: 0, right: 0, bottom: 0, width: "120px",
-          background: "linear-gradient(270deg, #000000 0%, transparent 100%)",
+          background: `linear-gradient(270deg, ${fadeBg} 0%, transparent 100%)`,
           zIndex: 2, pointerEvents: "none",
         }} />
 

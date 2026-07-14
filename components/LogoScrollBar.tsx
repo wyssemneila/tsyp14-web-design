@@ -1,17 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import { useTheme } from "@/components/ThemeProvider";
 
 const LOGO_COUNT = 8;
 
 export default function LogoScrollBar() {
   const items = Array.from({ length: LOGO_COUNT }, (_, i) => i);
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+  const bg = isLight ? "#c038c7" : "#000000";
 
   return (
     <div
       style={{
         width: "100%",
-        background: "#000000",
+        background: bg,
         padding: "22px 0",
         overflow: "hidden",
         position: "relative",
@@ -26,7 +30,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to right, #000000, transparent)",
+          background: `linear-gradient(to right, ${bg}, transparent)`,
           zIndex: 10,
           pointerEvents: "none",
         }}
@@ -39,7 +43,7 @@ export default function LogoScrollBar() {
           top: 0,
           bottom: 0,
           width: "140px",
-          background: "linear-gradient(to left, #000000, transparent)",
+          background: `linear-gradient(to left, ${bg}, transparent)`,
           zIndex: 10,
           pointerEvents: "none",
         }}

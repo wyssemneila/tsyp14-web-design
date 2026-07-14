@@ -37,15 +37,15 @@ body {
 }
 
 [data-theme="light"] {
-  --bg: #f8f6fc;
+  --bg: #eeeaf4;
   --fg: #1a0a2e;
-  --card-bg: rgba(255, 255, 255, 0.9);
-  --card-border: rgba(155,48,255,0.18);
+  --card-bg: rgba(219, 180, 222, 0.9);
+  --card-border: rgba(168,28,175,0.18);
   --text-muted: rgba(26,10,46,0.55);
   --text-secondary: rgba(60,40,100,0.6);
-  --nav-bg: rgba(248,246,252,0.8);
-  --dropdown-bg: rgba(255,255,255,0.95);
-  --mobile-menu-bg: rgba(248,246,252,0.95);
+  --nav-bg: rgba(238,234,244,0.85);
+  --dropdown-bg: rgba(219,180,222,0.95);
+  --mobile-menu-bg: rgba(238,234,244,0.95);
 }
 
 /* Shimmer sweep on white headline */
@@ -693,215 +693,345 @@ button, a {
   .about-team-grid { grid-template-columns: repeat(3, 1fr) !important; }
 }
 
-/* ══════════════════════════════════════════
-   LIGHT MODE — comprehensive overrides
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════
+   LIGHT MODE — proper palette with #a81caf accent
+   bg: #eeeaf4  cards: #ffffff  text: #1a0a2e
+   accent: #a81caf  accent-soft: rgba(168,28,175,0.1)
+══════════════════════════════════════════════════ */
 
-[data-theme="light"] {
-  /* ── Global backgrounds ── */
-  & main,
-  & section,
-  & body {
-    background: #f8f6fc !important;
-    color: #1a0a2e !important;
-  }
+/* ── 1. Base: backgrounds & text ── */
+[data-theme="light"] body,
+[data-theme="light"] main,
+[data-theme="light"] main > section {
+  background: #eeeaf4 !important;
+  color: #1a0a2e !important;
+}
 
-  /* ── Navbar ── */
-  & nav[style] {
-    background: rgba(248,246,252,0.8) !important;
-    border-bottom-color: rgba(155,48,255,0.15) !important;
-  }
-  & nav a[style],
-  & nav button[style] {
-    color: rgba(26,10,46,0.6) !important;
-  }
-  & nav a[style]:hover {
-    color: #1a0a2e !important;
-  }
+/* All inline-style divs/sections with black bg */
+[data-theme="light"] section,
+[data-theme="light"] main > div {
+  background-color: #eeeaf4 !important;
+}
 
-  /* ── Mobile menu ── */
-  & .nav-mobile-menu {
-    background: rgba(248,246,252,0.95) !important;
-  }
-  & .nav-mobile-menu a,
-  & .nav-mobile-menu button {
-    color: rgba(26,10,46,0.85) !important;
-  }
+/* ── 2. ALL text: force dark on light ── */
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4,
+[data-theme="light"] h5,
+[data-theme="light"] h6 {
+  color: #1a0a2e !important;
+  -webkit-text-fill-color: #1a0a2e !important;
+}
 
-  /* ── Hamburger lines ── */
-  & .nav-hamburger span {
-    background: rgba(26,10,46,0.85) !important;
-  }
+[data-theme="light"] h1 span,
+[data-theme="light"] h2 span,
+[data-theme="light"] h3 span {
+  color: #1a0a2e !important;
+  -webkit-text-fill-color: #1a0a2e !important;
+}
 
-  /* ── Text colors ── White text → dark text ── */
-  & h1, & h2, & h3, & h4, & h5, & h6 {
-    color: #1a0a2e !important;
-  }
-  & h1 span[style*="color: \"#ffffff\""],
-  & h1 span[style*="color: #fff"],
-  & h2 span[style*="color: \"#ffffff\""],
-  & h2 span[style*="color: #fff"] {
-    color: #1a0a2e !important;
-  }
-  & p {
-    color: rgba(40,20,80,0.65) !important;
-  }
+/* Gradient text — keep purple gradient visible */
+[data-theme="light"] .gradient-flow {
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+  background: linear-gradient(135deg, #a81caf, #8b2fc9, #a81caf) !important;
+  background-size: 300% 300% !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
 
-  /* ── Cards ── */
-  & .speaker-card,
-  & .edition-card,
-  & .partner-logo-card,
-  & .venue-feature-card,
-  & .about-contact-card {
-    background: rgba(255,255,255,0.9) !important;
-    border-color: rgba(155,48,255,0.12) !important;
-    box-shadow: 0 2px 16px rgba(100,60,180,0.06) !important;
-  }
-  & .speaker-card:hover,
-  & .edition-card:hover,
-  & .venue-feature-card:hover {
-    background: #ffffff !important;
-    border-color: rgba(155,48,255,0.35) !important;
-    box-shadow: 0 8px 32px rgba(100,60,180,0.12) !important;
-  }
+/* Outlined text → purple stroke on light */
+[data-theme="light"] span[style] {
+  -webkit-text-stroke-color: rgba(168,28,175,0.55) !important;
+}
 
-  /* ── Flip cards ── */
-  & .flip-card-front,
-  & .flip-card-back {
-    background: linear-gradient(145deg, #ffffff 0%, #f0ecf8 100%) !important;
-  }
-  & .flip-card-front h3,
-  & .flip-card-back h3 {
-    color: #1a0a2e !important;
-  }
-  & .flip-card-front span,
-  & .flip-card-back span,
-  & .flip-card-back p {
-    color: rgba(40,20,80,0.55) !important;
-  }
+/* Shimmer text → dark shimmer */
+[data-theme="light"] .shimmer-white {
+  background: linear-gradient(90deg,
+    #1a0a2e 30%, #a81caf 48%, #1a0a2e 52%, #a81caf 56%, #1a0a2e 70%
+  ) !important;
+  background-size: 300% auto !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
 
-  /* ── Partner logos ── don't invert in light mode ── */
-  & .partner-logo-img {
-    filter: none !important;
-    opacity: 0.7 !important;
-  }
-  & .partner-logo-card:hover .partner-logo-img {
-    opacity: 1 !important;
-  }
+/* Body text */
+[data-theme="light"] p,
+[data-theme="light"] label {
+  color: #3d2a5c !important;
+}
 
-  /* ── Edition cards ── */
-  & .edition-roman {
-    -webkit-text-stroke-color: rgba(155,48,255,0.45) !important;
-  }
-  & .edition-dot-grid {
-    background-image: radial-gradient(circle, rgba(155,48,255,0.08) 1px, transparent 1px) !important;
-  }
+/* Muted small text (eyebrows, labels, captions) */
+[data-theme="light"] span {
+  color: #5a3d7a !important;
+}
 
-  /* ── Memory cards ── */
-  & .memory-card {
-    border-color: rgba(155,48,255,0.1) !important;
-    box-shadow: 0 2px 12px rgba(100,60,180,0.08) !important;
-  }
+/* Links inside content */
+[data-theme="light"] a {
+  color: #5a3d7a !important;
+}
 
-  /* ── Footer ── */
-  & footer {
-    background: #0d0520 !important;
-    color: #ffffff !important;
-  }
-  & footer h3,
-  & footer h4,
-  & footer span,
-  & footer p,
-  & footer a,
-  & footer div {
-    color: inherit !important;
-  }
-  & .footer-social-btn {
-    color: rgba(255,255,255,0.38) !important;
-    background: rgba(255,255,255,0.04) !important;
-    border-color: rgba(155,48,255,0.15) !important;
-  }
-  & .footer-social-btn:hover {
-    color: #ffffff !important;
-  }
+/* ── 3. Navbar ── */
+[data-theme="light"] nav {
+  background: rgba(238,234,244,0.85) !important;
+  border-bottom-color: rgba(168,28,175,0.12) !important;
+  backdrop-filter: blur(24px) !important;
+}
 
-  /* ── Inputs and selects ── */
-  & input[style],
-  & select[style] {
-    background: rgba(255,255,255,0.9) !important;
-    color: #1a0a2e !important;
-    border-color: rgba(155,48,255,0.2) !important;
-  }
-  & input::placeholder {
-    color: rgba(40,20,80,0.35) !important;
-  }
+[data-theme="light"] nav a,
+[data-theme="light"] nav span {
+  color: #3d2a5c !important;
+}
 
-  /* ── Gradient dividers ── */
-  & div[style*="linear-gradient"][style*="rgba(155,48,255,0.2)"] {
-    opacity: 0.5;
-  }
+[data-theme="light"] nav a:hover {
+  color: #1a0a2e !important;
+}
 
-  /* ── Logo inversion — keep logos visible on light bg ── */
-  & nav img[alt="IEEE TSYP14"] {
-    filter: none;
-  }
+/* Nav pill bg */
+[data-theme="light"] .nav-links {
+  background: rgba(168,28,175,0.04) !important;
+  border-color: rgba(168,28,175,0.1) !important;
+}
 
-  /* ── Shimmer text ── */
-  & .shimmer-white {
-    background: linear-gradient(90deg,
-      #1a0a2e 30%,
-      rgba(155,48,255,0.75) 47%,
-      #1a0a2e 52%,
-      rgba(155,48,255,0.75) 57%,
-      #1a0a2e 70%
-    ) !important;
-    background-size: 300% auto !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
-  }
+/* Dropdown */
+[data-theme="light"] .nav-links div[style*="position: absolute"] {
+  background: rgba(255,255,255,0.97) !important;
+  border-color: rgba(168,28,175,0.12) !important;
+  box-shadow: 0 12px 40px rgba(60,20,80,0.12) !important;
+}
 
-  /* ── Outlined text strokes — darker ── */
-  & span[style*="WebkitTextStroke"],
-  & h2 span[style*="WebkitTextStroke"] {
-    -webkit-text-stroke-color: rgba(155,48,255,0.5) !important;
-  }
+/* Mobile menu */
+[data-theme="light"] .nav-mobile-menu {
+  background: rgba(238,234,244,0.97) !important;
+}
+[data-theme="light"] .nav-mobile-menu a,
+[data-theme="light"] .nav-mobile-menu button {
+  color: #1a0a2e !important;
+}
 
-  /* ── Card & section backgrounds in inline styles ── */
-  & div[style*="background: \"#000000\""],
-  & div[style*="background: #000"],
-  & div[style*="background: \"#000\""],
-  & section[style*="background: \"#000\""],
-  & section[style*="background: \"#000000\""] {
-    background: #f8f6fc !important;
-  }
+/* Hamburger lines */
+[data-theme="light"] .nav-hamburger span {
+  background: #1a0a2e !important;
+}
 
-  /* ── Glows — soften in light mode ── */
-  & div[style*="filter: blur"] {
-    opacity: 0.3 !important;
-  }
+/* Logo — may need dark version */
+[data-theme="light"] nav img[alt="IEEE TSYP14"] {
+  filter: brightness(0.2) !important;
+}
 
-  /* ── Theme toggle button ── */
-  & .theme-toggle-btn {
-    background: rgba(155,48,255,0.1) !important;
-    border-color: rgba(155,48,255,0.25) !important;
-    color: #7c3aed !important;
-  }
+/* ── 4. Cards ── */
+[data-theme="light"] .speaker-card,
+[data-theme="light"] .edition-card {
+  background: #dbb4de !important;
+  border-color: rgba(168,28,175,0.18) !important;
+  box-shadow: 0 2px 12px rgba(168,28,175,0.1) !important;
+}
+[data-theme="light"] .speaker-card:hover,
+[data-theme="light"] .edition-card:hover {
+  background: #d0a4d4 !important;
+  border-color: rgba(168,28,175,0.35) !important;
+  box-shadow: 0 8px 32px rgba(168,28,175,0.15) !important;
+}
 
-  /* ── About page member card ── */
-  & .about-team-grid > div {
-    background: #ffffff !important;
-    border-color: rgba(155,48,255,0.1) !important;
-  }
+[data-theme="light"] .partner-logo-card {
+  background: #dbb4de !important;
+  border-color: rgba(168,28,175,0.15) !important;
+  box-shadow: 0 1px 8px rgba(168,28,175,0.08) !important;
+}
+[data-theme="light"] .partner-logo-card:hover {
+  border-color: rgba(168,28,175,0.3) !important;
+  background: #d0a4d4 !important;
+}
 
-  /* ── Venue images — no purple filter needed ── */
-  & iframe[style*="filter"] {
-    filter: none !important;
-  }
+/* Partner logos — remove white filter */
+[data-theme="light"] .partner-logo-img {
+  filter: none !important;
+  opacity: 0.7 !important;
+}
+[data-theme="light"] .partner-logo-card:hover .partner-logo-img {
+  opacity: 1 !important;
+}
 
-  /* ── Countdown pill ── */
-  & .edition-badge {
-    background: rgba(155,48,255,0.1) !important;
-    box-shadow: 0 0 12px rgba(155,48,255,0.15) !important;
-  }
+/* Venue feature cards */
+[data-theme="light"] .venue-feature-card {
+  background: #dbb4de !important;
+  border-color: rgba(168,28,175,0.15) !important;
+  box-shadow: 0 2px 12px rgba(168,28,175,0.08) !important;
+}
+[data-theme="light"] .venue-feature-card:hover {
+  border-color: rgba(168,28,175,0.3) !important;
+  box-shadow: 0 8px 28px rgba(168,28,175,0.12) !important;
+}
+
+/* About contact cards */
+[data-theme="light"] .about-contact-card {
+  background: #dbb4de !important;
+  border-color: rgba(168,28,175,0.15) !important;
+}
+[data-theme="light"] .about-contact-card:hover {
+  border-color: rgba(168,28,175,0.3) !important;
+  box-shadow: 0 4px 20px rgba(168,28,175,0.1) !important;
+}
+
+/* About team cards */
+[data-theme="light"] .about-team-grid > div {
+  background: #dbb4de !important;
+  border-color: rgba(168,28,175,0.15) !important;
+  box-shadow: 0 2px 12px rgba(168,28,175,0.08) !important;
+}
+
+/* ── 5. Flip cards ── */
+[data-theme="light"] .flip-card-front {
+  background: linear-gradient(145deg, #dbb4de 0%, #d0a4d4 100%) !important;
+}
+[data-theme="light"] .flip-card-back {
+  background: linear-gradient(145deg, #d4acd8 0%, #c99cce 100%) !important;
+}
+[data-theme="light"] .flip-card-border {
+  background: conic-gradient(
+    from var(--angle),
+    rgba(168,28,175,0.0) 0%,
+    rgba(168,28,175,0.5) 20%,
+    rgba(200,80,200,0.7) 40%,
+    rgba(140,20,160,0.5) 60%,
+    rgba(168,28,175,0.25) 80%,
+    rgba(168,28,175,0.0) 100%
+  ) !important;
+}
+
+/* Edition cards */
+[data-theme="light"] .edition-roman {
+  -webkit-text-stroke-color: rgba(168,28,175,0.35) !important;
+}
+[data-theme="light"] .edition-dot-grid {
+  background-image: radial-gradient(circle, rgba(168,28,175,0.06) 1px, transparent 1px) !important;
+}
+
+/* Memory cards */
+[data-theme="light"] .memory-card {
+  border-color: rgba(168,28,175,0.08) !important;
+  box-shadow: 0 2px 10px rgba(80,40,120,0.06) !important;
+}
+
+/* ── 6. Inputs ── */
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea {
+  background: #e8d0ea !important;
+  color: #1a0a2e !important;
+  border-color: rgba(168,28,175,0.2) !important;
+}
+[data-theme="light"] input::placeholder {
+  color: rgba(60,40,100,0.4) !important;
+}
+[data-theme="light"] select option {
+  background: #ffffff !important;
+  color: #1a0a2e !important;
+}
+
+/* ── 7. Buttons — keep purple CTA readable ── */
+[data-theme="light"] button[style*="linear-gradient(135deg, #9b30ff"] {
+  background: linear-gradient(135deg, #a81caf 0%, #8b2fc9 100%) !important;
+}
+
+/* ── 8. SVG strokes ── accent purple in light */
+[data-theme="light"] svg[stroke="rgba(155,48,255,0.85)"],
+[data-theme="light"] svg[stroke="rgba(155,48,255,0.7)"] {
+  stroke: rgba(168,28,175,0.8) !important;
+}
+
+/* ── 9. Glows — much softer in light ── */
+[data-theme="light"] [style*="filter: blur"],
+[data-theme="light"] [style*="filter:blur"] {
+  opacity: 0.15 !important;
+}
+
+/* ── 10. Footer — stays dark ── */
+[data-theme="light"] footer {
+  background: #110825 !important;
+  color: #ffffff !important;
+}
+[data-theme="light"] footer * {
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+}
+[data-theme="light"] .footer-social-btn {
+  color: rgba(255,255,255,0.38) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border-color: rgba(168,28,175,0.2) !important;
+}
+[data-theme="light"] .footer-social-btn:hover {
+  color: #ffffff !important;
+}
+
+/* ── 11. Hero section — keep dark (has space image) ── */
+[data-theme="light"] main > section:first-child,
+[data-theme="light"] main > section:first-child * {
+  /* Hero keeps dark bg from inline styles — don't override */
+}
+
+/* ── 12. Countdown section — purple digits ── */
+[data-theme="light"] .countdown-row span,
+[data-theme="light"] .countdown-units span,
+[data-theme="light"] .countdown-units div {
+  color: #c038c7 !important;
+}
+[data-theme="light"] #theme {
+  background: #eeeaf4 !important;
+}
+[data-theme="light"] #theme div[style*="linear-gradient"] {
+  background: none !important;
+}
+
+/* ── 13. Theme toggle ── */
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(168,28,175,0.08) !important;
+  border-color: rgba(168,28,175,0.2) !important;
+  color: #a81caf !important;
+}
+
+/* ── 14. Scrollbar ── */
+[data-theme="light"] ::-webkit-scrollbar { width: 8px; }
+[data-theme="light"] ::-webkit-scrollbar-track { background: #eeeaf4; }
+[data-theme="light"] ::-webkit-scrollbar-thumb { background: rgba(168,28,175,0.2); border-radius: 4px; }
+
+/* ── 15. Map iframe — no dark inversion ── */
+[data-theme="light"] iframe {
+  filter: none !important;
+}
+
+/* ── 16. Logo scroll track — purple bg, keep white logos ── */
+[data-theme="light"] .logo-scroll-track img {
+  filter: brightness(1.2) !important;
+  opacity: 0.8 !important;
+}
+[data-theme="light"] .logo-scroll-track img:hover {
+  opacity: 1 !important;
+}
+
+/* ── 17. Badge / pills ── */
+[data-theme="light"] .edition-badge {
+  background: rgba(168,28,175,0.1) !important;
+  box-shadow: 0 0 8px rgba(168,28,175,0.1) !important;
+}
+
+/* ── 18. Speaker / edition scan lines — soften ── */
+[data-theme="light"] .speaker-scan,
+[data-theme="light"] .edition-scan-line {
+  background: linear-gradient(to bottom, transparent, rgba(168,28,175,0.04), transparent) !important;
+}
+[data-theme="light"] .speaker-top-glow,
+[data-theme="light"] .edition-top-glow,
+[data-theme="light"] .memory-top-glow {
+  background: linear-gradient(90deg, transparent, rgba(168,28,175,0.35), transparent) !important;
+}
+
+/* ── 19. Corner brackets ── */
+[data-theme="light"] .ed-corner {
+  border-color: rgba(168,28,175,0.25) !important;
+}
+[data-theme="light"] .edition-card:hover .ed-corner {
+  border-color: rgba(168,28,175,0.55) !important;
 }

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const TARGET = new Date("2026-12-21T00:00:00");
 
@@ -25,7 +26,7 @@ const UNITS = [
 ];
 
 /* Slot-machine digit — a strip of 0-9 that slides to the correct position */
-function SlotDigit({ char }: { char: string }) {
+function SlotDigit({ char, digitColor, maskBg }: { char: string; digitColor: string; maskBg: string }) {
   const num = parseInt(char) || 0;
   const containerRef = useRef<HTMLDivElement>(null);
   const [itemH, setItemH] = useState(0);
@@ -70,7 +71,7 @@ function SlotDigit({ char }: { char: string }) {
               letterSpacing: "-0.045em",
               fontVariantNumeric: "tabular-nums",
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
-              color: "#ffffff",
+              color: digitColor,
               display: "block",
             }}>
               {i}
@@ -82,14 +83,14 @@ function SlotDigit({ char }: { char: string }) {
       {/* Top + bottom fade masks so the reel feels infinite */}
       <div style={{
         position: "absolute", inset: 0, pointerEvents: "none",
-        background: "linear-gradient(to bottom, #000 0%, transparent 28%, transparent 72%, #000 100%)",
+        background: `linear-gradient(to bottom, ${maskBg} 0%, transparent 28%, transparent 72%, ${maskBg} 100%)`,
       }} />
     </div>
   );
 }
 
-function UnitBlock({ value, label, index, inView }: {
-  value: number; label: string; index: number; inView: boolean;
+function UnitBlock({ value, label, index, inView, digitColor, maskBg }: {
+  value: number; label: string; index: number; inView: boolean; digitColor: string; maskBg: string;
 }) {
   const digits = String(value).padStart(2, "0").split("");
 
@@ -120,7 +121,7 @@ function UnitBlock({ value, label, index, inView }: {
       </span>
 
       <div style={{ display: "flex", gap: "clamp(2px, 0.4vw, 5px)" }}>
-        {digits.map((d, i) => <SlotDigit key={i} char={d} />)}
+        {digits.map((d, i) => <SlotDigit key={i} char={d} digitColor={digitColor} maskBg={maskBg} />)}
       </div>
     </motion.div>
   );
@@ -130,6 +131,11 @@ export default function CountdownSection() {
   const [time, setTime] = useState(calcTimeLeft);
   const sectionRef = useRef<HTMLElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-40px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+  const sectionBg = isLight ? "#eeeaf4" : "#000000";
+  const digitColor = isLight ? "#c038c7" : "#ffffff";
+  const maskBg = isLight ? "#eeeaf4" : "#000";
 
   useEffect(() => {
     const id = setInterval(() => setTime(calcTimeLeft()), 1000);
@@ -144,7 +150,7 @@ export default function CountdownSection() {
         position: "relative",
         width: "100%",
         padding: "88px 0 104px",
-        background: "#000000",
+        background: sectionBg,
         overflow: "hidden",
       }}
     >
@@ -191,7 +197,7 @@ export default function CountdownSection() {
       >
         {UNITS.map(({ key, label }, i) => (
           <div key={key} style={{ display: "flex", alignItems: "center", flex: 1 }}>
-            <UnitBlock value={time[key]} label={label} index={i} inView={inView} />
+            <UnitBlock value={time[key]} label={label} index={i} inView={inView} digitColor={digitColor} maskBg={maskBg} />
             {i < UNITS.length - 1 && (
               <motion.div
                 className="countdown-sep"
@@ -227,7 +233,7 @@ export default function CountdownSection() {
         }} />
         <p style={{
           marginTop: "16px", textAlign: "center",
-          fontSize: "10px", color: "rgba(255,255,255,0.18)",
+          fontSize: "10px", color: isLight ? "rgba(26,10,46,0.4)" : "rgba(255,255,255,0.18)",
           letterSpacing: "0.18em", textTransform: "uppercase",
           fontFamily: "var(--font-inter), 'Inter', sans-serif",
         }}>
