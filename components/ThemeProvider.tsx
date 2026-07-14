@@ -68,21 +68,21 @@ function applyLightMode() {
   const NAV_BG = "rgba(238,234,244,0.85)";
   const PURPLE = "#c038c7";
 
-  // Navbar
+  // Navbar → purple background
   document.querySelectorAll<HTMLElement>("nav[style]").forEach(el => {
     if (el.dataset.origBg) return;
     const bg = el.style.background || el.style.backgroundColor;
     if (bg && (bg.includes("rgba(0, 0, 0") || bg.includes("rgba(0,0,0") || bg.includes("rgb(0, 0, 0"))) {
       el.dataset.origBg = bg;
-      el.style.background = NAV_BG;
-      el.style.borderBottomColor = "rgba(168,28,175,0.15)";
+      el.style.background = "rgba(192,56,199,0.9)";
+      el.style.borderBottomColor = "rgba(255,255,255,0.15)";
     }
   });
 
   // Sections and main
   document.querySelectorAll<HTMLElement>("section[style], main[style]").forEach(el => {
     if (el.dataset.origBg) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.classList.contains("hero-min-h")) return;
     const bg = el.style.background || el.style.backgroundColor;
     if (isDarkBg(bg)) {
       el.dataset.origBg = bg;
@@ -108,7 +108,7 @@ function applyLightMode() {
 
   document.querySelectorAll<HTMLElement>("h1, h2, h3, h4").forEach(el => {
     if (el.dataset.origColor !== undefined) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.closest("nav") || el.closest(".hero-min-h")) return;
     const c = el.style.color;
     if (!c || c === "#ffffff" || c === "rgb(255, 255, 255)" || c.includes("rgba(255, 255, 255")) {
       el.dataset.origColor = c || "";
@@ -118,7 +118,7 @@ function applyLightMode() {
 
   document.querySelectorAll<HTMLElement>("h1 span[style], h2 span[style], h3 span[style]").forEach(el => {
     if (el.dataset.origColor !== undefined) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.closest("nav") || el.closest(".hero-min-h")) return;
     const c = el.style.color;
     const fill = el.style.getPropertyValue("-webkit-text-fill-color") || (el.style as unknown as Record<string, string>).webkitTextFillColor;
     if (c === "#ffffff" || c === "rgb(255, 255, 255)" || c === "transparent") {
@@ -138,7 +138,7 @@ function applyLightMode() {
 
   document.querySelectorAll<HTMLElement>("p[style]").forEach(el => {
     if (el.dataset.origColor !== undefined) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.closest("nav") || el.closest(".hero-min-h")) return;
     const c = el.style.color;
     if (c && (c.includes("rgba(200") || c.includes("rgba(180") || c.includes("rgba(190") || c.includes("rgba(255, 255, 255") || c === "rgb(255, 255, 255)" || c === "#ffffff")) {
       el.dataset.origColor = c;
@@ -148,7 +148,7 @@ function applyLightMode() {
 
   document.querySelectorAll<HTMLElement>("span[style]").forEach(el => {
     if (el.dataset.origColor !== undefined) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.closest("nav") || el.closest(".hero-min-h")) return;
     const c = el.style.color;
     if (c && (c.includes("rgba(255, 255, 255") || c.includes("rgba(200") || c.includes("rgba(180") || c.includes("rgba(155") || c === "rgb(255, 255, 255)" || c === "#ffffff")) {
       el.dataset.origColor = c;
@@ -168,7 +168,7 @@ function applyLightMode() {
 
   document.querySelectorAll<HTMLElement>("div[style], span[style]").forEach(el => {
     if (el.dataset.origColor !== undefined) return;
-    if (el.closest("footer")) return;
+    if (el.closest("footer") || el.closest("nav") || el.closest(".hero-min-h")) return;
     const c = el.style.color;
     if (c === "#ffffff" || c === "rgb(255, 255, 255)") {
       el.dataset.origColor = c;

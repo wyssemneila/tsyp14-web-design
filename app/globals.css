@@ -775,50 +775,63 @@ button, a {
 
 /* ── 3. Navbar ── */
 [data-theme="light"] nav {
-  background: rgba(238,234,244,0.85) !important;
-  border-bottom-color: rgba(168,28,175,0.12) !important;
+  background: rgba(192,56,199,0.9) !important;
+  border-bottom-color: rgba(255,255,255,0.15) !important;
   backdrop-filter: blur(24px) !important;
 }
 
 [data-theme="light"] nav a,
 [data-theme="light"] nav span {
-  color: #3d2a5c !important;
+  color: rgba(255,255,255,0.85) !important;
 }
 
 [data-theme="light"] nav a:hover {
-  color: #1a0a2e !important;
+  color: #ffffff !important;
 }
 
 /* Nav pill bg */
 [data-theme="light"] .nav-links {
-  background: rgba(168,28,175,0.04) !important;
-  border-color: rgba(168,28,175,0.1) !important;
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+
+/* Nav pill hover highlight */
+[data-theme="light"] .nav-links div[style*="background: linear-gradient"] {
+  background: rgba(255,255,255,0.15) !important;
+  border-color: rgba(255,255,255,0.25) !important;
 }
 
 /* Dropdown */
 [data-theme="light"] .nav-links div[style*="position: absolute"] {
-  background: rgba(255,255,255,0.97) !important;
-  border-color: rgba(168,28,175,0.12) !important;
-  box-shadow: 0 12px 40px rgba(60,20,80,0.12) !important;
+  background: rgba(168,28,175,0.95) !important;
+  border-color: rgba(255,255,255,0.15) !important;
+  box-shadow: 0 12px 40px rgba(100,10,120,0.3) !important;
 }
 
 /* Mobile menu */
 [data-theme="light"] .nav-mobile-menu {
-  background: rgba(238,234,244,0.97) !important;
+  background: rgba(192,56,199,0.97) !important;
 }
 [data-theme="light"] .nav-mobile-menu a,
 [data-theme="light"] .nav-mobile-menu button {
-  color: #1a0a2e !important;
+  color: #ffffff !important;
 }
 
 /* Hamburger lines */
 [data-theme="light"] .nav-hamburger span {
-  background: #1a0a2e !important;
+  background: #ffffff !important;
 }
 
-/* Logo — may need dark version */
+/* Logo — keep white in purple navbar */
 [data-theme="light"] nav img[alt="IEEE TSYP14"] {
-  filter: brightness(0.2) !important;
+  filter: none !important;
+}
+
+/* Theme toggle in purple nav */
+[data-theme="light"] .theme-toggle-btn {
+  background: rgba(255,255,255,0.12) !important;
+  border-color: rgba(255,255,255,0.25) !important;
+  color: #ffffff !important;
 }
 
 /* ── 4. Cards ── */
@@ -966,10 +979,27 @@ button, a {
   color: #ffffff !important;
 }
 
-/* ── 11. Hero section — keep dark (has space image) ── */
-[data-theme="light"] main > section:first-child,
-[data-theme="light"] main > section:first-child * {
-  /* Hero keeps dark bg from inline styles — don't override */
+/* ── 11. Hero section — purple bg, white text ── */
+[data-theme="light"] main > section:first-child h1,
+[data-theme="light"] main > section:first-child h1 span,
+[data-theme="light"] main > section:first-child h2,
+[data-theme="light"] main > section:first-child p,
+[data-theme="light"] main > section:first-child span,
+[data-theme="light"] main > section:first-child div {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+[data-theme="light"] .hero-min-h .shimmer-white {
+  background: linear-gradient(90deg,
+    #ffffff 30%,
+    rgba(255,220,255,0.8) 47%,
+    #ffffff 52%,
+    rgba(255,220,255,0.8) 57%,
+    #ffffff 70%
+  ) !important;
+  background-size: 300% auto !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
 }
 
 /* ── 12. Countdown section — purple digits ── */
@@ -985,12 +1015,7 @@ button, a {
   background: none !important;
 }
 
-/* ── 13. Theme toggle ── */
-[data-theme="light"] .theme-toggle-btn {
-  background: rgba(168,28,175,0.08) !important;
-  border-color: rgba(168,28,175,0.2) !important;
-  color: #a81caf !important;
-}
+/* ── 13. Theme toggle — handled in nav section above ── */
 
 /* ── 14. Scrollbar ── */
 [data-theme="light"] ::-webkit-scrollbar { width: 8px; }

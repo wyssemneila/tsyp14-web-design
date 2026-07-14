@@ -6,6 +6,7 @@ import Navbar from "./Navbar";
 import ParticleCanvas from "./ParticleCanvas";
 import DemiSphere from "./DemiSphere";
 import LogoScrollBar from "./LogoScrollBar";
+import { useTheme } from "@/components/ThemeProvider";
 
 const TARGET = new Date("2026-12-21T00:00:00");
 
@@ -255,6 +256,8 @@ function StatsRow() {
 }
 
 export default function HeroSection() {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
   return (
     <section
       className="hero-min-h"
@@ -268,28 +271,30 @@ export default function HeroSection() {
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
       }}
     >
-      {/* ── Base background: #07071a — exact p1 color ── */}
-      <div style={{ position: "absolute", inset: 0, background: "#000000", zIndex: 0 }} />
+      {/* ── Base background ── */}
+      <div style={{ position: "absolute", inset: 0, background: isLight ? "#c038c7" : "#000000", zIndex: 0 }} />
 
-      {/* ── Radial purple spotlight at center-top — exact p1 spec ── */}
+      {/* ── Radial purple spotlight at center-top ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(100,60,200,0.18) 0%, rgba(80,40,160,0.06) 55%, transparent 75%)",
+          background: isLight
+            ? "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(255,255,255,0.15) 0%, transparent 75%)"
+            : "radial-gradient(ellipse 60% 45% at 50% 0%, rgba(100,60,200,0.18) 0%, rgba(80,40,160,0.06) 55%, transparent 75%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
       />
 
-      {/* ── Edge vignette for depth ── */}
+      {/* ── Edge vignette for depth — reduced in light mode ── */}
       <div
         style={{
           position: "absolute",
           inset: 0,
-          background:
-            "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 50%, rgba(0,0,10,0.5) 100%)",
+          background: isLight
+            ? "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 60%, rgba(238,234,244,0.1) 100%)"
+            : "radial-gradient(ellipse 130% 100% at 50% 50%, transparent 50%, rgba(0,0,10,0.5) 100%)",
           pointerEvents: "none",
           zIndex: 1,
         }}
