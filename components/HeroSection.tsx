@@ -272,7 +272,7 @@ export default function HeroSection() {
       }}
     >
       {/* ── Base background ── */}
-      <div style={{ position: "absolute", inset: 0, background: isLight ? "#c038c7" : "#000000", zIndex: 0 }} />
+      <div style={{ position: "absolute", inset: 0, background: isLight ? "#9c11a3" : "#000000", zIndex: 0 }} />
 
       {/* ── Radial purple spotlight at center-top ── */}
       <div

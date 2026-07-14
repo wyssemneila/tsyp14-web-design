@@ -136,7 +136,7 @@ export default function PartnersSection() {
           }}
         >
           <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>Our </span>
-          <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(168,28,175,0.7)" : "1px rgba(155,48,255,0.7)" }}>Partners</span>
+          <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(156,17,163,0.7)" : "1px rgba(155,48,255,0.7)" }}>Partners</span>
         </motion.h2>
       </div>
 

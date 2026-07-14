@@ -72,12 +72,12 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
         overflow: "hidden",
         cursor: "pointer",
         background: cardBg,
-        border: `1px solid ${hovered ? "rgba(155,48,255,0.35)" : isLight ? "rgba(168,28,175,0.15)" : "rgba(255,255,255,0.04)"}`,
+        border: `1px solid ${hovered ? "rgba(155,48,255,0.35)" : isLight ? "rgba(156,17,163,0.15)" : "rgba(255,255,255,0.04)"}`,
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         transform: hovered ? "translateY(-8px)" : "translateY(0)",
         boxShadow: hovered
           ? "0 20px 50px rgba(155,48,255,0.15), 0 0 0 1px rgba(155,48,255,0.15)"
-          : isLight ? "0 2px 8px rgba(168,28,175,0.1)" : "0 2px 8px rgba(0,0,0,0.3)",
+          : isLight ? "0 2px 8px rgba(156,17,163,0.1)" : "0 2px 8px rgba(0,0,0,0.3)",
       }}
     >
       {/* Photo — flush to card edges */}
@@ -181,7 +181,7 @@ export default function AboutPage() {
           >
             <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>The Minds </span>
             {isLight ? (
-              <span style={{ color: "#a81caf" }}>Shaping It</span>
+              <span style={{ color: "#9c11a3" }}>Shaping It</span>
             ) : (
               <span style={{
                 background: "linear-gradient(135deg, #9b30ff 20%, #c084fc 80%)",
@@ -234,7 +234,7 @@ export default function AboutPage() {
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               }}>
                 <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>Let&apos;s </span>
-                <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1.5px rgba(168,28,175,0.6)" : "1.5px rgba(155,48,255,0.5)" }}>Connect</span>
+                <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1.5px rgba(156,17,163,0.6)" : "1.5px rgba(155,48,255,0.5)" }}>Connect</span>
               </h2>
             </motion.div>
 
@@ -260,8 +260,8 @@ export default function AboutPage() {
                     display: "flex", flexDirection: "column", alignItems: "center", gap: "10px",
                     padding: "24px 12px",
                     borderRadius: "16px",
-                    background: isLight ? "rgba(168,28,175,0.06)" : "rgba(255,255,255,0.015)",
-                    border: isLight ? "1px solid rgba(168,28,175,0.12)" : "1px solid rgba(155,48,255,0.06)",
+                    background: isLight ? "rgba(156,17,163,0.06)" : "rgba(255,255,255,0.015)",
+                    border: isLight ? "1px solid rgba(156,17,163,0.12)" : "1px solid rgba(155,48,255,0.06)",
                     textDecoration: "none", textAlign: "center",
                     transition: "border-color 0.3s ease, box-shadow 0.3s ease",
                   }}

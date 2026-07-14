@@ -163,7 +163,7 @@ export default function ThemeSection() {
               textShadow: "0 0 60px rgba(155,48,255,0.4)",
             }}>THE </span>
             {isLight ? (
-              <span style={{ color: "#a81caf" }}>NOOSPHERE</span>
+              <span style={{ color: "#9c11a3" }}>NOOSPHERE</span>
             ) : (
               <span style={{
                 background: "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
