@@ -84,6 +84,9 @@ export default function ThemeSection() {
             width: "100%",
             height: "100%",
             zIndex: 0,
+            // WebGL clears to black — invert flips it to white in light mode,
+            // hue-rotate keeps the tubes purple instead of green
+            filter: isLight ? "invert(1) hue-rotate(180deg)" : "none",
           }}
         />
 
@@ -154,9 +157,14 @@ export default function ThemeSection() {
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
-            <span style={{ color: "#ffffff", textShadow: "0 0 60px rgba(155,48,255,0.4)" }}>THE </span>
             <span style={{
-              background: "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
+              color: isLight ? "#1a0a2e" : "#ffffff",
+              textShadow: "0 0 60px rgba(155,48,255,0.4)",
+            }}>THE </span>
+            <span style={{
+              background: isLight
+                ? "linear-gradient(135deg, #1a0a2e 0%, #6d28d9 40%, #a81caf 70%, #c038c7 100%)"
+                : "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -196,11 +204,11 @@ export default function ThemeSection() {
           className="theme-desc-grid"
           style={{ textAlign: "left", marginBottom: "20px" }}
         >
-          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(210,200,235,0.72)", fontWeight: 400, margin: 0 }}>
+          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: isLight ? "rgba(26,10,46,0.75)" : "rgba(210,200,235,0.72)", fontWeight: 400, margin: 0 }}>
             Architects of the Noosphere is a vision where innovation connects minds to serve humanity with dignity and transparency.
           </p>
           <div className="theme-desc-divider" style={{ width: "1px", background: "linear-gradient(180deg, transparent, rgba(155,48,255,0.25), transparent)" }} />
-          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: "rgba(175,160,210,0.5)", fontWeight: 300, margin: 0 }}>
+          <p style={{ fontSize: "clamp(13px, 1.3vw, 15px)", lineHeight: 1.8, color: isLight ? "rgba(61,42,92,0.65)" : "rgba(175,160,210,0.5)", fontWeight: 300, margin: 0 }}>
             It inspires young engineers to build a shared intellectual space — where collaboration, ethics, and emerging technology truly serve people.
           </p>
         </motion.div>
