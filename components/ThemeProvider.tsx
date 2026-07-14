@@ -74,7 +74,7 @@ function applyLightMode() {
     const bg = el.style.background || el.style.backgroundColor;
     if (bg && (bg.includes("rgba(0, 0, 0") || bg.includes("rgba(0,0,0") || bg.includes("rgb(0, 0, 0"))) {
       el.dataset.origBg = bg;
-      el.style.background = "rgba(192,56,199,0.9)";
+      el.style.background = "#c038c7";
       el.style.borderBottomColor = "rgba(255,255,255,0.15)";
     }
   });
@@ -288,6 +288,20 @@ function applyLightMode() {
       if (bg && bg.includes("linear-gradient") && bg.includes("#000")) {
         el.dataset.origBg = bg;
         el.style.background = bg.replace(/#000000/g, BG).replace(/#000/g, BG);
+      }
+    });
+  }
+
+  // Footer → purple background, white text
+  const footer = document.querySelector<HTMLElement>("footer");
+  if (footer && !footer.dataset.origBg) {
+    footer.dataset.origBg = footer.style.background || footer.style.backgroundColor || "";
+    footer.style.background = PURPLE;
+    footer.querySelectorAll<HTMLElement>("[style]").forEach(el => {
+      const bg = el.style.background || el.style.backgroundColor;
+      if (bg && isDarkBg(bg)) {
+        el.dataset.origBg = bg;
+        el.style.background = "transparent";
       }
     });
   }

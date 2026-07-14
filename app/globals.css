@@ -773,11 +773,11 @@ button, a {
   color: #5a3d7a !important;
 }
 
-/* ── 3. Navbar ── */
+/* ── 3. Navbar — solid purple like the logo bar ── */
 [data-theme="light"] nav {
-  background: rgba(192,56,199,0.9) !important;
+  background: #c038c7 !important;
   border-bottom-color: rgba(255,255,255,0.15) !important;
-  backdrop-filter: blur(24px) !important;
+  backdrop-filter: none !important;
 }
 
 [data-theme="light"] nav a,
@@ -810,7 +810,7 @@ button, a {
 
 /* Mobile menu */
 [data-theme="light"] .nav-mobile-menu {
-  background: rgba(192,56,199,0.97) !important;
+  background: #c038c7 !important;
 }
 [data-theme="light"] .nav-mobile-menu a,
 [data-theme="light"] .nav-mobile-menu button {
@@ -961,9 +961,9 @@ button, a {
   opacity: 0.15 !important;
 }
 
-/* ── 10. Footer — stays dark ── */
+/* ── 10. Footer — purple ── */
 [data-theme="light"] footer {
-  background: #110825 !important;
+  background: #c038c7 !important;
   color: #ffffff !important;
 }
 [data-theme="light"] footer * {
@@ -971,12 +971,13 @@ button, a {
   -webkit-text-fill-color: inherit !important;
 }
 [data-theme="light"] .footer-social-btn {
-  color: rgba(255,255,255,0.38) !important;
-  background: rgba(255,255,255,0.04) !important;
-  border-color: rgba(168,28,175,0.2) !important;
+  color: rgba(255,255,255,0.5) !important;
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.2) !important;
 }
 [data-theme="light"] .footer-social-btn:hover {
   color: #ffffff !important;
+  background: rgba(255,255,255,0.2) !important;
 }
 
 /* ── 11. Hero section — purple bg, white text ── */
