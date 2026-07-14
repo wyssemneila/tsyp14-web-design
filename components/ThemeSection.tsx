@@ -84,10 +84,10 @@ export default function ThemeSection() {
             width: "100%",
             height: "100%",
             zIndex: 0,
-            // WebGL clears to black — screen blend drops black to transparent so
-            // the section's own grey background (sectionBg) shows through instead,
-            // while the glowing tubes still add their color on top
-            mixBlendMode: isLight ? "screen" : "normal",
+            // WebGL clears to black — invert flips it near-white, hue-rotate keeps
+            // the tubes purple (not green), and a slight brightness dip nudges the
+            // white down to match the section's grey (#eeeaf4) without washing out the glow
+            filter: isLight ? "invert(1) hue-rotate(180deg) brightness(0.94)" : "none",
           }}
         />
 
