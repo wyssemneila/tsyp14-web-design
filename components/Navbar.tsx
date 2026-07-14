@@ -73,6 +73,8 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileProgOpen, setMobileProgOpen] = useState(false);
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <>
@@ -89,10 +91,10 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0 24px",
-          background: "rgba(0,0,0,0.55)",
-          backdropFilter: "blur(24px)",
-          WebkitBackdropFilter: "blur(24px)",
-          borderBottom: "1px solid rgba(155,48,255,0.12)",
+          background: isLight ? "#c038c7" : "rgba(0,0,0,0.55)",
+          backdropFilter: isLight ? "none" : "blur(24px)",
+          WebkitBackdropFilter: isLight ? "none" : "blur(24px)",
+          borderBottom: isLight ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(155,48,255,0.12)",
           fontFamily: "var(--font-inter), 'Inter', sans-serif",
         }}
       >
