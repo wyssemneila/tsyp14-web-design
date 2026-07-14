@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useTheme } from "@/components/ThemeProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -52,6 +53,11 @@ function IconSend() { return <svg {...ico}><path d="M22 2L11 13"/><path d="M22 2
 
 function MemberCard({ member, index, inView }: { member: Member; index: number; inView: boolean }) {
   const [hovered, setHovered] = useState(false);
+  const { theme } = useTheme();
+  const isLight = theme === "light";
+  const cardBg = isLight ? "#dbb4de" : "#0a0510";
+  const nameColor = isLight ? "#1a0a2e" : "#ffffff";
+  const emailColor = isLight ? "rgba(90,20,100,0.75)" : "rgba(155,48,255,0.5)";
 
   return (
     <motion.div
@@ -65,13 +71,13 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
         borderRadius: "16px",
         overflow: "hidden",
         cursor: "pointer",
-        background: "#0a0510",
-        border: `1px solid ${hovered ? "rgba(155,48,255,0.35)" : "rgba(255,255,255,0.04)"}`,
+        background: cardBg,
+        border: `1px solid ${hovered ? "rgba(155,48,255,0.35)" : isLight ? "rgba(168,28,175,0.15)" : "rgba(255,255,255,0.04)"}`,
         transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
         transform: hovered ? "translateY(-8px)" : "translateY(0)",
         boxShadow: hovered
           ? "0 20px 50px rgba(155,48,255,0.15), 0 0 0 1px rgba(155,48,255,0.15)"
-          : "0 2px 8px rgba(0,0,0,0.3)",
+          : isLight ? "0 2px 8px rgba(168,28,175,0.1)" : "0 2px 8px rgba(0,0,0,0.3)",
       }}
     >
       {/* Photo — flush to card edges */}
@@ -88,7 +94,7 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
         {/* Bottom fade into card bg */}
         <div style={{
           position: "absolute", inset: 0, pointerEvents: "none",
-          background: "linear-gradient(to top, #0a0510 0%, rgba(10,5,16,0.4) 35%, transparent 60%)",
+          background: `linear-gradient(to top, ${cardBg} 0%, ${cardBg} 35%, transparent 60%)`,
         }} />
         {/* Role badge overlaid on image */}
         <div style={{
@@ -110,7 +116,7 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
       {/* Info — compact */}
       <div style={{ padding: "14px 14px 16px" }}>
         <h3 style={{
-          fontSize: "13px", fontWeight: 700, color: "#ffffff", margin: "0 0 6px",
+          fontSize: "13px", fontWeight: 700, color: nameColor, margin: "0 0 6px",
           fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
           lineHeight: 1.3,
         }}>{member.name}</h3>
@@ -119,7 +125,7 @@ function MemberCard({ member, index, inView }: { member: Member; index: number; 
           href={`mailto:${member.email}`}
           style={{
             display: "inline-flex", alignItems: "center", gap: "5px",
-            fontSize: "9px", color: "rgba(155,48,255,0.5)", textDecoration: "none",
+            fontSize: "9px", color: emailColor, textDecoration: "none",
             fontFamily: "var(--font-inter), 'Inter', sans-serif",
             opacity: hovered ? 1 : 0.5,
             transition: "opacity 0.3s ease",
@@ -144,11 +150,13 @@ export default function AboutPage() {
   const teamInView = useInView(teamRef, { once: true, margin: "-80px" });
   const contactRef = useRef(null);
   const contactInView = useInView(contactRef, { once: true, margin: "-80px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <>
       <Navbar />
-      <main style={{ background: "#000000", minHeight: "100vh" }}>
+      <main style={{ background: isLight ? "#eeeaf4" : "#000000", minHeight: "100vh" }}>
 
         {/* ── Hero — compact one-line ── */}
         <section ref={heroRef} style={{
@@ -171,11 +179,15 @@ export default function AboutPage() {
               margin: 0, fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
             }}
           >
-            <span style={{ color: "#ffffff" }}>The Minds </span>
-            <span style={{
-              background: "linear-gradient(135deg, #9b30ff 20%, #c084fc 80%)",
-              WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
-            }}>Shaping It</span>
+            <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>The Minds </span>
+            {isLight ? (
+              <span style={{ color: "#a81caf" }}>Shaping It</span>
+            ) : (
+              <span style={{
+                background: "linear-gradient(135deg, #9b30ff 20%, #c084fc 80%)",
+                WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent",
+              }}>Shaping It</span>
+            )}
           </motion.h1>
         </section>
 
@@ -221,8 +233,8 @@ export default function AboutPage() {
                 fontSize: "clamp(24px, 4vw, 40px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.1, margin: 0,
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               }}>
-                <span style={{ color: "#ffffff" }}>Let&apos;s </span>
-                <span style={{ color: "transparent", WebkitTextStroke: "1.5px rgba(155,48,255,0.5)" }}>Connect</span>
+                <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>Let&apos;s </span>
+                <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1.5px rgba(168,28,175,0.6)" : "1.5px rgba(155,48,255,0.5)" }}>Connect</span>
               </h2>
             </motion.div>
 
@@ -248,8 +260,8 @@ export default function AboutPage() {
                     display: "flex", flexDirection: "column", alignItems: "center", gap: "10px",
                     padding: "24px 12px",
                     borderRadius: "16px",
-                    background: "rgba(255,255,255,0.015)",
-                    border: "1px solid rgba(155,48,255,0.06)",
+                    background: isLight ? "rgba(168,28,175,0.06)" : "rgba(255,255,255,0.015)",
+                    border: isLight ? "1px solid rgba(168,28,175,0.12)" : "1px solid rgba(155,48,255,0.06)",
                     textDecoration: "none", textAlign: "center",
                     transition: "border-color 0.3s ease, box-shadow 0.3s ease",
                   }}
@@ -263,7 +275,7 @@ export default function AboutPage() {
                     <item.Icon />
                   </div>
                   <div style={{ fontSize: "9px", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(155,48,255,0.5)" }}>{item.label}</div>
-                  <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", fontWeight: 500 }}>{item.value}</div>
+                  <div style={{ fontSize: "11px", color: isLight ? "rgba(26,10,46,0.6)" : "rgba(255,255,255,0.5)", fontWeight: 500 }}>{item.value}</div>
                 </motion.a>
               ))}
             </motion.div>

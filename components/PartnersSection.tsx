@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useTheme } from "@/components/ThemeProvider";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -76,6 +77,8 @@ function PartnerGroup({ title, partners, baseDelay }: { title: string; partners:
 export default function PartnersSection() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section
@@ -83,7 +86,7 @@ export default function PartnersSection() {
       style={{
         position: "relative",
         width: "100%",
-        background: "#000000",
+        background: isLight ? "#eeeaf4" : "#000000",
         padding: "100px 0 120px",
         overflow: "hidden",
         fontFamily: "var(--font-inter), 'Inter', sans-serif",
@@ -132,8 +135,8 @@ export default function PartnersSection() {
             fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
           }}
         >
-          <span style={{ color: "#ffffff" }}>Our </span>
-          <span style={{ color: "transparent", WebkitTextStroke: "1px rgba(155,48,255,0.7)" }}>Partners</span>
+          <span style={{ color: isLight ? "#1a0a2e" : "#ffffff" }}>Our </span>
+          <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(168,28,175,0.7)" : "1px rgba(155,48,255,0.7)" }}>Partners</span>
         </motion.h2>
       </div>
 

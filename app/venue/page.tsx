@@ -4,6 +4,11 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useTheme } from "@/components/ThemeProvider";
+
+const LIGHT_BG = "#eeeaf4";
+const LIGHT_TEXT = "#1a0a2e";
+const LIGHT_CARD = "#dbb4de";
 
 const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
 
@@ -141,13 +146,15 @@ function SectionEyebrow({ label }: { label: string }) {
 }
 
 function SectionTitle({ solid, outlined }: { solid: string; outlined: string }) {
+  const { theme } = useTheme();
+  const isLight = theme === "light";
   return (
     <h2 style={{
       fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 800, letterSpacing: "-0.03em", lineHeight: 1.05, margin: 0,
       fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
     }}>
-      <span style={{ color: "#ffffff" }}>{solid} </span>
-      <span style={{ color: "transparent", WebkitTextStroke: "1px rgba(155,48,255,0.75)" }}>{outlined}</span>
+      <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff" }}>{solid} </span>
+      <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(168,28,175,0.7)" : "1px rgba(155,48,255,0.75)" }}>{outlined}</span>
     </h2>
   );
 }
@@ -168,6 +175,8 @@ function GradientDivider() {
 function VenueHero() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section ref={ref} style={{
@@ -175,10 +184,12 @@ function VenueHero() {
       display: "flex", flexDirection: "column", overflow: "hidden",
       fontFamily: "var(--font-inter), 'Inter', sans-serif",
     }}>
-      <div style={{ position: "absolute", inset: 0, background: "#000000", zIndex: 0 }} />
+      <div style={{ position: "absolute", inset: 0, background: isLight ? LIGHT_BG : "#000000", zIndex: 0 }} />
       <div style={{
         position: "absolute", inset: 0, zIndex: 1,
-        background: "radial-gradient(ellipse 60% 50% at 70% 40%, rgba(100,60,200,0.12) 0%, transparent 70%)",
+        background: isLight
+          ? "radial-gradient(ellipse 60% 50% at 70% 40%, rgba(200,80,220,0.1) 0%, transparent 70%)"
+          : "radial-gradient(ellipse 60% 50% at 70% 40%, rgba(100,60,200,0.12) 0%, transparent 70%)",
         pointerEvents: "none",
       }} />
 
@@ -208,8 +219,8 @@ function VenueHero() {
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               margin: "0 0 8px",
             }}>
-              <span style={{ color: "#ffffff", display: "block" }}>Medina</span>
-              <span style={{ color: "#ffffff", display: "block" }}>Congress</span>
+              <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff", display: "block" }}>Medina</span>
+              <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff", display: "block" }}>Congress</span>
               <span className="gradient-flow" style={{
                 display: "block",
                 fontSize: "clamp(36px, 6vw, 80px)", fontWeight: 800,
@@ -226,10 +237,10 @@ function VenueHero() {
             />
 
             <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "rgba(180,150,255,0.7)", fontSize: "14px", fontWeight: 500 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: isLight ? "rgba(90,20,100,0.8)" : "rgba(180,150,255,0.7)", fontSize: "14px", fontWeight: 500 }}>
                 <LocationIcon /> Yasmine Hammamet, Tunisia
               </div>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "rgba(180,150,255,0.7)", fontSize: "14px", fontWeight: 500 }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: isLight ? "rgba(90,20,100,0.8)" : "rgba(180,150,255,0.7)", fontSize: "14px", fontWeight: 500 }}>
                 <CalendarIcon /> 21 December 2026
               </div>
             </div>
@@ -303,11 +314,13 @@ function VenueHero() {
 function VenueFeatures() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", padding: "100px 0",
-      background: "#000", overflow: "hidden",
+      background: isLight ? LIGHT_BG : "#000", overflow: "hidden",
     }}>
       <div aria-hidden style={{
         position: "absolute", top: "50%", left: "50%", transform: "translate(-50%,-50%)",
@@ -329,7 +342,7 @@ function VenueFeatures() {
           initial={{ opacity: 0, y: 10 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7, ease: EASE, delay: 0.16 }}
-          style={{ marginTop: "14px", fontSize: "13px", color: "rgba(255,255,255,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}
+          style={{ marginTop: "14px", fontSize: "13px", color: isLight ? "rgba(26,10,46,0.4)" : "rgba(255,255,255,0.25)", letterSpacing: "0.1em", textTransform: "uppercase" }}
         >
           Everything you need in one place
         </motion.p>
@@ -348,8 +361,8 @@ function VenueFeatures() {
             transition={{ duration: 0.7, ease: EASE, delay: 0.1 + i * 0.08 }}
             className="venue-feature-card"
             style={{
-              background: "rgba(6, 2, 22, 0.82)",
-              border: "1px solid rgba(155,48,255,0.14)",
+              background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
+              border: isLight ? "1px solid rgba(168,28,175,0.15)" : "1px solid rgba(155,48,255,0.14)",
               borderRadius: "16px",
               padding: "28px 24px",
               display: "flex", alignItems: "flex-start", gap: "18px",
@@ -379,11 +392,11 @@ function VenueFeatures() {
               }}>{f.label}</div>
               <div style={{
                 fontSize: "clamp(24px, 3vw, 32px)", fontWeight: 800,
-                color: "#fff", lineHeight: 1, letterSpacing: "-0.02em",
+                color: isLight ? LIGHT_TEXT : "#fff", lineHeight: 1, letterSpacing: "-0.02em",
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               }}>{f.value}</div>
               <div style={{
-                fontSize: "12px", color: "rgba(200,195,220,0.5)", marginTop: "6px",
+                fontSize: "12px", color: isLight ? "rgba(61,42,92,0.65)" : "rgba(200,195,220,0.5)", marginTop: "6px",
               }}>{f.desc}</div>
             </div>
           </motion.div>
@@ -403,11 +416,13 @@ function VenueMap() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [activeMap, setActiveMap] = useState(0);
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", padding: "100px 0 120px",
-      background: "#000", overflow: "hidden",
+      background: isLight ? LIGHT_BG : "#000", overflow: "hidden",
     }}>
       <div aria-hidden style={{
         position: "absolute", top: "40%", right: "10%",
@@ -443,8 +458,8 @@ function VenueMap() {
               border: `1px solid ${activeMap === i ? "rgba(155,48,255,0.5)" : "rgba(155,48,255,0.15)"}`,
               background: activeMap === i
                 ? "linear-gradient(135deg, rgba(155,48,255,0.2) 0%, rgba(124,58,237,0.1) 100%)"
-                : "rgba(255,255,255,0.02)",
-              color: activeMap === i ? "#fff" : "rgba(255,255,255,0.4)",
+                : isLight ? "rgba(168,28,175,0.04)" : "rgba(255,255,255,0.02)",
+              color: activeMap === i ? (isLight ? LIGHT_TEXT : "#fff") : isLight ? "rgba(26,10,46,0.45)" : "rgba(255,255,255,0.4)",
               transition: "all 0.3s ease",
               boxShadow: activeMap === i ? "0 0 20px rgba(155,48,255,0.15)" : "none",
             }}
@@ -467,8 +482,8 @@ function VenueMap() {
         <div style={{
           borderRadius: "20px", overflow: "hidden",
           border: "1px solid rgba(155,48,255,0.18)",
-          background: "rgba(6, 2, 22, 0.6)",
-          boxShadow: "0 0 40px rgba(155,48,255,0.08), 0 24px 64px rgba(0,0,0,0.4)",
+          background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.6)",
+          boxShadow: isLight ? "0 0 40px rgba(168,28,175,0.08), 0 24px 64px rgba(168,28,175,0.1)" : "0 0 40px rgba(155,48,255,0.08), 0 24px 64px rgba(0,0,0,0.4)",
           position: "relative",
         }}>
           <AnimatePresence mode="wait">
@@ -523,11 +538,13 @@ function VenueMap() {
 function DiscoverTunisia() {
   const ref = useRef<HTMLElement>(null);
   const inView = useInView(ref, { once: true, margin: "-60px" });
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", padding: "100px 0 60px",
-      background: "#000", overflow: "hidden",
+      background: isLight ? LIGHT_BG : "#000", overflow: "hidden",
     }}>
       <GradientDivider />
 
@@ -560,7 +577,7 @@ function DiscoverTunisia() {
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               margin: 0,
             }}>
-              <span style={{ color: "#ffffff" }}>Tunisia </span>
+              <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff" }}>Tunisia </span>
               <span className="gradient-flow" style={{
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
                 fontSize: "clamp(40px, 6vw, 80px)", fontWeight: 800,
@@ -577,12 +594,12 @@ function DiscoverTunisia() {
 
             <p style={{
               fontSize: "clamp(14px, 1.4vw, 16px)", lineHeight: 1.8,
-              color: "rgba(200,195,220,0.65)", fontWeight: 400, margin: 0, maxWidth: "500px",
+              color: isLight ? "rgba(61,42,92,0.8)" : "rgba(200,195,220,0.65)", fontWeight: 400, margin: 0, maxWidth: "500px",
             }}>
               Tunisia offers stunning beaches and vast deserts. Explore ancient sites
-              like <strong style={{ color: "rgba(220,210,255,0.9)", fontWeight: 600 }}>Carthage</strong>,
+              like <strong style={{ color: isLight ? "#7c1a82" : "rgba(220,210,255,0.9)", fontWeight: 600 }}>Carthage</strong>,
               stroll through vibrant Medinas, or unwind by the sea.
-              The culture blends <strong style={{ color: "rgba(220,210,255,0.9)", fontWeight: 600 }}>Arab, Berber, and French</strong> influences.
+              The culture blends <strong style={{ color: isLight ? "#7c1a82" : "rgba(220,210,255,0.9)", fontWeight: 600 }}>Arab, Berber, and French</strong> influences.
               Enjoy delicious food, unique architecture, and lively festivals.
               Ride camels or visit charming villages — there&apos;s something for everyone!
             </p>
@@ -628,7 +645,12 @@ function DiscoverTunisia() {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3234.5!2d10.56!3d36.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzbCsDI0JzAwLjAiTiAxMMKwMzMnMzYuMCJF!5e0!3m2!1sen!2stn!4v1"
                 width="100%" height="380"
-                style={{ border: 0, display: "block", filter: "invert(0.9) hue-rotate(180deg) saturate(0.3) brightness(0.8)" }}
+                style={{
+                  border: 0, display: "block",
+                  filter: isLight
+                    ? "hue-rotate(180deg) saturate(0.4) brightness(1.05)"
+                    : "invert(0.9) hue-rotate(180deg) saturate(0.3) brightness(0.8)",
+                }}
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
@@ -696,6 +718,8 @@ function VisaChecker() {
   const [query, setQuery] = useState("");
   const [result, setResult] = useState<null | boolean>(null);
   const [checkedCountry, setCheckedCountry] = useState("");
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   const handleCheck = () => {
     if (!query.trim()) return;
@@ -711,7 +735,7 @@ function VisaChecker() {
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", padding: "100px 0 120px",
-      background: "#000", overflow: "hidden",
+      background: isLight ? LIGHT_BG : "#000", overflow: "hidden",
     }}>
       <GradientDivider />
 
@@ -744,7 +768,7 @@ function VisaChecker() {
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               margin: "0 0 8px",
             }}>
-              <span style={{ color: "#ffffff" }}>Visa Requirements for</span><br />
+              <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff" }}>Visa Requirements for</span><br />
               <span className="gradient-flow" style={{
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
                 fontSize: "clamp(28px, 4.5vw, 56px)", fontWeight: 800,
@@ -753,7 +777,7 @@ function VisaChecker() {
             </h2>
 
             <p style={{
-              fontSize: "14px", lineHeight: 1.7, color: "rgba(200,195,220,0.6)",
+              fontSize: "14px", lineHeight: 1.7, color: isLight ? "rgba(61,42,92,0.75)" : "rgba(200,195,220,0.6)",
               margin: "20px 0 28px", maxWidth: "480px",
             }}>
               Find out if you need a visa to travel to Tunisia or qualify for visa-free entry.
@@ -763,8 +787,8 @@ function VisaChecker() {
             <div style={{ position: "relative", maxWidth: "420px" }}>
               <div style={{
                 display: "flex", alignItems: "center",
-                background: "rgba(6, 2, 22, 0.82)",
-                border: "1px solid rgba(155,48,255,0.2)",
+                background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
+                border: isLight ? "1px solid rgba(168,28,175,0.2)" : "1px solid rgba(155,48,255,0.2)",
                 borderRadius: "12px", overflow: "hidden",
                 transition: "border-color 0.3s",
               }}>
@@ -777,7 +801,7 @@ function VisaChecker() {
                   style={{
                     flex: 1, padding: "14px 18px",
                     background: "transparent", border: "none", outline: "none",
-                    color: "#fff", fontSize: "14px",
+                    color: isLight ? LIGHT_TEXT : "#fff", fontSize: "14px",
                     fontFamily: "var(--font-inter), 'Inter', sans-serif",
                   }}
                 />
@@ -800,7 +824,8 @@ function VisaChecker() {
               {suggestions.length > 0 && result === null && (
                 <div style={{
                   position: "absolute", top: "100%", left: 0, right: 0, marginTop: "4px",
-                  background: "rgba(12, 6, 30, 0.95)", border: "1px solid rgba(155,48,255,0.2)",
+                  background: isLight ? "#e8d0ea" : "rgba(12, 6, 30, 0.95)",
+                  border: isLight ? "1px solid rgba(168,28,175,0.2)" : "1px solid rgba(155,48,255,0.2)",
                   borderRadius: "10px", overflow: "hidden", zIndex: 20,
                   backdropFilter: "blur(16px)",
                 }}>
@@ -811,7 +836,7 @@ function VisaChecker() {
                       style={{
                         width: "100%", padding: "10px 18px",
                         background: "transparent", border: "none",
-                        color: "rgba(220,215,240,0.8)", fontSize: "13px",
+                        color: isLight ? "rgba(26,10,46,0.8)" : "rgba(220,215,240,0.8)", fontSize: "13px",
                         textAlign: "left", cursor: "pointer",
                         transition: "background 0.15s",
                         fontFamily: "var(--font-inter), 'Inter', sans-serif",
@@ -858,13 +883,13 @@ function VisaChecker() {
             <div style={{ marginTop: "28px", display: "flex", flexDirection: "column", gap: "10px" }}>
               <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
                 <div style={{ flexShrink: 0, marginTop: "2px" }}><AlertIcon /></div>
-                <p style={{ fontSize: "11px", lineHeight: 1.6, color: "rgba(200,195,220,0.45)", margin: 0 }}>
+                <p style={{ fontSize: "11px", lineHeight: 1.6, color: isLight ? "rgba(61,42,92,0.55)" : "rgba(200,195,220,0.45)", margin: 0 }}>
                   Always check with the Tunisian embassy or consulate in your country for the most up-to-date visa information before planning your trip.
                 </p>
               </div>
               <div style={{ display: "flex", alignItems: "flex-start", gap: "8px" }}>
                 <div style={{ flexShrink: 0, marginTop: "2px" }}><AlertIcon /></div>
-                <p style={{ fontSize: "11px", lineHeight: 1.6, color: "rgba(200,195,220,0.45)", margin: 0 }}>
+                <p style={{ fontSize: "11px", lineHeight: 1.6, color: isLight ? "rgba(61,42,92,0.55)" : "rgba(200,195,220,0.45)", margin: 0 }}>
                   The TSYP 14 organizers cannot assist with individual visa applications. However, we can provide an invitation letter to support your visa application.
                 </p>
               </div>
@@ -930,8 +955,8 @@ function VisaChecker() {
                   style={{
                     position: "absolute", left: b.x, top: b.y,
                     width: "52px", height: "52px", borderRadius: "14px",
-                    background: "rgba(6, 2, 22, 0.9)",
-                    border: "1px solid rgba(155,48,255,0.2)",
+                    background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.9)",
+                    border: isLight ? "1px solid rgba(168,28,175,0.2)" : "1px solid rgba(155,48,255,0.2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexDirection: "column", gap: "2px",
                     boxShadow: "0 0 20px rgba(155,48,255,0.1)",
@@ -963,13 +988,15 @@ function CurrencyConverter() {
   const inView = useInView(ref, { once: true, margin: "-60px" });
   const [from, setFrom] = useState("USD");
   const [amount, setAmount] = useState("");
+  const { theme } = useTheme();
+  const isLight = theme === "light";
 
   const converted = amount ? (parseFloat(amount) * (CURRENCIES[from]?.rate || 0)).toFixed(2) : "0.00";
 
   return (
     <section ref={ref} style={{
       position: "relative", width: "100%", padding: "0 0 120px",
-      background: "#000", overflow: "hidden",
+      background: isLight ? LIGHT_BG : "#000", overflow: "hidden",
     }}>
       <GradientDivider />
 
@@ -995,7 +1022,7 @@ function CurrencyConverter() {
               fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               margin: "0 0 8px",
             }}>
-              <span style={{ color: "#ffffff" }}>Dinar </span>
+              <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff" }}>Dinar </span>
               <span className="gradient-flow" style={{
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
                 fontSize: "clamp(32px, 5vw, 64px)", fontWeight: 800,
@@ -1004,10 +1031,10 @@ function CurrencyConverter() {
             </h2>
 
             <p style={{
-              fontSize: "14px", lineHeight: 1.7, color: "rgba(200,195,220,0.6)",
+              fontSize: "14px", lineHeight: 1.7, color: isLight ? "rgba(61,42,92,0.75)" : "rgba(200,195,220,0.6)",
               margin: "20px 0 28px", maxWidth: "460px",
             }}>
-              The national currency is the <strong style={{ color: "rgba(220,210,255,0.9)", fontWeight: 600 }}>Tunisian Dinar (TND)</strong>,
+              The national currency is the <strong style={{ color: isLight ? "#7c1a82" : "rgba(220,210,255,0.9)", fontWeight: 600 }}>Tunisian Dinar (TND)</strong>,
               which is very friendly to foreign currencies.
             </p>
 
@@ -1019,9 +1046,9 @@ function CurrencyConverter() {
                 onChange={e => setFrom(e.target.value)}
                 style={{
                   padding: "10px 16px", borderRadius: "10px",
-                  background: "rgba(6, 2, 22, 0.82)",
-                  border: "1px solid rgba(155,48,255,0.2)",
-                  color: "#fff", fontSize: "13px",
+                  background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
+                  border: isLight ? "1px solid rgba(168,28,175,0.2)" : "1px solid rgba(155,48,255,0.2)",
+                  color: isLight ? LIGHT_TEXT : "#fff", fontSize: "13px",
                   fontFamily: "var(--font-inter), 'Inter', sans-serif",
                   outline: "none", cursor: "pointer",
                   appearance: "auto",
@@ -1046,8 +1073,8 @@ function CurrencyConverter() {
 
             {/* Amount input */}
             <div style={{
-              background: "rgba(6, 2, 22, 0.82)",
-              border: "1px solid rgba(155,48,255,0.2)",
+              background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
+              border: isLight ? "1px solid rgba(168,28,175,0.2)" : "1px solid rgba(155,48,255,0.2)",
               borderRadius: "12px", overflow: "hidden",
               maxWidth: "420px",
             }}>
@@ -1059,7 +1086,7 @@ function CurrencyConverter() {
                 style={{
                   width: "100%", padding: "16px 18px",
                   background: "transparent", border: "none", outline: "none",
-                  color: "#fff", fontSize: "16px",
+                  color: isLight ? LIGHT_TEXT : "#fff", fontSize: "16px",
                   fontFamily: "var(--font-inter), 'Inter', sans-serif",
                 }}
               />
@@ -1078,7 +1105,7 @@ function CurrencyConverter() {
               }}>Converted amount:</span>
               <span style={{
                 fontSize: "clamp(24px, 3vw, 36px)", fontWeight: 800,
-                color: "#fff", letterSpacing: "-0.02em",
+                color: isLight ? LIGHT_TEXT : "#fff", letterSpacing: "-0.02em",
                 fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
               }}>
                 {converted}
