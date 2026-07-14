@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Plus_Jakarta_Sans } from "next/font/google";
+import ThemeProvider from "@/components/ThemeProvider";
 import "./globals.css";
 
 const inter = Inter({
@@ -33,8 +34,10 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable} ${jakarta.variable} h-full antialiased`}>
-      <body className="min-h-full bg-black">{children}</body>
+    <html lang="en" data-theme="dark" className={`${inter.variable} ${poppins.variable} ${jakarta.variable} h-full antialiased`}>
+      <body className="min-h-full">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 
 const LINKS = ["Home", "The Noosphere", "Program", "Venue", "About Us"];
 
@@ -33,6 +34,37 @@ function ChevronDown({ open }: { open: boolean }) {
     >
       <polyline points="6 9 12 15 18 9" />
     </motion.svg>
+  );
+}
+
+function ThemeToggle() {
+  const { theme, toggle } = useTheme();
+  const isLight = theme === "light";
+  return (
+    <button
+      onClick={toggle}
+      aria-label={`Switch to ${isLight ? "dark" : "light"} mode`}
+      className="theme-toggle-btn"
+      style={{
+        width: "36px", height: "36px", borderRadius: "10px",
+        display: "flex", alignItems: "center", justifyContent: "center",
+        cursor: "pointer", border: "1px solid rgba(155,48,255,0.2)",
+        background: "rgba(155,48,255,0.06)",
+        color: "rgba(155,48,255,0.8)",
+        transition: "all 0.3s ease",
+        flexShrink: 0,
+      }}
+    >
+      {isLight ? (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </svg>
+      ) : (
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      )}
+    </button>
   );
 }
 
@@ -185,24 +217,26 @@ export default function Navbar() {
           })}
         </div>
 
-        {/* Desktop CTA */}
-        <motion.button
-          whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(155,48,255,0.35)" }}
-          whileTap={{ scale: 0.97 }}
-          transition={{ duration: 0.18 }}
-          className="nav-links"
-          style={{
-            padding: "9px 22px",
-            background: "linear-gradient(135deg, #9b30ff 0%, #7c3aed 100%)",
-            color: "#ffffff", fontSize: "11px", fontWeight: 600,
-            letterSpacing: "0.1em", textTransform: "uppercase",
-            borderRadius: "8px", border: "1px solid rgba(155,48,255,0.4)",
-            cursor: "pointer", flexShrink: 0,
-            boxShadow: "0 0 16px rgba(155,48,255,0.2)",
-          }}
-        >
-          Register
-        </motion.button>
+        {/* Desktop CTA + Theme Toggle */}
+        <div className="nav-links" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+          <ThemeToggle />
+          <motion.button
+            whileHover={{ scale: 1.03, boxShadow: "0 0 24px rgba(155,48,255,0.35)" }}
+            whileTap={{ scale: 0.97 }}
+            transition={{ duration: 0.18 }}
+            style={{
+              padding: "9px 22px",
+              background: "linear-gradient(135deg, #9b30ff 0%, #7c3aed 100%)",
+              color: "#ffffff", fontSize: "11px", fontWeight: 600,
+              letterSpacing: "0.1em", textTransform: "uppercase",
+              borderRadius: "8px", border: "1px solid rgba(155,48,255,0.4)",
+              cursor: "pointer", flexShrink: 0,
+              boxShadow: "0 0 16px rgba(155,48,255,0.2)",
+            }}
+          >
+            Register
+          </motion.button>
+        </div>
 
         {/* Hamburger — mobile only */}
         <button
@@ -323,22 +357,28 @@ export default function Navbar() {
               );
             })}
 
-            <motion.button
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: LINKS.length * 0.06, duration: 0.35 }}
-              onClick={() => setMenuOpen(false)}
-              style={{
-                marginTop: "8px", padding: "14px 36px",
-                background: "linear-gradient(135deg, #9b30ff 0%, #7c3aed 100%)",
-                color: "#ffffff", fontSize: "12px", fontWeight: 600,
-                letterSpacing: "0.12em", textTransform: "uppercase",
-                borderRadius: "10px", border: "1px solid rgba(155,48,255,0.4)",
-                cursor: "pointer", minWidth: "160px", minHeight: "48px",
-              }}
+              style={{ display: "flex", alignItems: "center", gap: "12px", marginTop: "8px" }}
+              onClick={(e) => e.stopPropagation()}
             >
-              Register
-            </motion.button>
+              <ThemeToggle />
+              <button
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  padding: "14px 36px",
+                  background: "linear-gradient(135deg, #9b30ff 0%, #7c3aed 100%)",
+                  color: "#ffffff", fontSize: "12px", fontWeight: 600,
+                  letterSpacing: "0.12em", textTransform: "uppercase",
+                  borderRadius: "10px", border: "1px solid rgba(155,48,255,0.4)",
+                  cursor: "pointer", minWidth: "160px", minHeight: "48px",
+                }}
+              >
+                Register
+              </button>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

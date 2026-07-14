@@ -16,10 +16,36 @@
 
 html,
 body {
-  background: #000000;
-  color: #ffffff;
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--font-inter), 'Inter', sans-serif;
   overflow-x: hidden;
+  transition: background 0.4s ease, color 0.4s ease;
+}
+
+:root,
+[data-theme="dark"] {
+  --bg: #000000;
+  --fg: #ffffff;
+  --card-bg: rgba(6, 2, 22, 0.82);
+  --card-border: rgba(155,48,255,0.16);
+  --text-muted: rgba(255,255,255,0.48);
+  --text-secondary: rgba(200,195,220,0.6);
+  --nav-bg: rgba(0,0,0,0.55);
+  --dropdown-bg: rgba(10,5,18,0.92);
+  --mobile-menu-bg: rgba(0,0,0,0.92);
+}
+
+[data-theme="light"] {
+  --bg: #f8f6fc;
+  --fg: #1a0a2e;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --card-border: rgba(155,48,255,0.18);
+  --text-muted: rgba(26,10,46,0.55);
+  --text-secondary: rgba(60,40,100,0.6);
+  --nav-bg: rgba(248,246,252,0.8);
+  --dropdown-bg: rgba(255,255,255,0.95);
+  --mobile-menu-bg: rgba(248,246,252,0.95);
 }
 
 /* Shimmer sweep on white headline */
@@ -665,4 +691,217 @@ button, a {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .about-team-grid { grid-template-columns: repeat(3, 1fr) !important; }
+}
+
+/* ══════════════════════════════════════════
+   LIGHT MODE — comprehensive overrides
+══════════════════════════════════════════ */
+
+[data-theme="light"] {
+  /* ── Global backgrounds ── */
+  & main,
+  & section,
+  & body {
+    background: #f8f6fc !important;
+    color: #1a0a2e !important;
+  }
+
+  /* ── Navbar ── */
+  & nav[style] {
+    background: rgba(248,246,252,0.8) !important;
+    border-bottom-color: rgba(155,48,255,0.15) !important;
+  }
+  & nav a[style],
+  & nav button[style] {
+    color: rgba(26,10,46,0.6) !important;
+  }
+  & nav a[style]:hover {
+    color: #1a0a2e !important;
+  }
+
+  /* ── Mobile menu ── */
+  & .nav-mobile-menu {
+    background: rgba(248,246,252,0.95) !important;
+  }
+  & .nav-mobile-menu a,
+  & .nav-mobile-menu button {
+    color: rgba(26,10,46,0.85) !important;
+  }
+
+  /* ── Hamburger lines ── */
+  & .nav-hamburger span {
+    background: rgba(26,10,46,0.85) !important;
+  }
+
+  /* ── Text colors ── White text → dark text ── */
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+    color: #1a0a2e !important;
+  }
+  & h1 span[style*="color: \"#ffffff\""],
+  & h1 span[style*="color: #fff"],
+  & h2 span[style*="color: \"#ffffff\""],
+  & h2 span[style*="color: #fff"] {
+    color: #1a0a2e !important;
+  }
+  & p {
+    color: rgba(40,20,80,0.65) !important;
+  }
+
+  /* ── Cards ── */
+  & .speaker-card,
+  & .edition-card,
+  & .partner-logo-card,
+  & .venue-feature-card,
+  & .about-contact-card {
+    background: rgba(255,255,255,0.9) !important;
+    border-color: rgba(155,48,255,0.12) !important;
+    box-shadow: 0 2px 16px rgba(100,60,180,0.06) !important;
+  }
+  & .speaker-card:hover,
+  & .edition-card:hover,
+  & .venue-feature-card:hover {
+    background: #ffffff !important;
+    border-color: rgba(155,48,255,0.35) !important;
+    box-shadow: 0 8px 32px rgba(100,60,180,0.12) !important;
+  }
+
+  /* ── Flip cards ── */
+  & .flip-card-front,
+  & .flip-card-back {
+    background: linear-gradient(145deg, #ffffff 0%, #f0ecf8 100%) !important;
+  }
+  & .flip-card-front h3,
+  & .flip-card-back h3 {
+    color: #1a0a2e !important;
+  }
+  & .flip-card-front span,
+  & .flip-card-back span,
+  & .flip-card-back p {
+    color: rgba(40,20,80,0.55) !important;
+  }
+
+  /* ── Partner logos ── don't invert in light mode ── */
+  & .partner-logo-img {
+    filter: none !important;
+    opacity: 0.7 !important;
+  }
+  & .partner-logo-card:hover .partner-logo-img {
+    opacity: 1 !important;
+  }
+
+  /* ── Edition cards ── */
+  & .edition-roman {
+    -webkit-text-stroke-color: rgba(155,48,255,0.45) !important;
+  }
+  & .edition-dot-grid {
+    background-image: radial-gradient(circle, rgba(155,48,255,0.08) 1px, transparent 1px) !important;
+  }
+
+  /* ── Memory cards ── */
+  & .memory-card {
+    border-color: rgba(155,48,255,0.1) !important;
+    box-shadow: 0 2px 12px rgba(100,60,180,0.08) !important;
+  }
+
+  /* ── Footer ── */
+  & footer {
+    background: #0d0520 !important;
+    color: #ffffff !important;
+  }
+  & footer h3,
+  & footer h4,
+  & footer span,
+  & footer p,
+  & footer a,
+  & footer div {
+    color: inherit !important;
+  }
+  & .footer-social-btn {
+    color: rgba(255,255,255,0.38) !important;
+    background: rgba(255,255,255,0.04) !important;
+    border-color: rgba(155,48,255,0.15) !important;
+  }
+  & .footer-social-btn:hover {
+    color: #ffffff !important;
+  }
+
+  /* ── Inputs and selects ── */
+  & input[style],
+  & select[style] {
+    background: rgba(255,255,255,0.9) !important;
+    color: #1a0a2e !important;
+    border-color: rgba(155,48,255,0.2) !important;
+  }
+  & input::placeholder {
+    color: rgba(40,20,80,0.35) !important;
+  }
+
+  /* ── Gradient dividers ── */
+  & div[style*="linear-gradient"][style*="rgba(155,48,255,0.2)"] {
+    opacity: 0.5;
+  }
+
+  /* ── Logo inversion — keep logos visible on light bg ── */
+  & nav img[alt="IEEE TSYP14"] {
+    filter: none;
+  }
+
+  /* ── Shimmer text ── */
+  & .shimmer-white {
+    background: linear-gradient(90deg,
+      #1a0a2e 30%,
+      rgba(155,48,255,0.75) 47%,
+      #1a0a2e 52%,
+      rgba(155,48,255,0.75) 57%,
+      #1a0a2e 70%
+    ) !important;
+    background-size: 300% auto !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+  }
+
+  /* ── Outlined text strokes — darker ── */
+  & span[style*="WebkitTextStroke"],
+  & h2 span[style*="WebkitTextStroke"] {
+    -webkit-text-stroke-color: rgba(155,48,255,0.5) !important;
+  }
+
+  /* ── Card & section backgrounds in inline styles ── */
+  & div[style*="background: \"#000000\""],
+  & div[style*="background: #000"],
+  & div[style*="background: \"#000\""],
+  & section[style*="background: \"#000\""],
+  & section[style*="background: \"#000000\""] {
+    background: #f8f6fc !important;
+  }
+
+  /* ── Glows — soften in light mode ── */
+  & div[style*="filter: blur"] {
+    opacity: 0.3 !important;
+  }
+
+  /* ── Theme toggle button ── */
+  & .theme-toggle-btn {
+    background: rgba(155,48,255,0.1) !important;
+    border-color: rgba(155,48,255,0.25) !important;
+    color: #7c3aed !important;
+  }
+
+  /* ── About page member card ── */
+  & .about-team-grid > div {
+    background: #ffffff !important;
+    border-color: rgba(155,48,255,0.1) !important;
+  }
+
+  /* ── Venue images — no purple filter needed ── */
+  & iframe[style*="filter"] {
+    filter: none !important;
+  }
+
+  /* ── Countdown pill ── */
+  & .edition-badge {
+    background: rgba(155,48,255,0.1) !important;
+    box-shadow: 0 0 12px rgba(155,48,255,0.15) !important;
+  }
 }
