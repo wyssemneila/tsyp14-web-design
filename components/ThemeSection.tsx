@@ -84,9 +84,10 @@ export default function ThemeSection() {
             width: "100%",
             height: "100%",
             zIndex: 0,
-            // WebGL clears to black — invert flips it to white in light mode,
-            // hue-rotate keeps the tubes purple instead of green
-            filter: isLight ? "invert(1) hue-rotate(180deg)" : "none",
+            // WebGL clears to black — screen blend drops black to transparent so
+            // the section's own grey background (sectionBg) shows through instead,
+            // while the glowing tubes still add their color on top
+            mixBlendMode: isLight ? "screen" : "normal",
           }}
         />
 
@@ -161,16 +162,18 @@ export default function ThemeSection() {
               color: isLight ? "#1a0a2e" : "#ffffff",
               textShadow: "0 0 60px rgba(155,48,255,0.4)",
             }}>THE </span>
-            <span style={{
-              background: isLight
-                ? "linear-gradient(135deg, #1a0a2e 0%, #6d28d9 40%, #a81caf 70%, #c038c7 100%)"
-                : "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}>
-              NOOSPHERE
-            </span>
+            {isLight ? (
+              <span style={{ color: "#a81caf" }}>NOOSPHERE</span>
+            ) : (
+              <span style={{
+                background: "linear-gradient(135deg, #ffffff 0%, #e2d9ff 30%, #a78bfa 65%, #7c3aed 100%)",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+              }}>
+                NOOSPHERE
+              </span>
+            )}
           </motion.h2>
         </div>
       </div>
