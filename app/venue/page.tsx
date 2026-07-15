@@ -154,7 +154,7 @@ function SectionTitle({ solid, outlined }: { solid: string; outlined: string }) 
       fontFamily: "var(--font-jakarta), 'Plus Jakarta Sans', sans-serif",
     }}>
       <span style={{ color: isLight ? LIGHT_TEXT : "#ffffff" }}>{solid} </span>
-      <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(156,17,163,0.7)" : "1px rgba(155,48,255,0.75)" }}>{outlined}</span>
+      <span style={{ color: "transparent", WebkitTextStroke: isLight ? "1px rgba(53,6,62,0.7)" : "1px rgba(155,48,255,0.75)" }}>{outlined}</span>
     </h2>
   );
 }
@@ -362,7 +362,7 @@ function VenueFeatures() {
             className="venue-feature-card"
             style={{
               background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
-              border: isLight ? "1px solid rgba(156,17,163,0.15)" : "1px solid rgba(155,48,255,0.14)",
+              border: isLight ? "1px solid rgba(53,6,62,0.15)" : "1px solid rgba(155,48,255,0.14)",
               borderRadius: "16px",
               padding: "28px 24px",
               display: "flex", alignItems: "flex-start", gap: "18px",
@@ -458,7 +458,7 @@ function VenueMap() {
               border: `1px solid ${activeMap === i ? "rgba(155,48,255,0.5)" : "rgba(155,48,255,0.15)"}`,
               background: activeMap === i
                 ? "linear-gradient(135deg, rgba(155,48,255,0.2) 0%, rgba(124,58,237,0.1) 100%)"
-                : isLight ? "rgba(156,17,163,0.04)" : "rgba(255,255,255,0.02)",
+                : isLight ? "rgba(53,6,62,0.04)" : "rgba(255,255,255,0.02)",
               color: activeMap === i ? (isLight ? LIGHT_TEXT : "#fff") : isLight ? "rgba(26,10,46,0.45)" : "rgba(255,255,255,0.4)",
               transition: "all 0.3s ease",
               boxShadow: activeMap === i ? "0 0 20px rgba(155,48,255,0.15)" : "none",
@@ -483,7 +483,7 @@ function VenueMap() {
           borderRadius: "20px", overflow: "hidden",
           border: "1px solid rgba(155,48,255,0.18)",
           background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.6)",
-          boxShadow: isLight ? "0 0 40px rgba(156,17,163,0.08), 0 24px 64px rgba(156,17,163,0.1)" : "0 0 40px rgba(155,48,255,0.08), 0 24px 64px rgba(0,0,0,0.4)",
+          boxShadow: isLight ? "0 0 40px rgba(53,6,62,0.08), 0 24px 64px rgba(53,6,62,0.1)" : "0 0 40px rgba(155,48,255,0.08), 0 24px 64px rgba(0,0,0,0.4)",
           position: "relative",
         }}>
           <AnimatePresence mode="wait">
@@ -788,7 +788,7 @@ function VisaChecker() {
               <div style={{
                 display: "flex", alignItems: "center",
                 background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
-                border: isLight ? "1px solid rgba(156,17,163,0.2)" : "1px solid rgba(155,48,255,0.2)",
+                border: isLight ? "1px solid rgba(53,6,62,0.2)" : "1px solid rgba(155,48,255,0.2)",
                 borderRadius: "12px", overflow: "hidden",
                 transition: "border-color 0.3s",
               }}>
@@ -825,7 +825,7 @@ function VisaChecker() {
                 <div style={{
                   position: "absolute", top: "100%", left: 0, right: 0, marginTop: "4px",
                   background: isLight ? "#e8d0ea" : "rgba(12, 6, 30, 0.95)",
-                  border: isLight ? "1px solid rgba(156,17,163,0.2)" : "1px solid rgba(155,48,255,0.2)",
+                  border: isLight ? "1px solid rgba(53,6,62,0.2)" : "1px solid rgba(155,48,255,0.2)",
                   borderRadius: "10px", overflow: "hidden", zIndex: 20,
                   backdropFilter: "blur(16px)",
                 }}>
@@ -956,7 +956,7 @@ function VisaChecker() {
                     position: "absolute", left: b.x, top: b.y,
                     width: "52px", height: "52px", borderRadius: "14px",
                     background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.9)",
-                    border: isLight ? "1px solid rgba(156,17,163,0.2)" : "1px solid rgba(155,48,255,0.2)",
+                    border: isLight ? "1px solid rgba(53,6,62,0.2)" : "1px solid rgba(155,48,255,0.2)",
                     display: "flex", alignItems: "center", justifyContent: "center",
                     flexDirection: "column", gap: "2px",
                     boxShadow: "0 0 20px rgba(155,48,255,0.1)",
@@ -1047,7 +1047,7 @@ function CurrencyConverter() {
                 style={{
                   padding: "10px 16px", borderRadius: "10px",
                   background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
-                  border: isLight ? "1px solid rgba(156,17,163,0.2)" : "1px solid rgba(155,48,255,0.2)",
+                  border: isLight ? "1px solid rgba(53,6,62,0.2)" : "1px solid rgba(155,48,255,0.2)",
                   color: isLight ? LIGHT_TEXT : "#fff", fontSize: "13px",
                   fontFamily: "var(--font-inter), 'Inter', sans-serif",
                   outline: "none", cursor: "pointer",
@@ -1074,7 +1074,7 @@ function CurrencyConverter() {
             {/* Amount input */}
             <div style={{
               background: isLight ? LIGHT_CARD : "rgba(6, 2, 22, 0.82)",
-              border: isLight ? "1px solid rgba(156,17,163,0.2)" : "1px solid rgba(155,48,255,0.2)",
+              border: isLight ? "1px solid rgba(53,6,62,0.2)" : "1px solid rgba(155,48,255,0.2)",
               borderRadius: "12px", overflow: "hidden",
               maxWidth: "420px",
             }}>

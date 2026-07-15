@@ -64,9 +64,9 @@ function applyLightMode() {
   const CARD = "#dbb4de";
   const TEXT = "#1a0a2e";
   const TEXT_MUTED = "#3d2a5c";
-  const ACCENT = "#9c11a3";
+  const ACCENT = "#35063e";
   const NAV_BG = "rgba(238,234,244,0.85)";
-  const PURPLE = "#9c11a3";
+  const PURPLE = "#35063e";
 
   // Navbar → purple background
   document.querySelectorAll<HTMLElement>("nav[style]").forEach(el => {
@@ -74,7 +74,7 @@ function applyLightMode() {
     const bg = el.style.background || el.style.backgroundColor;
     if (bg && (bg.includes("rgba(0, 0, 0") || bg.includes("rgba(0,0,0") || bg.includes("rgb(0, 0, 0"))) {
       el.dataset.origBg = bg;
-      el.style.background = "#9c11a3";
+      el.style.background = "#35063e";
       el.style.borderBottomColor = "rgba(255,255,255,0.15)";
     }
   });
@@ -101,8 +101,8 @@ function applyLightMode() {
     } else if (bg && (bg.includes("rgba(6, 2, 22") || bg.includes("rgba(6,2,22") || bg.includes("rgba(10, 5, 18") || bg.includes("rgba(10,5,18"))) {
       el.dataset.origBg = bg;
       el.style.background = CARD;
-      el.style.borderColor = "rgba(156,17,163,0.12)";
-      el.style.boxShadow = "0 2px 12px rgba(156,17,163,0.06)";
+      el.style.borderColor = "rgba(53,6,62,0.12)";
+      el.style.boxShadow = "0 2px 12px rgba(53,6,62,0.06)";
     }
   });
 
@@ -132,7 +132,7 @@ function applyLightMode() {
     const stroke = (el.style as unknown as Record<string, string>).webkitTextStroke || el.style.getPropertyValue("-webkit-text-stroke");
     if (stroke && stroke.includes("rgba(155")) {
       el.dataset.origStroke = stroke;
-      (el.style as unknown as Record<string, string>).webkitTextStroke = stroke.replace(/rgba\(155,48,255,[^)]+\)/, `rgba(156,17,163,0.5)`);
+      (el.style as unknown as Record<string, string>).webkitTextStroke = stroke.replace(/rgba\(155,48,255,[^)]+\)/, `rgba(53,6,62,0.5)`);
     }
   });
 
@@ -182,7 +182,7 @@ function applyLightMode() {
     el.dataset.origColor = el.style.color || "";
     el.style.background = CARD;
     el.style.color = TEXT;
-    el.style.borderColor = "rgba(156,17,163,0.2)";
+    el.style.borderColor = "rgba(53,6,62,0.2)";
   });
 
   // Buttons with dark backgrounds (not gradient/purple ones)
@@ -314,7 +314,7 @@ function applyLightMode() {
       if (!el.dataset.origShadow) {
         el.dataset.origShadow = shadow;
         el.style.boxShadow = shadow
-          .replace(/rgba\(0,\s*0,\s*0,\s*[\d.]+\)/g, "rgba(156,17,163,0.08)");
+          .replace(/rgba\(0,\s*0,\s*0,\s*[\d.]+\)/g, "rgba(53,6,62,0.08)");
       }
     }
   });

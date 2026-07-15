@@ -9,7 +9,7 @@ export default function LogoScrollBar() {
   const items = Array.from({ length: LOGO_COUNT }, (_, i) => i);
   const { theme } = useTheme();
   const isLight = theme === "light";
-  const bg = isLight ? "#9c11a3" : "#000000";
+  const bg = isLight ? "#35063e" : "#000000";
 
   return (
     <div

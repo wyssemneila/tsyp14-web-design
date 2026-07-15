@@ -91,7 +91,7 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0 24px",
-          background: isLight ? "#9c11a3" : "rgba(0,0,0,0.55)",
+          background: isLight ? "#35063e" : "rgba(0,0,0,0.55)",
           backdropFilter: isLight ? "none" : "blur(24px)",
           WebkitBackdropFilter: isLight ? "none" : "blur(24px)",
           borderBottom: isLight ? "1px solid rgba(255,255,255,0.15)" : "1px solid rgba(155,48,255,0.12)",

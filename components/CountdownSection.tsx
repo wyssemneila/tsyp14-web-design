@@ -134,7 +134,7 @@ export default function CountdownSection() {
   const { theme } = useTheme();
   const isLight = theme === "light";
   const sectionBg = isLight ? "#eeeaf4" : "#000000";
-  const digitColor = isLight ? "#9c11a3" : "#ffffff";
+  const digitColor = isLight ? "#35063e" : "#ffffff";
   const maskBg = isLight ? "#eeeaf4" : "#000";
 
   useEffect(() => {
