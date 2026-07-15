@@ -980,13 +980,13 @@ button, a {
   background: rgba(255,255,255,0.2) !important;
 }
 
-/* ── 11. Hero section — purple bg, white text ── */
-[data-theme="light"] main > section:first-child h1,
-[data-theme="light"] main > section:first-child h1 span,
-[data-theme="light"] main > section:first-child h2,
-[data-theme="light"] main > section:first-child p,
-[data-theme="light"] main > section:first-child span,
-[data-theme="light"] main > section:first-child div {
+/* ── 11. Hero section — purple bg, white text (home page only) ── */
+[data-theme="light"] .hero-min-h h1,
+[data-theme="light"] .hero-min-h h1 span,
+[data-theme="light"] .hero-min-h h2,
+[data-theme="light"] .hero-min-h p,
+[data-theme="light"] .hero-min-h span,
+[data-theme="light"] .hero-min-h div {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
 }
